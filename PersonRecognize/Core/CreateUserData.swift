@@ -1,0 +1,135 @@
+//
+//  CreateUserData.swift
+//  PersonRez
+//
+//  Created by Hồ Sĩ Tuấn on 17/09/2020.
+//  Copyright © 2020 Hồ Sĩ Tuấn. All rights reserved.
+//
+
+import UIKit
+import AVFoundation
+
+class FrameOperation: Operation {
+    var time: Double!
+    var label: String!
+    private var generator:AVAssetImageGenerator!
+    
+    init(time: Double, label: String, gen: AVAssetImageGenerator) {
+        self.time = time
+        self.label = label
+        self.generator = gen
+    }
+    
+    override func main() {
+        getFrame(fromTime: time, for: label)
+    }
+    
+    private func getFrame(fromTime:Double, for label: String) {
+        
+        let time:CMTime = CMTimeMakeWithSeconds(fromTime, preferredTimescale: 60)
+        let image:UIImage
+        do {
+            try image = UIImage(cgImage: self.generator.copyCGImage(at:time, actualTime:nil))
+        } catch {
+            return
+        }
+        image.face.crop { result in
+            switch result {
+            case .success(let faces):
+                for face in faces {
+                    for item in face.createImageList() {
+                        if let img = item {
+                            trainingDataset.saveImage(img, for: label)
+                        }
+                    }
+                }
+            case .notFound:
+                print("Not found face")
+            case .failure(let error):
+                print("Error crop face: \(error)")
+            }
+        }
+        image.rotate(radians: .pi / 12)?.face.crop({ (result) in
+            switch result {
+            case .success(let faces):
+                for face in faces {
+                    for item in face.createImageList() {
+                        if let img = item {
+                            trainingDataset.saveImage(img, for: label)
+                        }
+                    }
+                }
+            case .notFound:
+                print("Not found face")
+            case .failure(let error):
+                print("Error crop face: \(error)")
+            }
+        })
+        
+        image.rotate(radians: -.pi / 12)?.face.crop({ (result) in
+            switch result {
+            case .success(let faces):
+                for face in faces {
+                    for item in face.createImageList() {
+                        if let img = item {
+                            trainingDataset.saveImage(img, for: label)
+                        }
+                    }
+                }
+            case .notFound:
+                print("Not found face")
+            case .failure(let error):
+                print("Error crop face: \(error)")
+            }
+        })
+        
+        image.flipHorizontally()?.face.crop({ (result) in
+            switch result {
+            case .success(let faces):
+                for face in faces {
+                    for item in face.createImageList() {
+                        if let img = item {
+                            trainingDataset.saveImage(img, for: label)
+                        }
+                    }
+                }
+            case .notFound:
+                print("Not found face")
+            case .failure(let error):
+                print("Error crop face: \(error)")
+            }
+        })
+        
+    }
+}
+
+class GetFrames {
+    var fps = 5
+    private var generator:AVAssetImageGenerator!
+    
+    func getAllFrames(_ videoUrl: URL, for label: String) {
+        let asset:AVAsset = AVAsset(url: videoUrl)
+        let duration:Double = CMTimeGetSeconds(asset.duration)
+        self.generator = AVAssetImageGenerator(asset:asset)
+        self.generator.appliesPreferredTrackTransform = true
+        
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 10
+        
+            var i: Double = 0
+            repeat {
+                let frameOperation = FrameOperation(time: i, label: label, gen: self.generator)
+                queue.addOperation(frameOperation)
+                i = i + (1 / Double(fps))
+            } while (i < duration)
+            self.generator = nil
+        queue.addBarrierBlock {
+            print("Complete")
+//            DispatchQueue.main.async {
+//                //UIApplication.shared.windows.first?.rootViewController?.showDialog(message: "Added User")
+//            }
+//
+            
+        }
+    }
+}
