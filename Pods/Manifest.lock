@@ -1,0 +1,16 @@
+PODS:
+  - TensorFlow-experimental (1.1.1)
+
+DEPENDENCIES:
+  - TensorFlow-experimental
+
+SPEC REPOS:
+  trunk:
+    - TensorFlow-experimental
+
+SPEC CHECKSUMS:
+  TensorFlow-experimental: c38ed2a43acaa2d42ce4174ac076efaa76e26a12
+
+PODFILE CHECKSUM: 84fdd46ff15e7de59b9ff2e7a7135281bb70ae0d
+
+COCOAPODS: 1.9.3

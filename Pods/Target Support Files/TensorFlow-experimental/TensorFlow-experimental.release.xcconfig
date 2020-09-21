@@ -1,0 +1,12 @@
+CONFIGURATION_BUILD_DIR = ${PODS_CONFIGURATION_BUILD_DIR}/TensorFlow-experimental
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/TensorFlow-experimental/Frameworks"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = $(inherited) '${SRCROOT}/Pods/TensorFlow-experimental/Frameworks/tensorflow_experimental.framework/Headers' '${SRCROOT}/Pods/TensorFlow-experimental/Frameworks/tensorflow_experimental.framework/Headers/third_party/eigen3'
+OTHER_LDFLAGS = $(inherited) -L ${SRCROOT}/Pods/TensorFlow-experimental/Frameworks/tensorflow_experimental.framework -l"c++" -l"protobuf_experimental" -framework "Accelerate" -force_load ${SRCROOT}/Pods/TensorFlow-experimental/Frameworks/tensorflow_experimental.framework/tensorflow_experimental
+PODS_BUILD_DIR = ${BUILD_DIR}
+PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+PODS_ROOT = ${SRCROOT}
+PODS_TARGET_SRCROOT = ${PODS_ROOT}/TensorFlow-experimental
+PRODUCT_BUNDLE_IDENTIFIER = org.cocoapods.${PRODUCT_NAME:rfc1034identifier}
+SKIP_INSTALL = YES
+USE_RECURSIVE_SCRIPT_INPUTS_IN_SCRIPT_PHASES = YES

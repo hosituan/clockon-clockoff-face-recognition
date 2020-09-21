@@ -1,0 +1,433 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		951EB33822B6985E00A9533B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951EB33722B6985E00A9533B /* AppDelegate.swift */; };
+		951EB33A22B6985E00A9533B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951EB33922B6985E00A9533B /* ViewController.swift */; };
+		951EB33D22B6985E00A9533B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 951EB33B22B6985E00A9533B /* Main.storyboard */; };
+		951EB33F22B6986200A9533B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 951EB33E22B6986200A9533B /* Assets.xcassets */; };
+		951EB34222B6986200A9533B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 951EB34022B6986200A9533B /* LaunchScreen.storyboard */; };
+		951EB35122B698F100A9533B /* FaceNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951EB34A22B698F100A9533B /* FaceNet.swift */; };
+		951EB35222B698F100A9533B /* modelFacenet.pb in Resources */ = {isa = PBXBuildFile; fileRef = 951EB34C22B698F100A9533B /* modelFacenet.pb */; };
+		951EB35322B698F100A9533B /* tensorflow_utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 951EB34E22B698F100A9533B /* tensorflow_utils.mm */; };
+		951EB35422B698F100A9533B /* tfWrap.mm in Sources */ = {isa = PBXBuildFile; fileRef = 951EB35022B698F100A9533B /* tfWrap.mm */; };
+		951EB35A22B6A46D00A9533B /* Image+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951EB35922B6A46D00A9533B /* Image+.swift */; };
+		C74123AA68AA5B08B54BAB0F /* Pods_PersonRecognize.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9E4B7E8ED1140C3AD203DB7 /* Pods_PersonRecognize.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		43FBB4A03133E68FA1BD6073 /* Pods-PersonRecognize.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PersonRecognize.release.xcconfig"; path = "Target Support Files/Pods-PersonRecognize/Pods-PersonRecognize.release.xcconfig"; sourceTree = "<group>"; };
+		5463543A1B0A1372F08C75F6 /* Pods_SimpleFacenet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimpleFacenet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		951EB33422B6985E00A9533B /* PersonRecognize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PersonRecognize.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		951EB33722B6985E00A9533B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		951EB33922B6985E00A9533B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		951EB33C22B6985E00A9533B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		951EB33E22B6986200A9533B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		951EB34122B6986200A9533B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		951EB34322B6986200A9533B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		951EB34A22B698F100A9533B /* FaceNet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceNet.swift; sourceTree = "<group>"; };
+		951EB34C22B698F100A9533B /* modelFacenet.pb */ = {isa = PBXFileReference; lastKnownFileType = file; path = modelFacenet.pb; sourceTree = "<group>"; };
+		951EB34D22B698F100A9533B /* tensorflow_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tensorflow_utils.h; sourceTree = "<group>"; };
+		951EB34E22B698F100A9533B /* tensorflow_utils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = tensorflow_utils.mm; sourceTree = "<group>"; };
+		951EB34F22B698F100A9533B /* tfWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tfWrap.h; sourceTree = "<group>"; };
+		951EB35022B698F100A9533B /* tfWrap.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = tfWrap.mm; sourceTree = "<group>"; };
+		951EB35822B6994100A9533B /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		951EB35922B6A46D00A9533B /* Image+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+.swift"; sourceTree = "<group>"; };
+		B9E4B7E8ED1140C3AD203DB7 /* Pods_PersonRecognize.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PersonRecognize.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4CD8E9AA2201D33964A3CCD /* Pods-PersonRecognize.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PersonRecognize.debug.xcconfig"; path = "Target Support Files/Pods-PersonRecognize/Pods-PersonRecognize.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		951EB33122B6985E00A9533B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C74123AA68AA5B08B54BAB0F /* Pods_PersonRecognize.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5EA2F43CDDCF261339AA88CA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5463543A1B0A1372F08C75F6 /* Pods_SimpleFacenet.framework */,
+				B9E4B7E8ED1140C3AD203DB7 /* Pods_PersonRecognize.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		951EB32B22B6985D00A9533B = {
+			isa = PBXGroup;
+			children = (
+				951EB33622B6985E00A9533B /* PersonRecognize */,
+				951EB33522B6985E00A9533B /* Products */,
+				DE9185908FC6CE7D4B410D89 /* Pods */,
+				5EA2F43CDDCF261339AA88CA /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		951EB33522B6985E00A9533B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				951EB33422B6985E00A9533B /* PersonRecognize.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		951EB33622B6985E00A9533B /* PersonRecognize */ = {
+			isa = PBXGroup;
+			children = (
+				951EB33722B6985E00A9533B /* AppDelegate.swift */,
+				951EB33922B6985E00A9533B /* ViewController.swift */,
+				951EB35922B6A46D00A9533B /* Image+.swift */,
+				951EB34922B698F100A9533B /* Tensorflow */,
+				951EB33B22B6985E00A9533B /* Main.storyboard */,
+				951EB33E22B6986200A9533B /* Assets.xcassets */,
+				951EB35822B6994100A9533B /* Bridging-Header.h */,
+				951EB34022B6986200A9533B /* LaunchScreen.storyboard */,
+				951EB34322B6986200A9533B /* Info.plist */,
+			);
+			path = PersonRecognize;
+			sourceTree = "<group>";
+		};
+		951EB34922B698F100A9533B /* Tensorflow */ = {
+			isa = PBXGroup;
+			children = (
+				951EB34A22B698F100A9533B /* FaceNet.swift */,
+				951EB34B22B698F100A9533B /* Graph */,
+				951EB34D22B698F100A9533B /* tensorflow_utils.h */,
+				951EB34E22B698F100A9533B /* tensorflow_utils.mm */,
+				951EB34F22B698F100A9533B /* tfWrap.h */,
+				951EB35022B698F100A9533B /* tfWrap.mm */,
+			);
+			path = Tensorflow;
+			sourceTree = "<group>";
+		};
+		951EB34B22B698F100A9533B /* Graph */ = {
+			isa = PBXGroup;
+			children = (
+				951EB34C22B698F100A9533B /* modelFacenet.pb */,
+			);
+			path = Graph;
+			sourceTree = "<group>";
+		};
+		DE9185908FC6CE7D4B410D89 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C4CD8E9AA2201D33964A3CCD /* Pods-PersonRecognize.debug.xcconfig */,
+				43FBB4A03133E68FA1BD6073 /* Pods-PersonRecognize.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		951EB33322B6985E00A9533B /* PersonRecognize */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 951EB34622B6986200A9533B /* Build configuration list for PBXNativeTarget "PersonRecognize" */;
+			buildPhases = (
+				412ED670A451034CD6D10C15 /* [CP] Check Pods Manifest.lock */,
+				951EB33022B6985E00A9533B /* Sources */,
+				951EB33122B6985E00A9533B /* Frameworks */,
+				951EB33222B6985E00A9533B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PersonRecognize;
+			productName = SimpleFacenet;
+			productReference = 951EB33422B6985E00A9533B /* PersonRecognize.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		951EB32C22B6985D00A9533B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0940;
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = "Sun*";
+				TargetAttributes = {
+					951EB33322B6985E00A9533B = {
+						CreatedOnToolsVersion = 9.4.1;
+					};
+				};
+			};
+			buildConfigurationList = 951EB32F22B6985D00A9533B /* Build configuration list for PBXProject "PersonRecognize" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 951EB32B22B6985D00A9533B;
+			productRefGroup = 951EB33522B6985E00A9533B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				951EB33322B6985E00A9533B /* PersonRecognize */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		951EB33222B6985E00A9533B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				951EB34222B6986200A9533B /* LaunchScreen.storyboard in Resources */,
+				951EB33F22B6986200A9533B /* Assets.xcassets in Resources */,
+				951EB35222B698F100A9533B /* modelFacenet.pb in Resources */,
+				951EB33D22B6985E00A9533B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		412ED670A451034CD6D10C15 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PersonRecognize-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		951EB33022B6985E00A9533B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				951EB33A22B6985E00A9533B /* ViewController.swift in Sources */,
+				951EB35A22B6A46D00A9533B /* Image+.swift in Sources */,
+				951EB35422B698F100A9533B /* tfWrap.mm in Sources */,
+				951EB35122B698F100A9533B /* FaceNet.swift in Sources */,
+				951EB35322B698F100A9533B /* tensorflow_utils.mm in Sources */,
+				951EB33822B6985E00A9533B /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		951EB33B22B6985E00A9533B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				951EB33C22B6985E00A9533B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		951EB34022B6986200A9533B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				951EB34122B6986200A9533B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		951EB34422B6986200A9533B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		951EB34522B6986200A9533B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		951EB34722B6986200A9533B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C4CD8E9AA2201D33964A3CCD /* Pods-PersonRecognize.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S423MR2Z88;
+				INFOPLIST_FILE = PersonRecognize/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = cuonghx.SimpleFacenet1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PersonRecognize/Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		951EB34822B6986200A9533B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 43FBB4A03133E68FA1BD6073 /* Pods-PersonRecognize.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S423MR2Z88;
+				INFOPLIST_FILE = PersonRecognize/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = cuonghx.SimpleFacenet1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PersonRecognize/Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		951EB32F22B6985D00A9533B /* Build configuration list for PBXProject "PersonRecognize" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				951EB34422B6986200A9533B /* Debug */,
+				951EB34522B6986200A9533B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		951EB34622B6986200A9533B /* Build configuration list for PBXNativeTarget "PersonRecognize" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				951EB34722B6986200A9533B /* Debug */,
+				951EB34822B6986200A9533B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 951EB32C22B6985D00A9533B /* Project object */;
+}
