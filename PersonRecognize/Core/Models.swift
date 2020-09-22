@@ -10,10 +10,7 @@ import Foundation
 import UIKit
 
 
-let fnet = FaceNet()
-let fDetector = FaceDetector()
-var vectors = [Vector]()
-var vectorHelper = VectorHelper()
+
 
 class VectorHelper  {
     
@@ -75,15 +72,4 @@ func l2distance(_ feat1: [Double], _ feat2: [Double]) -> Double {
 }
 
 
-struct Vector {
-    var name: String
-    var vector: [Double]
-    var distance: Double
-}
-extension Vector {
-    init(name: String, vector: [Double]) {
-        self.init(name: name,
-                  vector: vector,
-                  distance: 0)
-    }
-}
+

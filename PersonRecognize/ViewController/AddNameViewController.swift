@@ -23,7 +23,6 @@ class AddNameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        textField.text = "Tuan"
     }
     
     @IBAction func tapDoneButoon(_ sender: UIButton) {

@@ -10,6 +10,14 @@
 import UIKit
 import CoreML
 
+//Machine Learning Model
+
+let fnet = FaceNet()
+let fDetector = FaceDetector()
+var vectors = [Vector]()
+var vectorHelper = VectorHelper()
+
+
 let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 let trainingDataset = ImageDataset(split: .train)
 let testingDataset = ImageDataset(split: .test)
@@ -20,3 +28,5 @@ var userList: [String] = []
 
 var attendList: [User] = []
 
+
+ 
