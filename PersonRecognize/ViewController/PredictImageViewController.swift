@@ -54,7 +54,7 @@ class PredictImageViewController: UIViewController, UIImagePickerControllerDeleg
             self.mainImg.image = image
             let result = vectorHelper.getResult(image: image)
             
-            nameFace1.text = userDict[result]
+            nameFace1.text = result
             print(result)
             image.face.crop { [self] res in
                 switch res {

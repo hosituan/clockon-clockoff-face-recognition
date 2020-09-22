@@ -9,6 +9,7 @@
 
 import UIKit
 import CoreML
+import RealmSwift
 
 //Machine Learning Model
 
@@ -23,10 +24,15 @@ let trainingDataset = ImageDataset(split: .train)
 let testingDataset = ImageDataset(split: .test)
 let labelUrl = documentDirectory.appendingPathComponent("label")
 var currentFrame: UIImage?
-var userDict:[String: String] = loadLabel()
+var currentLabel = "Unknown"
+//var userDict:[String: String] = loadLabel()
 var userList: [String] = []
 
 var attendList: [User] = []
 
 
- 
+let defaults = UserDefaults.standard
+var savedUserList = defaults.stringArray(forKey: "SavedUserList") ?? [String]()
+
+
+let realm = try! Realm()

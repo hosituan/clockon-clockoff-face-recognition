@@ -30,7 +30,7 @@ extension ViewLogViewController: UITableViewDelegate, UITableViewDataSource {
         cell.imgView.image = attendList[indexPath.row].image
         cell.nameLabel.text = attendList[indexPath.row].name
         cell.timeLabel.text = attendList[indexPath.row].time
-        cell.confidenceLabel.text = attendList[indexPath.row].confidence
+        cell.confidenceLabel.text = "" //attendList[indexPath.row].confidence
         return cell
     }
     

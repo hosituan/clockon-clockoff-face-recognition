@@ -15,7 +15,7 @@
 		951EB35322B698F100A9533B /* tensorflow_utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 951EB34E22B698F100A9533B /* tensorflow_utils.mm */; };
 		951EB35422B698F100A9533B /* tfWrap.mm in Sources */ = {isa = PBXBuildFile; fileRef = 951EB35022B698F100A9533B /* tfWrap.mm */; };
 		C74123AA68AA5B08B54BAB0F /* Pods_PersonRecognize.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9E4B7E8ED1140C3AD203DB7 /* Pods_PersonRecognize.framework */; };
-		FB7502B825198B7100193FF9 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7502B725198B7100193FF9 /* Models.swift */; };
+		FB7502B825198B7100193FF9 /* VectorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7502B725198B7100193FF9 /* VectorManager.swift */; };
 		FB9945E82519EA500023E174 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9945E72519EA500023E174 /* Vector.swift */; };
 		FBA1B48A2519052D00A31DF7 /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4842519052D00A31DF7 /* UIImage+Resize.swift */; };
 		FBA1B48B2519052D00A31DF7 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4852519052D00A31DF7 /* CustomButton.swift */; };
@@ -60,7 +60,7 @@
 		951EB35822B6994100A9533B /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		B9E4B7E8ED1140C3AD203DB7 /* Pods_PersonRecognize.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PersonRecognize.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4CD8E9AA2201D33964A3CCD /* Pods-PersonRecognize.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PersonRecognize.debug.xcconfig"; path = "Target Support Files/Pods-PersonRecognize/Pods-PersonRecognize.debug.xcconfig"; sourceTree = "<group>"; };
-		FB7502B725198B7100193FF9 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		FB7502B725198B7100193FF9 /* VectorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorManager.swift; sourceTree = "<group>"; };
 		FB9945E72519EA500023E174 /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
 		FBA1B4842519052D00A31DF7 /* UIImage+Resize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
 		FBA1B4852519052D00A31DF7 /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
@@ -181,6 +181,7 @@
 				FBA1B4852519052D00A31DF7 /* CustomButton.swift */,
 				FBA1B4862519052D00A31DF7 /* DismisKeyboard.swift */,
 				FBA1B4872519052D00A31DF7 /* CustomTableViewCell.swift */,
+				FBA1B4D9251905A100A31DF7 /* Labels.swift */,
 				FBA1B4882519052D00A31DF7 /* UIDeviceExtension.swift */,
 			);
 			path = Extension;
@@ -235,11 +236,10 @@
 				FBA1B4D6251905A100A31DF7 /* Global.swift */,
 				FB9945E72519EA500023E174 /* Vector.swift */,
 				FBA1B4D8251905A100A31DF7 /* User.swift */,
-				FBA1B4D9251905A100A31DF7 /* Labels.swift */,
 				FBA1B4DA251905A100A31DF7 /* ImageDataset.swift */,
 				FBA1B4DB251905A100A31DF7 /* CreateUserData.swift */,
 				FBA1B4DC251905A100A31DF7 /* Helper.swift */,
-				FB7502B725198B7100193FF9 /* Models.swift */,
+				FB7502B725198B7100193FF9 /* VectorManager.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -365,7 +365,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FBA1B4E2251905A100A31DF7 /* CreateUserData.swift in Sources */,
-				FB7502B825198B7100193FF9 /* Models.swift in Sources */,
+				FB7502B825198B7100193FF9 /* VectorManager.swift in Sources */,
 				FBA1B4C72519058B00A31DF7 /* FrameViewController.swift in Sources */,
 				FBA1B4CD2519058B00A31DF7 /* ViewFaceViewController.swift in Sources */,
 				FBA1B4DF251905A100A31DF7 /* User.swift in Sources */,

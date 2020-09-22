@@ -10,6 +10,6 @@ target 'PersonRecognize' do
 pod 'SkyFloatingLabelTextField', '~> 3.0'
 pod 'IQKeyboardManagerSwift'
 pod 'MBProgressHUD', '~> 1.2.0'
-
+pod 'RealmSwift'
 
 end

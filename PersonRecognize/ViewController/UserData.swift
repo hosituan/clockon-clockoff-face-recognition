@@ -21,13 +21,13 @@ class UserData: UIViewController, UIImagePickerControllerDelegate & UINavigation
     var userList:[String: String] = [:]
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        userDict = loadLabel()
-        loadData()
+//        userDict = loadLabel()
+//        loadData()
         tableView.delegate = self
         tableView.dataSource = self
         self.hideKeyboardWhenTappedAround()
@@ -36,42 +36,37 @@ class UserData: UIViewController, UIImagePickerControllerDelegate & UINavigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "viewFaceData" {
             let vc = segue.destination as! ViewFaceViewController
-            let indexPath = self.tableView.indexPathForSelectedRow
-            let currentCell = tableView.cellForRow(at: indexPath!)! as UITableViewCell
-            vc.title = "\(valueSelected) - \(currentCell.textLabel?.text ?? "Blank User")"
-            vc.indexPath = indexPath!.row
+            vc.name = valueSelected
         }
     }
     
-    func loadData() {
-        for i in 0..<30 {
-            let label = "user\(i)"
-            if userDict[label] != "" {
-                userList[label] = userDict[label]
-            }
-        }
-        
-    }
+//    func loadData() {
+//        for i in 0..<30 {
+//            let label = "user\(i)"
+//            if userDict[label] != "" {
+//                userList[label] = userDict[label]
+//            }
+//        }
+//
+//    }
     
-
+    
 }
 
 extension UserData: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        userList.count
+        savedUserList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "cellID")
-        if let user = userList["user\(indexPath.row)"] {
-            cell.textLabel?.text = "\(indexPath.row). " + user
-        }
+        cell.textLabel?.text = savedUserList[indexPath.row]
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        valueSelected = "user\(indexPath.row)"
+        valueSelected = savedUserList[indexPath.row]
         self.performSegue(withIdentifier: "viewFaceData", sender: nil)
     }
     

@@ -40,11 +40,9 @@ func contentsOfDirectory(at url: URL) -> [URL]? {
 func removeAllData() {
     let url1 = applicationDocumentsDirectory.appendingPathComponent("train")
     let url2 = applicationDocumentsDirectory.appendingPathComponent("test")
-    let url3 = applicationDocumentsDirectory.appendingPathComponent("label")
     
     try? FileManager.default.removeItem(at: url1)
     try? FileManager.default.removeItem(at: url2)
-    try? FileManager.default.removeItem(at: url3)
 }
 
 
@@ -63,12 +61,3 @@ extension UIViewController {
 }
 
 
-
-func manualCreate() {
-    let dictionary = NSMutableDictionary(capacity: 0)
-    
-    dictionary.setValue("quyen", forKey: "user7")
-    dictionary.write(to: labelUrl, atomically: true)
-    dictionary.setValue("Anh Toan", forKey: "user6")
-    dictionary.write(to: labelUrl, atomically: true)
-}

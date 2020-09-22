@@ -13,8 +13,8 @@ class TestViewController: UIViewController {
     @IBOutlet weak var imgView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        UserDefaults.standard.set("abcd", forKey: "Key")
-        print(UserDefaults.standard.string(forKey: "Key"))
+//        UserDefaults.standard.set("abcd", forKey: "Key")
+//        print(UserDefaults.standard.string(forKey: "Key"))
         
     }
     

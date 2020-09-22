@@ -13,6 +13,7 @@ struct Vector {
     var vector: [Double]
     var distance: Double
 }
+
 extension Vector {
     init(name: String, vector: [Double]) {
         self.init(name: name,
@@ -20,3 +21,4 @@ extension Vector {
                   distance: 0)
     }
 }
+

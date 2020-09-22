@@ -12,22 +12,24 @@ class ViewFaceViewController: UIViewController {
     
 
     @IBOutlet weak var tableView: UITableView!
-    var indexPath = 0
+    var name = ""
     var imgList:[UIImage?] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-        imgList = trainingDataset.getImage(label: "user\(indexPath)")
-        self.title = "\(imgList.count)"
-        print("user\(indexPath)")
+        imgList = trainingDataset.getImage(label: name)
+        print(name)
+        self.title = "\(name): \(imgList.count)"
         tableView.delegate = self
         tableView.dataSource = self
     }
     
-    @IBAction func clear(_ sender: UIBarButtonItem) {
-        let url = documentDirectory.appendingPathComponent("train").appendingPathComponent("user\(indexPath)")
-        removeIfExists(at: url)
-        saveLabel(at: "user\(indexPath)", value: "")
-        showDialog(message: "Cleared!")
+    @IBAction func generateVector(_ sender: UIBarButtonItem) {
+        
+        vectorHelper.addVector(name: name)
+//        let url = documentDirectory.appendingPathComponent("train").appendingPathComponent("user\(indexPath)")
+//        removeIfExists(at: url)
+//        saveLabel(at: "user\(indexPath)", value: "")
+//        showDialog(message: "Cleared!")
     }
     
     

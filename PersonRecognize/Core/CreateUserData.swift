@@ -34,6 +34,19 @@ class FrameOperation: Operation {
             return
         }
         trainingDataset.saveImage(image, for: label)
+        //vectorHelper.createVector1(name: label, image: image)
+        if let img = image.rotate(radians: .pi / 20) {
+            trainingDataset.saveImage(img, for: label)
+            //vectorHelper.createVector1(name: label, image: img)
+        }
+        if let img = image.rotate(radians: -.pi / 20) {
+            trainingDataset.saveImage(img, for: label)
+            //vectorHelper.createVector1(name: label, image: img)
+        }
+        if let img = image.flipHorizontally() {
+            trainingDataset.saveImage(img, for: label)
+            //vectorHelper.createVector1(name: label, image: img)
+        }
     }
 }
 

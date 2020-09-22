@@ -73,32 +73,36 @@ class PreviewView: UIView {
         var label = "Unknown"
         if let frame = currentFrame {
             let result = vectorHelper.getResult(image: frame)
-            if result != "" {
-                label = userDict[result]!
-                
+            if result != "" && result != "Unknown" {
+                label = result
+                if label != currentLabel {
+                    speak(name: label)
+                    currentLabel = label
+                }
                 let timestamp = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .medium, timeStyle: .medium)
-                let detectedUser = User(name: label, image: frame, time: timestamp, confidence: "100%")
+                
+                let detectedUser = User(name: label, image: frame, time: timestamp)
                 if attendList.count == 0 {
                     attendList.append(detectedUser)
                 }
                 else {
                     var count = 0
+                    //var user:User?
                     for item in attendList {
                         if item.name != label {
                             count += 1
                         }
+                        else {
+                            //user = item
+                        }
                     }
-                    if count == attendList.count {
+                    
+                    let validTime = false
+                    if count == attendList.count || validTime {
                         attendList.append(detectedUser)
-//                        let utterance = AVSpeechUtterance(string: "Hello \(label       )")
-//                        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-//                        utterance.rate = 0.1
-//
-//                        let synthesizer = AVSpeechSynthesizer()
-//                        synthesizer.speak(utterance)
                     }
                     else {
-                        print("User added")
+                        //print("User added")
                     }
                 }
             }
@@ -123,6 +127,15 @@ class PreviewView: UIView {
         }
         textLayer.removeAll()
         maskLayer.removeAll()
+    }
+    
+    func speak(name: String) {
+        let utterance = AVSpeechUtterance(string: "Hello \(name)")
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        utterance.rate = 0.1
+
+        let synthesizer = AVSpeechSynthesizer()
+        synthesizer.speak(utterance)
     }
     
 }

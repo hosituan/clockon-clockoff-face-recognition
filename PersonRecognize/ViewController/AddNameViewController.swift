@@ -18,41 +18,52 @@ class AddNameViewController: UIViewController {
     @IBOutlet weak var faceImageView: UIImageView!
     @IBOutlet weak var textField: SkyFloatingLabelTextField!
     var videoURL: URL?
-    var numberOflabel = 50
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let url = videoURL {
+            self.getThumbnailImageFromVideoUrl(url: url) { (thumbImage) in
+                self.faceImageView.image = thumbImage
+                self.faceImageView.layer.cornerRadius = self.faceImageView.frame.height / 2
+            }
+        }
+        hideKeyboardWhenTappedAround()
+
     }
     
     @IBAction func tapDoneButoon(_ sender: UIButton) {
         if textField.text != "" && videoURL != nil {
-            if let label = getEmptyLabel() {
-                let getFrames = GetFrames()
-                print("Empty label is: \(label)")
-                saveLabel(at: label, value: textField.text!)
-                getFrames.getAllFrames(videoURL!, for: label)
-                self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-            }
-            else {
-                let alert = UIAlertController(title: "Warning", message: "You can't add more than 30 users!", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                    self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-                }))
-                self.present(alert, animated: true, completion: nil)
-            }
+            
+            let getFrames = GetFrames()
+            print("Your Name is: \(textField.text!)")
+            savedUserList.append(textField.text!)
+            defaults.set(savedUserList, forKey: "SavedUserList")
+            getFrames.getAllFrames(videoURL!, for: textField.text!)
+            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
         }
     }
     
-    func getEmptyLabel() -> String? {
-        userDict = loadLabel()
-        for i in 0..<numberOflabel {
-            let label = "user\(i)"
-            if userDict[label] == "" {
-                return label
+    func getThumbnailImageFromVideoUrl(url: URL, completion: @escaping ((_ image: UIImage?)->Void)) {
+        DispatchQueue.global().async {
+            let asset = AVAsset(url: url)
+            let avAssetImageGenerator = AVAssetImageGenerator(asset: asset)
+            avAssetImageGenerator.appliesPreferredTrackTransform = true
+            let thumnailTime = CMTimeMake(value: 2, timescale: 1)
+            do {
+                let cgThumbImage = try avAssetImageGenerator.copyCGImage(at: thumnailTime, actualTime: nil)
+                let thumbImage = UIImage(cgImage: cgThumbImage)
+                DispatchQueue.main.async {
+                    completion(thumbImage)
+                }
+            } catch {
+                print(error.localizedDescription)
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
             }
         }
-        return nil
     }
     
 }

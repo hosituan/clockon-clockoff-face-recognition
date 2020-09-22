@@ -7,11 +7,17 @@
 //
 
 import Foundation
-import UIKit
+import RealmSwift
 
 struct User {
     var name: String
     var image: UIImage
     var time: String
-    var confidence: String
+    //var confidence: String
+}
+
+class SavedVector: Object {
+    @objc dynamic var name: String = ""
+    @objc dynamic var vector: String = ""
+    @objc dynamic var distance: Double = 0
 }

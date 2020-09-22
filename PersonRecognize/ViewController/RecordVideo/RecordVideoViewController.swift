@@ -72,12 +72,16 @@ class RecordVideoViewController: UIViewController, AVCaptureFileOutputRecordingD
             desLabel.text = "Move your head slowly!"
             startButton.isEnabled = false
             captureSession.addOutput(movieOutput)
-            if let label = getEmptyLabel() {
-                let paths = documentDirectory.appendingPathComponent("\(label).mov")
-                try? FileManager.default.removeItem(at: paths)
-                movieOutput.startRecording(to: paths, recordingDelegate: self)
-                timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
-            }
+            let paths = documentDirectory.appendingPathComponent("output.mov")
+            try? FileManager.default.removeItem(at: paths)
+            movieOutput.startRecording(to: paths, recordingDelegate: self)
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+//            if let label = getEmptyLabel() {
+//                let paths = documentDirectory.appendingPathComponent("\(label).mov")
+//                try? FileManager.default.removeItem(at: paths)
+//                movieOutput.startRecording(to: paths, recordingDelegate: self)
+//                timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+//            }
         }
         else {
             self.captureSession.stopRunning()
@@ -122,14 +126,14 @@ class RecordVideoViewController: UIViewController, AVCaptureFileOutputRecordingD
             outputVideoUrl = outputFileURL
         }
     }
-    func getEmptyLabel() -> String? {
-        userDict = loadLabel()
-        for i in 0..<numberOfLabel {
-            let label = "user\(i)"
-            if userDict[label] == "" {
-                return label
-            }
-        }
-        return nil
-    }
+//    func getEmptyLabel() -> String? {
+//        userDict = loadLabel()
+//        for i in 0..<numberOfLabel {
+//            let label = "user\(i)"
+//            if userDict[label] == "" {
+//                return label
+//            }
+//        }
+//        return nil
+//    }
 }

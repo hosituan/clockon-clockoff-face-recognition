@@ -1,8 +1,11 @@
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/TensorFlow-experimental/Frameworks"
+ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/FaceCropper" "${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardManagerSwift" "${PODS_CONFIGURATION_BUILD_DIR}/MBProgressHUD" "${PODS_CONFIGURATION_BUILD_DIR}/Realm" "${PODS_CONFIGURATION_BUILD_DIR}/RealmSwift" "${PODS_CONFIGURATION_BUILD_DIR}/SkyFloatingLabelTextField" "${PODS_ROOT}/TensorFlow-experimental/Frameworks"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) '${SRCROOT}/Pods/TensorFlow-experimental/Frameworks/tensorflow_experimental.framework/Headers' '${SRCROOT}/Pods/TensorFlow-experimental/Frameworks/tensorflow_experimental.framework/Headers/third_party/eigen3'
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/FaceCropper/FaceCropper.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/MBProgressHUD/MBProgressHUD.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/Realm/Realm.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/RealmSwift/RealmSwift.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework/Headers" '${SRCROOT}/Pods/TensorFlow-experimental/Frameworks/tensorflow_experimental.framework/Headers' '${SRCROOT}/Pods/TensorFlow-experimental/Frameworks/tensorflow_experimental.framework/Headers/third_party/eigen3'
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_LDFLAGS = $(inherited) -L ${SRCROOT}/Pods/TensorFlow-experimental/Frameworks/tensorflow_experimental.framework -ObjC -l"c++" -l"protobuf_experimental" -framework "Accelerate" -framework "tensorflow_experimental" -force_load ${SRCROOT}/Pods/TensorFlow-experimental/Frameworks/tensorflow_experimental.framework/tensorflow_experimental
+LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Realm/core"
+OTHER_LDFLAGS = $(inherited) -L ${SRCROOT}/Pods/TensorFlow-experimental/Frameworks/tensorflow_experimental.framework -ObjC -l"c++" -l"protobuf_experimental" -l"z" -framework "Accelerate" -framework "CoreGraphics" -framework "FaceCropper" -framework "Foundation" -framework "IQKeyboardManagerSwift" -framework "MBProgressHUD" -framework "QuartzCore" -framework "Realm" -framework "RealmSwift" -framework "Security" -framework "SkyFloatingLabelTextField" -framework "UIKit" -framework "Vision" -framework "tensorflow_experimental" -force_load ${SRCROOT}/Pods/TensorFlow-experimental/Frameworks/tensorflow_experimental.framework/tensorflow_experimental
+OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_PODFILE_DIR_PATH = ${SRCROOT}/.

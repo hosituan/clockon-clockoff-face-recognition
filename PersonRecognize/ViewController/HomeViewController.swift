@@ -9,26 +9,24 @@
 import UIKit
 import MBProgressHUD
 import AVFoundation
-
+import RealmSwift
 
 class HomeViewController: UIViewController {
-    
+
     var fps = 2
     private var generator:AVAssetImageGenerator!
-    var modelUrl: URL?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         fnet.load()
+        print(savedUserList)
+        vectors = vectorHelper.loadVector()
+        print("Number of vectors: \(vectors.count)")
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
-        userDict = loadLabel()
-        if let dictionary = NSMutableDictionary(contentsOf: labelUrl){
-            userDict = dictionary as! Dictionary<String,String>
-        }
-        print(userDict)
-        
+        showDialog(message: "You have \(vectors.count) vectors!")
         
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -38,22 +36,22 @@ class HomeViewController: UIViewController {
     
     @IBAction func tapGenerateData(_ sender: UIButton) {
         
-        let alert = UIAlertController(title: "Number", message: "Fill id", preferredStyle: .alert)
-        alert.addTextField { (textField) in
-            textField.text = ""
-        }
-
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [self, weak alert] (_) in
-            let textField = (alert!.textFields![0]) as UITextField
-            let i = textField.text!
-            let label = "user\(i)"
-            print(label)
-            let videoURL = documentDirectory.appendingPathComponent("\(label).mov")
-            print(videoURL)
-            getAllFrames(videoURL, for: label)
-        }))
-
-        self.present(alert, animated: true, completion: nil)
+//        let alert = UIAlertController(title: "Number", message: "Fill id", preferredStyle: .alert)
+//        alert.addTextField { (textField) in
+//            textField.text = ""
+//        }
+//
+//        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [self, weak alert] (_) in
+//            let textField = (alert!.textFields![0]) as UITextField
+//            let i = textField.text!
+//            let label = "user\(i)"
+//            print(label)
+//            let videoURL = documentDirectory.appendingPathComponent("\(label).mov")
+//            print(videoURL)
+//            getAllFrames(videoURL, for: "Hồ Sĩ Tuấn")
+//        }))
+//
+//        self.present(alert, animated: true, completion: nil)
 
         
     }
@@ -74,14 +72,7 @@ class HomeViewController: UIViewController {
         self.performSegue(withIdentifier: "viewLog", sender: nil)
     }
     @IBAction func tapTraining(_ sender: UIButton) {
-        
-        
-        for user in userDict {
-            if user.value != "" {
-                print("\(user.key):\(user.value)")
-                vectorHelper.addVector(name: user.key)
-            }
-        }
+
     }
 }
 

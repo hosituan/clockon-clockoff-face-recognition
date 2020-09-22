@@ -1,16 +1,42 @@
 PODS:
+  - FaceCropper (1.0.0)
+  - IQKeyboardManagerSwift (6.5.6)
+  - MBProgressHUD (1.2.0)
+  - Realm (5.4.3):
+    - Realm/Headers (= 5.4.3)
+  - Realm/Headers (5.4.3)
+  - RealmSwift (5.4.3):
+    - Realm (= 5.4.3)
+  - SkyFloatingLabelTextField (3.8.0)
   - TensorFlow-experimental (1.1.1)
 
 DEPENDENCIES:
+  - FaceCropper
+  - IQKeyboardManagerSwift
+  - MBProgressHUD (~> 1.2.0)
+  - RealmSwift
+  - SkyFloatingLabelTextField (~> 3.0)
   - TensorFlow-experimental
 
 SPEC REPOS:
   trunk:
+    - FaceCropper
+    - IQKeyboardManagerSwift
+    - MBProgressHUD
+    - Realm
+    - RealmSwift
+    - SkyFloatingLabelTextField
     - TensorFlow-experimental
 
 SPEC CHECKSUMS:
+  FaceCropper: 5037221c279db6ae3cea68e76ac4165c85c7c291
+  IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  Realm: e3d5fcc50fd79ddf87a2d86301f6edbf57531f84
+  RealmSwift: db608068eccc54bce47928e8118bde13c120c307
+  SkyFloatingLabelTextField: 5a338412114808e961fe2d14ea2c5452c8b6e4aa
   TensorFlow-experimental: c38ed2a43acaa2d42ce4174ac076efaa76e26a12
 
-PODFILE CHECKSUM: 84fdd46ff15e7de59b9ff2e7a7135281bb70ae0d
+PODFILE CHECKSUM: 0e5a437f02618544fc3ce5c71819dca3ae7de694
 
 COCOAPODS: 1.9.3
