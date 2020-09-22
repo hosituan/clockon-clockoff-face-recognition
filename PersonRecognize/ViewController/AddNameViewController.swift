@@ -23,16 +23,16 @@ class AddNameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        textField.text = "Tuan"
     }
     
     @IBAction func tapDoneButoon(_ sender: UIButton) {
         if textField.text != "" && videoURL != nil {
             if let label = getEmptyLabel() {
-                //let getFrames = GetFrames()
+                let getFrames = GetFrames()
                 print("Empty label is: \(label)")
                 saveLabel(at: label, value: textField.text!)
-                //getFrames.getAllFrames(videoURL!, for: label)
+                getFrames.getAllFrames(videoURL!, for: label)
                 self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
             }
             else {

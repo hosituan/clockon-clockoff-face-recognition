@@ -23,6 +23,7 @@ class PredictImageViewController: UIViewController, UIImagePickerControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         clearData()
+        print(vectors.count)
     }
     
 
@@ -51,34 +52,38 @@ class PredictImageViewController: UIViewController, UIImagePickerControllerDeleg
         if let image = info[.editedImage] as? UIImage {
             print("this is image")
             self.mainImg.image = image
+            let result = vectorHelper.getResult(image: image)
             
+            nameFace1.text = userDict[result]
+            print(result)
             image.face.crop { [self] res in
                 switch res {
                 case .success(let faces):
                     self.face1.image = faces[0]
                     self.face1.layer.cornerRadius = self.corner
-                    let result = model.predict(image: faces[0].resized(smallestSide: 227)!)
-                    let confidence = result.1! * 100
-                    print(result)
-                    if confidence >= 50 {
-                        self.nameFace1.text = "\(userDict[result.0!]!): \(confidence.rounded() )%"
-                    }
-                    else {
-                        self.nameFace1.text = "Unknown"
-                    }
                     
-                    if faces.count == 2 {
-                        self.face2.image = faces[1]
-                        self.face2.layer.cornerRadius = self.corner
-                        let result = model.predict(image: faces[1])
-                        let confidence = result.1! * 100
-                        if confidence >= 560 {
-                            self.nameFace2.text = "\(userDict[result.0!]!): \(confidence)%"
-                        }
-                        else {
-                            self.nameFace2.text = "Unknown"
-                        }
-                    }
+//                    let result = model.predict(image: faces[0].resized(smallestSide: 227)!)
+//                    let confidence = result.1! * 100
+//                    print(result)
+//                    if confidence >= 50 {
+//                        self.nameFace1.text = "\(userDict[result.0!]!): \(confidence.rounded() )%"
+//                    }
+//                    else {
+//                        self.nameFace1.text = "Unknown"
+//                    }
+//
+//                    if faces.count == 2 {
+//                        self.face2.image = faces[1]
+//                        self.face2.layer.cornerRadius = self.corner
+//                        let result = model.predict(image: faces[1])
+//                        let confidence = result.1! * 100
+//                        if confidence >= 560 {
+//                            self.nameFace2.text = "\(userDict[result.0!]!): \(confidence)%"
+//                        }
+//                        else {
+//                            self.nameFace2.text = "Unknown"
+//                        }
+//                    }
                 case .notFound:
                     self.showDialog(message: "Not found any face!")
                 case .failure(let error):

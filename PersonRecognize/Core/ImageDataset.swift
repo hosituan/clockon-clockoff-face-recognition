@@ -29,7 +29,6 @@ class ImageDataset {
         baseURL = applicationDocumentsDirectory.appendingPathComponent(split.folderName)
         createDatasetFolder()
     }
-    //var count: Int { getImage().count }
     private func createDatasetFolder() {
         print("Path for \(split): \(baseURL)")
         createDirectory(at: baseURL)
@@ -71,15 +70,5 @@ extension ImageDataset {
         }
         return imageList
         
-    }
-    private func loadModel(url: URL) -> MLModel? {
-        do {
-            let config = MLModelConfiguration()
-            config.computeUnits = .all
-            return try MLModel(contentsOf: url, configuration: config)
-        } catch {
-            print("Error loading model: \(error)")
-            return nil
-        }
     }
 }

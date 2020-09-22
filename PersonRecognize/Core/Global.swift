@@ -14,13 +14,8 @@ let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .u
 let trainingDataset = ImageDataset(split: .train)
 let testingDataset = ImageDataset(split: .test)
 let labelUrl = documentDirectory.appendingPathComponent("label")
-var imageLabelDictionary : [UIImage:String] = [:]
-var updatableModel : MLModel?
-var imageConstraint: MLImageConstraint!
-var model = Model()
 var currentFrame: UIImage?
 var userDict:[String: String] = loadLabel()
-var faceList: [[UIImage : String]] = [[:]]
 var userList: [String] = []
 
 var attendList: [User] = []

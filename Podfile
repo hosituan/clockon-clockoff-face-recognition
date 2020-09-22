@@ -6,5 +6,10 @@ target 'PersonRecognize' do
 
 
   pod 'TensorFlow-experimental'
+	pod 'FaceCropper'
+pod 'SkyFloatingLabelTextField', '~> 3.0'
+pod 'IQKeyboardManagerSwift'
+pod 'MBProgressHUD', '~> 1.2.0'
+
 
 end

@@ -428,7 +428,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vzI-vf-Xq7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="980" y="-89"/>
+            <point key="canvasLocation" x="980" y="-89.408866995073893"/>
         </scene>
         <!--Add Name View Controller-->
         <scene sceneID="4sK-ub-EUV">
@@ -439,7 +439,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x6j-HM-px9" customClass="CustomButton" customModule="PersonRecognize" customModuleProvider="target">
-                                <rect key="frame" x="37.666666666666657" y="589.33333333333337" width="300" height="50"/>
+                                <rect key="frame" x="37.666666666666657" y="139.33333333333334" width="300" height="50"/>
                                 <color key="backgroundColor" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="2cR-Kj-hSs"/>
@@ -453,15 +453,8 @@
                                     <action selector="tapDoneButoon:" destination="cev-iW-UM4" eventType="touchUpInside" id="Jeg-f1-eWf"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2gh-ru-ebr">
-                                <rect key="frame" x="37.666666666666657" y="150" width="300" height="300"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="BvQ-1O-p84"/>
-                                    <constraint firstAttribute="height" constant="300" id="rFT-8P-6Ir"/>
-                                </constraints>
-                            </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yxJ-M2-SEu" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                <rect key="frame" x="37.666666666666657" y="499.99999999999994" width="300" height="39.333333333333314"/>
+                                <rect key="frame" x="37.666666666666657" y="50" width="300" height="39.333333333333343"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
@@ -472,18 +465,15 @@
                         <viewLayoutGuide key="safeArea" id="kos-Z6-1ey"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="2gh-ru-ebr" firstAttribute="centerX" secondItem="MvC-dr-M7o" secondAttribute="centerX" id="Jh7-x2-lc6"/>
                             <constraint firstItem="yxJ-M2-SEu" firstAttribute="width" secondItem="x6j-HM-px9" secondAttribute="width" id="Ljy-Da-Uyi"/>
+                            <constraint firstItem="yxJ-M2-SEu" firstAttribute="top" secondItem="kos-Z6-1ey" secondAttribute="top" constant="50" id="SG0-po-9H4"/>
                             <constraint firstItem="x6j-HM-px9" firstAttribute="top" secondItem="yxJ-M2-SEu" secondAttribute="bottom" constant="50" id="SHE-vD-vp3"/>
                             <constraint firstItem="x6j-HM-px9" firstAttribute="centerX" secondItem="MvC-dr-M7o" secondAttribute="centerX" id="XNr-vI-RMo"/>
-                            <constraint firstItem="2gh-ru-ebr" firstAttribute="top" secondItem="kos-Z6-1ey" secondAttribute="top" constant="150" id="heG-vB-n6o"/>
                             <constraint firstItem="yxJ-M2-SEu" firstAttribute="centerX" secondItem="MvC-dr-M7o" secondAttribute="centerX" id="kP5-Yo-rVE"/>
-                            <constraint firstItem="yxJ-M2-SEu" firstAttribute="top" secondItem="2gh-ru-ebr" secondAttribute="bottom" constant="50" id="vdr-i7-ZWd"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="1uM-W4-Bu4"/>
                     <connections>
-                        <outlet property="faceImageView" destination="2gh-ru-ebr" id="74J-3o-EBw"/>
                         <outlet property="textField" destination="yxJ-M2-SEu" id="so1-8j-UoE"/>
                     </connections>
                 </viewController>

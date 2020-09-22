@@ -63,7 +63,10 @@ extension UserData: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "cellID")
-        cell.textLabel?.text = "\(indexPath.row). " + userList["user\(indexPath.row)"]!
+        if let user = userList["user\(indexPath.row)"] {
+            cell.textLabel?.text = "\(indexPath.row). " + user
+        }
+        
         return cell
     }
     

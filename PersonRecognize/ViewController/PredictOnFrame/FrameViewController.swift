@@ -18,7 +18,6 @@ class FrameViewController: UIViewController {
     @IBOutlet weak var previewView: PreviewView!
     // VNRequest: Either Retangles or Landmarks
     private var faceDetectionRequest: VNRequest!
-    @IBOutlet weak var faceImageView: UIImageView!
     // TODO: Decide camera position --- front or back
     private var devicePosition: AVCaptureDevice.Position = .front
     
@@ -391,25 +390,7 @@ extension FrameViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else { return  }
 
         let image = UIImage(cgImage: cgImage)
-        image.face.crop {
-            res in
-            switch res {
-            case .success(let faces):
-                currentFrame = faces[0].rotate(radians: .pi/2)?.flipHorizontally()
-//                if let image = currentFrame {
-//                    let result = model.predict(image: image)
-//                    if !userList.contains(result.0!) {
-//                        userList.append(result.0!)
-//                        faceList.append([image:result.0!])
-//                        self.tableView.reloadData()
-//                    }
-//                }
-            case .notFound:
-                print("Not found face")
-            case .failure(let error):
-                print("Error crop face: \(error)")
-            }
-        }
+        currentFrame = image.rotate(radians: .pi/2)?.flipHorizontally()
         
         if let cameraIntrinsicData = CMGetAttachment(sampleBuffer, key: kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix, attachmentModeOut: nil) {
             requestOptions = [.cameraIntrinsics : cameraIntrinsicData]
@@ -430,21 +411,6 @@ extension FrameViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
 }
 
 
-//extension FrameViewController : UITableViewDelegate, UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        faceList.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "cellID") as? CustomTableViewCell
-//        let indexValue = faceList[indexPath.row]
-//        cell?.imageView?.image = indexValue.first?.key.resized(smallestSide: 50)
-//        cell?.imageView?.layer.cornerRadius = 35
-//        return cell!
-//    }
-//
-//
-//}
 
 
 

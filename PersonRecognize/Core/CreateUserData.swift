@@ -33,78 +33,12 @@ class FrameOperation: Operation {
         } catch {
             return
         }
-        image.face.crop { result in
-            switch result {
-            case .success(let faces):
-                for face in faces {
-                    for item in face.createImageList() {
-                        if let img = item {
-                            trainingDataset.saveImage(img, for: label)
-                        }
-                    }
-                }
-            case .notFound:
-                print("Not found face")
-            case .failure(let error):
-                print("Error crop face: \(error)")
-            }
-        }
-        image.rotate(radians: .pi / 12)?.face.crop({ (result) in
-            switch result {
-            case .success(let faces):
-                for face in faces {
-                    for item in face.createImageList() {
-                        if let img = item {
-                            trainingDataset.saveImage(img, for: label)
-                        }
-                    }
-                }
-            case .notFound:
-                print("Not found face")
-            case .failure(let error):
-                print("Error crop face: \(error)")
-            }
-        })
-        
-        image.rotate(radians: -.pi / 12)?.face.crop({ (result) in
-            switch result {
-            case .success(let faces):
-                for face in faces {
-                    for item in face.createImageList() {
-                        if let img = item {
-                            trainingDataset.saveImage(img, for: label)
-                        }
-                    }
-                }
-            case .notFound:
-                print("Not found face")
-            case .failure(let error):
-                print("Error crop face: \(error)")
-            }
-        })
-        
-        image.flipHorizontally()?.face.crop({ (result) in
-            switch result {
-            case .success(let faces):
-                for face in faces {
-                    for item in face.createImageList() {
-                        if let img = item {
-                            trainingDataset.saveImage(img, for: label)
-                        }
-                    }
-                }
-            case .notFound:
-                print("Not found face")
-            case .failure(let error):
-                print("Error crop face: \(error)")
-            }
-        })
-        
+        trainingDataset.saveImage(image, for: label)
     }
 }
 
 class GetFrames {
-    var fps = 5
+    var fps = 2
     private var generator:AVAssetImageGenerator!
     
     func getAllFrames(_ videoUrl: URL, for label: String) {
@@ -125,10 +59,6 @@ class GetFrames {
             self.generator = nil
         queue.addBarrierBlock {
             print("Complete")
-//            DispatchQueue.main.async {
-//                //UIApplication.shared.windows.first?.rootViewController?.showDialog(message: "Added User")
-//            }
-//
             
         }
     }

@@ -72,53 +72,41 @@ class PreviewView: UIView {
         
         var label = "Unknown"
         if let frame = currentFrame {
-            let result = model.predict(image:  (frame.resized(smallestSide: 227)!))
-            print(result)
-            let confidence = result.1! * 100
-            if confidence >= 80 {
-
-                if result.0 == "unknown" {
-                    label = "Unknown"
+            let result = vectorHelper.getResult(image: frame)
+            if result != "" {
+                label = userDict[result]!
+                
+                let timestamp = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .medium, timeStyle: .medium)
+                let detectedUser = User(name: label, image: frame, time: timestamp, confidence: "100%")
+                if attendList.count == 0 {
+                    attendList.append(detectedUser)
                 }
                 else {
-                    if let name = userDict[result.0!] {
-                        label = "\(name): \(confidence.rounded() )%"
-                        //print(attendList.count)
-                        let timestamp = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .medium, timeStyle: .medium)
-                        let detectedUser = User(name: name, image: frame, time: timestamp, confidence: "- \(confidence.rounded())%")
-                        if attendList.count == 0 {
-                            attendList.append(detectedUser)
-//                            let utterance = AVSpeechUtterance(string: "Hello \(name)")
-//                            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-//                            utterance.rate = 0.1
-//
-//                            let synthesizer = AVSpeechSynthesizer()
-//                            synthesizer.speak(utterance)
-                        }
-                        else {
-                            var count = 0
-                            for item in attendList {
-                                if item.name != name {
-                                    count += 1
-                                }
-                            }
-                            if count == attendList.count {
-                                attendList.append(detectedUser)
-                            }
-                            else {
-                                //print("User added")
-                            }
+                    var count = 0
+                    for item in attendList {
+                        if item.name != label {
+                            count += 1
                         }
                     }
-
+                    if count == attendList.count {
+                        attendList.append(detectedUser)
+//                        let utterance = AVSpeechUtterance(string: "Hello \(label       )")
+//                        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+//                        utterance.rate = 0.1
+//
+//                        let synthesizer = AVSpeechSynthesizer()
+//                        synthesizer.speak(utterance)
+                    }
+                    else {
+                        print("User added")
+                    }
                 }
             }
-            else {
-            }
         }
+        _ = createLayer(in: facebounds, prediction: label)
         
 
-        _ = createLayer(in: facebounds, prediction: label)
+        
         
     }
     func ImageInRect(_ rect: CGRect) -> UIImage?

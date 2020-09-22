@@ -3,21 +3,46 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		951EB33822B6985E00A9533B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951EB33722B6985E00A9533B /* AppDelegate.swift */; };
 		951EB33A22B6985E00A9533B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951EB33922B6985E00A9533B /* ViewController.swift */; };
-		951EB33D22B6985E00A9533B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 951EB33B22B6985E00A9533B /* Main.storyboard */; };
 		951EB33F22B6986200A9533B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 951EB33E22B6986200A9533B /* Assets.xcassets */; };
 		951EB34222B6986200A9533B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 951EB34022B6986200A9533B /* LaunchScreen.storyboard */; };
 		951EB35122B698F100A9533B /* FaceNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951EB34A22B698F100A9533B /* FaceNet.swift */; };
 		951EB35222B698F100A9533B /* modelFacenet.pb in Resources */ = {isa = PBXBuildFile; fileRef = 951EB34C22B698F100A9533B /* modelFacenet.pb */; };
 		951EB35322B698F100A9533B /* tensorflow_utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 951EB34E22B698F100A9533B /* tensorflow_utils.mm */; };
 		951EB35422B698F100A9533B /* tfWrap.mm in Sources */ = {isa = PBXBuildFile; fileRef = 951EB35022B698F100A9533B /* tfWrap.mm */; };
-		951EB35A22B6A46D00A9533B /* Image+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951EB35922B6A46D00A9533B /* Image+.swift */; };
 		C74123AA68AA5B08B54BAB0F /* Pods_PersonRecognize.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9E4B7E8ED1140C3AD203DB7 /* Pods_PersonRecognize.framework */; };
+		FB7502B825198B7100193FF9 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7502B725198B7100193FF9 /* Models.swift */; };
+		FBA1B48A2519052D00A31DF7 /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4842519052D00A31DF7 /* UIImage+Resize.swift */; };
+		FBA1B48B2519052D00A31DF7 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4852519052D00A31DF7 /* CustomButton.swift */; };
+		FBA1B48C2519052D00A31DF7 /* DismisKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4862519052D00A31DF7 /* DismisKeyboard.swift */; };
+		FBA1B48D2519052D00A31DF7 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4872519052D00A31DF7 /* CustomTableViewCell.swift */; };
+		FBA1B48E2519052D00A31DF7 /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4882519052D00A31DF7 /* UIDeviceExtension.swift */; };
+		FBA1B4C62519058B00A31DF7 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4B62519058B00A31DF7 /* PreviewView.swift */; };
+		FBA1B4C72519058B00A31DF7 /* FrameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4B72519058B00A31DF7 /* FrameViewController.swift */; };
+		FBA1B4C82519058B00A31DF7 /* LogTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4B92519058B00A31DF7 /* LogTableViewCell.swift */; };
+		FBA1B4C92519058B00A31DF7 /* ViewLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4BA2519058B00A31DF7 /* ViewLogViewController.swift */; };
+		FBA1B4CA2519058B00A31DF7 /* AddNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4BB2519058B00A31DF7 /* AddNameViewController.swift */; };
+		FBA1B4CB2519058B00A31DF7 /* TrainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4BD2519058B00A31DF7 /* TrainViewController.swift */; };
+		FBA1B4CC2519058B00A31DF7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4BE2519058B00A31DF7 /* HomeViewController.swift */; };
+		FBA1B4CD2519058B00A31DF7 /* ViewFaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4BF2519058B00A31DF7 /* ViewFaceViewController.swift */; };
+		FBA1B4CE2519058B00A31DF7 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4C02519058B00A31DF7 /* UserData.swift */; };
+		FBA1B4CF2519058B00A31DF7 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4C12519058B00A31DF7 /* TestViewController.swift */; };
+		FBA1B4D02519058B00A31DF7 /* PredictImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4C22519058B00A31DF7 /* PredictImageViewController.swift */; };
+		FBA1B4D12519058B00A31DF7 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4C42519058B00A31DF7 /* VideoView.swift */; };
+		FBA1B4D22519058B00A31DF7 /* RecordVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4C52519058B00A31DF7 /* RecordVideoViewController.swift */; };
+		FBA1B4DD251905A100A31DF7 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4D6251905A100A31DF7 /* Global.swift */; };
+		FBA1B4DE251905A100A31DF7 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4D7251905A100A31DF7 /* Model.swift */; };
+		FBA1B4DF251905A100A31DF7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4D8251905A100A31DF7 /* User.swift */; };
+		FBA1B4E0251905A100A31DF7 /* Labels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4D9251905A100A31DF7 /* Labels.swift */; };
+		FBA1B4E1251905A100A31DF7 /* ImageDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4DA251905A100A31DF7 /* ImageDataset.swift */; };
+		FBA1B4E2251905A100A31DF7 /* CreateUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4DB251905A100A31DF7 /* CreateUserData.swift */; };
+		FBA1B4E3251905A100A31DF7 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4DC251905A100A31DF7 /* Helper.swift */; };
+		FBA1B4E8251905A800A31DF7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBA1B4E6251905A800A31DF7 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,7 +51,6 @@
 		951EB33422B6985E00A9533B /* PersonRecognize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PersonRecognize.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		951EB33722B6985E00A9533B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		951EB33922B6985E00A9533B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		951EB33C22B6985E00A9533B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		951EB33E22B6986200A9533B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		951EB34122B6986200A9533B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		951EB34322B6986200A9533B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -37,9 +61,35 @@
 		951EB34F22B698F100A9533B /* tfWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tfWrap.h; sourceTree = "<group>"; };
 		951EB35022B698F100A9533B /* tfWrap.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = tfWrap.mm; sourceTree = "<group>"; };
 		951EB35822B6994100A9533B /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
-		951EB35922B6A46D00A9533B /* Image+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+.swift"; sourceTree = "<group>"; };
 		B9E4B7E8ED1140C3AD203DB7 /* Pods_PersonRecognize.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PersonRecognize.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4CD8E9AA2201D33964A3CCD /* Pods-PersonRecognize.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PersonRecognize.debug.xcconfig"; path = "Target Support Files/Pods-PersonRecognize/Pods-PersonRecognize.debug.xcconfig"; sourceTree = "<group>"; };
+		FB7502B725198B7100193FF9 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		FBA1B4842519052D00A31DF7 /* UIImage+Resize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
+		FBA1B4852519052D00A31DF7 /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		FBA1B4862519052D00A31DF7 /* DismisKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismisKeyboard.swift; sourceTree = "<group>"; };
+		FBA1B4872519052D00A31DF7 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		FBA1B4882519052D00A31DF7 /* UIDeviceExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDeviceExtension.swift; sourceTree = "<group>"; };
+		FBA1B4B62519058B00A31DF7 /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
+		FBA1B4B72519058B00A31DF7 /* FrameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameViewController.swift; sourceTree = "<group>"; };
+		FBA1B4B92519058B00A31DF7 /* LogTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogTableViewCell.swift; sourceTree = "<group>"; };
+		FBA1B4BA2519058B00A31DF7 /* ViewLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewLogViewController.swift; sourceTree = "<group>"; };
+		FBA1B4BB2519058B00A31DF7 /* AddNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNameViewController.swift; sourceTree = "<group>"; };
+		FBA1B4BD2519058B00A31DF7 /* TrainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainViewController.swift; sourceTree = "<group>"; };
+		FBA1B4BE2519058B00A31DF7 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		FBA1B4BF2519058B00A31DF7 /* ViewFaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewFaceViewController.swift; sourceTree = "<group>"; };
+		FBA1B4C02519058B00A31DF7 /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		FBA1B4C12519058B00A31DF7 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		FBA1B4C22519058B00A31DF7 /* PredictImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredictImageViewController.swift; sourceTree = "<group>"; };
+		FBA1B4C42519058B00A31DF7 /* VideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
+		FBA1B4C52519058B00A31DF7 /* RecordVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordVideoViewController.swift; sourceTree = "<group>"; };
+		FBA1B4D6251905A100A31DF7 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		FBA1B4D7251905A100A31DF7 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		FBA1B4D8251905A100A31DF7 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		FBA1B4D9251905A100A31DF7 /* Labels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Labels.swift; sourceTree = "<group>"; };
+		FBA1B4DA251905A100A31DF7 /* ImageDataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDataset.swift; sourceTree = "<group>"; };
+		FBA1B4DB251905A100A31DF7 /* CreateUserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateUserData.swift; sourceTree = "<group>"; };
+		FBA1B4DC251905A100A31DF7 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		FBA1B4E7251905A800A31DF7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,14 +134,17 @@
 		951EB33622B6985E00A9533B /* PersonRecognize */ = {
 			isa = PBXGroup;
 			children = (
-				951EB33722B6985E00A9533B /* AppDelegate.swift */,
-				951EB33922B6985E00A9533B /* ViewController.swift */,
-				951EB35922B6A46D00A9533B /* Image+.swift */,
+				FBA1B4B42519058B00A31DF7 /* ViewController */,
 				951EB34922B698F100A9533B /* Tensorflow */,
-				951EB33B22B6985E00A9533B /* Main.storyboard */,
-				951EB33E22B6986200A9533B /* Assets.xcassets */,
+				FBA1B4832519052D00A31DF7 /* Extension */,
+				FBA1B4E5251905A800A31DF7 /* View */,
+				FBA1B4D5251905A100A31DF7 /* Core */,
 				951EB35822B6994100A9533B /* Bridging-Header.h */,
+				FBA1B4BC2519058B00A31DF7 /* Unused */,
 				951EB34022B6986200A9533B /* LaunchScreen.storyboard */,
+				951EB33922B6985E00A9533B /* ViewController.swift */,
+				951EB33E22B6986200A9533B /* Assets.xcassets */,
+				951EB33722B6985E00A9533B /* AppDelegate.swift */,
 				951EB34322B6986200A9533B /* Info.plist */,
 			);
 			path = PersonRecognize;
@@ -127,6 +180,92 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		FBA1B4832519052D00A31DF7 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				FBA1B4842519052D00A31DF7 /* UIImage+Resize.swift */,
+				FBA1B4852519052D00A31DF7 /* CustomButton.swift */,
+				FBA1B4862519052D00A31DF7 /* DismisKeyboard.swift */,
+				FBA1B4872519052D00A31DF7 /* CustomTableViewCell.swift */,
+				FBA1B4882519052D00A31DF7 /* UIDeviceExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		FBA1B4B42519058B00A31DF7 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FBA1B4B52519058B00A31DF7 /* PredictOnFrame */,
+				FBA1B4B82519058B00A31DF7 /* View Log */,
+				FBA1B4BB2519058B00A31DF7 /* AddNameViewController.swift */,
+				FBA1B4BE2519058B00A31DF7 /* HomeViewController.swift */,
+				FBA1B4BF2519058B00A31DF7 /* ViewFaceViewController.swift */,
+				FBA1B4C02519058B00A31DF7 /* UserData.swift */,
+				FBA1B4C12519058B00A31DF7 /* TestViewController.swift */,
+				FBA1B4C22519058B00A31DF7 /* PredictImageViewController.swift */,
+				FBA1B4C32519058B00A31DF7 /* RecordVideo */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		FBA1B4B52519058B00A31DF7 /* PredictOnFrame */ = {
+			isa = PBXGroup;
+			children = (
+				FBA1B4B62519058B00A31DF7 /* PreviewView.swift */,
+				FBA1B4B72519058B00A31DF7 /* FrameViewController.swift */,
+			);
+			path = PredictOnFrame;
+			sourceTree = "<group>";
+		};
+		FBA1B4B82519058B00A31DF7 /* View Log */ = {
+			isa = PBXGroup;
+			children = (
+				FBA1B4B92519058B00A31DF7 /* LogTableViewCell.swift */,
+				FBA1B4BA2519058B00A31DF7 /* ViewLogViewController.swift */,
+			);
+			path = "View Log";
+			sourceTree = "<group>";
+		};
+		FBA1B4BC2519058B00A31DF7 /* Unused */ = {
+			isa = PBXGroup;
+			children = (
+				FBA1B4D7251905A100A31DF7 /* Model.swift */,
+				FBA1B4BD2519058B00A31DF7 /* TrainViewController.swift */,
+			);
+			path = Unused;
+			sourceTree = "<group>";
+		};
+		FBA1B4C32519058B00A31DF7 /* RecordVideo */ = {
+			isa = PBXGroup;
+			children = (
+				FBA1B4C42519058B00A31DF7 /* VideoView.swift */,
+				FBA1B4C52519058B00A31DF7 /* RecordVideoViewController.swift */,
+			);
+			path = RecordVideo;
+			sourceTree = "<group>";
+		};
+		FBA1B4D5251905A100A31DF7 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				FBA1B4D6251905A100A31DF7 /* Global.swift */,
+				FBA1B4D8251905A100A31DF7 /* User.swift */,
+				FBA1B4D9251905A100A31DF7 /* Labels.swift */,
+				FBA1B4DA251905A100A31DF7 /* ImageDataset.swift */,
+				FBA1B4DB251905A100A31DF7 /* CreateUserData.swift */,
+				FBA1B4DC251905A100A31DF7 /* Helper.swift */,
+				FB7502B725198B7100193FF9 /* Models.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		FBA1B4E5251905A800A31DF7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FBA1B4E6251905A800A31DF7 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -138,6 +277,7 @@
 				951EB33022B6985E00A9533B /* Sources */,
 				951EB33122B6985E00A9533B /* Frameworks */,
 				951EB33222B6985E00A9533B /* Resources */,
+				8CBB9D1182A4B63BCC2CC5BA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -187,9 +327,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				951EB34222B6986200A9533B /* LaunchScreen.storyboard in Resources */,
+				FBA1B4E8251905A800A31DF7 /* Main.storyboard in Resources */,
 				951EB33F22B6986200A9533B /* Assets.xcassets in Resources */,
 				951EB35222B698F100A9533B /* modelFacenet.pb in Resources */,
-				951EB33D22B6985E00A9533B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,6 +354,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		8CBB9D1182A4B63BCC2CC5BA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PersonRecognize/Pods-PersonRecognize-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PersonRecognize/Pods-PersonRecognize-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PersonRecognize/Pods-PersonRecognize-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -221,10 +378,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FBA1B4E2251905A100A31DF7 /* CreateUserData.swift in Sources */,
+				FB7502B825198B7100193FF9 /* Models.swift in Sources */,
+				FBA1B4C72519058B00A31DF7 /* FrameViewController.swift in Sources */,
+				FBA1B4CD2519058B00A31DF7 /* ViewFaceViewController.swift in Sources */,
+				FBA1B4DF251905A100A31DF7 /* User.swift in Sources */,
+				FBA1B4C62519058B00A31DF7 /* PreviewView.swift in Sources */,
+				FBA1B48A2519052D00A31DF7 /* UIImage+Resize.swift in Sources */,
+				FBA1B4C82519058B00A31DF7 /* LogTableViewCell.swift in Sources */,
 				951EB33A22B6985E00A9533B /* ViewController.swift in Sources */,
-				951EB35A22B6A46D00A9533B /* Image+.swift in Sources */,
+				FBA1B4D12519058B00A31DF7 /* VideoView.swift in Sources */,
 				951EB35422B698F100A9533B /* tfWrap.mm in Sources */,
+				FBA1B4C92519058B00A31DF7 /* ViewLogViewController.swift in Sources */,
+				FBA1B48C2519052D00A31DF7 /* DismisKeyboard.swift in Sources */,
+				FBA1B4D02519058B00A31DF7 /* PredictImageViewController.swift in Sources */,
+				FBA1B4DE251905A100A31DF7 /* Model.swift in Sources */,
+				FBA1B4DD251905A100A31DF7 /* Global.swift in Sources */,
+				FBA1B4D22519058B00A31DF7 /* RecordVideoViewController.swift in Sources */,
+				FBA1B4CE2519058B00A31DF7 /* UserData.swift in Sources */,
+				FBA1B48B2519052D00A31DF7 /* CustomButton.swift in Sources */,
+				FBA1B4E3251905A100A31DF7 /* Helper.swift in Sources */,
+				FBA1B4CC2519058B00A31DF7 /* HomeViewController.swift in Sources */,
+				FBA1B48E2519052D00A31DF7 /* UIDeviceExtension.swift in Sources */,
+				FBA1B4CF2519058B00A31DF7 /* TestViewController.swift in Sources */,
+				FBA1B48D2519052D00A31DF7 /* CustomTableViewCell.swift in Sources */,
+				FBA1B4E0251905A100A31DF7 /* Labels.swift in Sources */,
+				FBA1B4E1251905A100A31DF7 /* ImageDataset.swift in Sources */,
+				FBA1B4CA2519058B00A31DF7 /* AddNameViewController.swift in Sources */,
 				951EB35122B698F100A9533B /* FaceNet.swift in Sources */,
+				FBA1B4CB2519058B00A31DF7 /* TrainViewController.swift in Sources */,
 				951EB35322B698F100A9533B /* tensorflow_utils.mm in Sources */,
 				951EB33822B6985E00A9533B /* AppDelegate.swift in Sources */,
 			);
@@ -233,20 +415,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		951EB33B22B6985E00A9533B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				951EB33C22B6985E00A9533B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		951EB34022B6986200A9533B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				951EB34122B6986200A9533B /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		FBA1B4E6251905A800A31DF7 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FBA1B4E7251905A800A31DF7 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -303,7 +485,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -357,7 +539,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -370,18 +552,19 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C4CD8E9AA2201D33964A3CCD /* Pods-PersonRecognize.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon1;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S423MR2Z88;
 				INFOPLIST_FILE = PersonRecognize/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cuonghx.SimpleFacenet1;
+				PRODUCT_BUNDLE_IDENTIFIER = hosituan.PersonRegcognize;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "PersonRecognize/Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -390,18 +573,19 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 43FBB4A03133E68FA1BD6073 /* Pods-PersonRecognize.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon1;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S423MR2Z88;
 				INFOPLIST_FILE = PersonRecognize/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cuonghx.SimpleFacenet1;
+				PRODUCT_BUNDLE_IDENTIFIER = hosituan.PersonRegcognize;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "PersonRecognize/Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

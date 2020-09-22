@@ -13,14 +13,13 @@ import AVFoundation
 
 class HomeViewController: UIViewController {
     
-    var fps = 5
+    var fps = 2
     private var generator:AVAssetImageGenerator!
-    
     var modelUrl: URL?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadMLModel()
+        fnet.load()
     }
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
@@ -28,9 +27,8 @@ class HomeViewController: UIViewController {
         if let dictionary = NSMutableDictionary(contentsOf: labelUrl){
             userDict = dictionary as! Dictionary<String,String>
         }
-        print(faceList.count)
-        print(faceList)
         print(userDict)
+        
         
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -40,17 +38,23 @@ class HomeViewController: UIViewController {
     
     @IBAction func tapGenerateData(_ sender: UIButton) {
         
-//        //let getFrame = GetFrames()
-//        for i in 11...19 {
-//            let label = "user\(i)"
-//            //let name = userDict[label]!
-//            let videoURL = documentDirectory.appendingPathComponent("\(label).mov")
-//            print(videoURL)
-//            getAllFrames(videoURL, for: label)
-//        }
-        
-    }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let alert = UIAlertController(title: "Number", message: "Fill id", preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            textField.text = ""
+        }
+
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [self, weak alert] (_) in
+            let textField = (alert!.textFields![0]) as UITextField
+            let i = textField.text!
+            let label = "user\(i)"
+            print(label)
+            let videoURL = documentDirectory.appendingPathComponent("\(label).mov")
+            print(videoURL)
+            getAllFrames(videoURL, for: label)
+        }))
+
+        self.present(alert, animated: true, completion: nil)
+
         
     }
     
@@ -71,53 +75,12 @@ class HomeViewController: UIViewController {
     }
     @IBAction func tapTraining(_ sender: UIButton) {
         
-        showDialog(message: "This feature is not available!")
-        //        imageLabelDictionary = [:]
-        //
-        //        for label in userDict.keys {
-        //            for item in trainingDataset.getImage(label: label) {
-        //                imageLabelDictionary[item!] = label
-        //            }
-        //        }
-        //        if imageLabelDictionary != [:] {
-        //            let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
-        //            loadingNotification.mode = MBProgressHUDMode.indeterminate
-        //            loadingNotification.label.text = "Training"
-        //            model.startTraining(view: self.view)
-        //        }
-        //        else {
-        //
-        //            showDialog(message: "No data!")
-        //        }
-    }
-}
-
-extension HomeViewController {
-    func loadMLModel() {
-        do{
-            let fileManager = FileManager.default
-            let documentDirectory = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create:true)
-            let fileURL = documentDirectory.appendingPathComponent("HumanTraineds.mlmodelc")
-            if let model = model.loadModel(url: fileURL){
-                updatableModel = model
-                modelUrl = fileURL
+        
+        for user in userDict {
+            if user.value != "" {
+                print("\(user.key):\(user.value)")
+                vectorHelper.addVector(name: user.key)
             }
-            else{
-                if let modelURL = Bundle.main.url(forResource: "HumanImageClassifier", withExtension: "mlmodelc"){
-                    if let model = model.loadModel(url: modelURL){
-                        print("Loaded from: \(modelURL)")
-                        updatableModel = model
-                        modelUrl = modelURL
-                    }
-                }
-            }
-            
-            if let updatableModel = updatableModel {
-                imageConstraint = model.getImageConstraint(model: updatableModel)
-            }
-            
-        } catch(let error){
-            print("initial error is \(error.localizedDescription)")
         }
     }
 }
@@ -130,25 +93,13 @@ extension HomeViewController {
         self.generator = AVAssetImageGenerator(asset:asset)
         self.generator.appliesPreferredTrackTransform = true
         
-        //let queue = OperationQueue()
-        //queue.maxConcurrentOperationCount = 10
-        
         var i: Double = 0
         repeat {
-            //let frameOperation = FrameOperation(time: i, label: label, gen: self.generator)
-            //queue.addOperation(frameOperation)
             getFrame(fromTime: i, for: label)
             i = i + (1 / Double(fps))
         } while (i < duration)
         self.generator = nil
-        //queue.addBarrierBlock {
         print("Complete")
-            //            DispatchQueue.main.async {
-            //                //UIApplication.shared.windows.first?.rootViewController?.showDialog(message: "Added User")
-            //            }
-            //
-            
-        //}
     }
     func getFrame(fromTime:Double, for label: String) {
         
@@ -159,73 +110,17 @@ extension HomeViewController {
         } catch {
             return
         }
-        image.face.crop { result in
-            switch result {
-            case .success(let faces):
-                for face in faces {
-                    for item in face.createImageList() {
-                        if let img = item {
-                            trainingDataset.saveImage(img, for: label)
-                        }
-                    }
-                }
-            case .notFound:
-                print("Not found face")
-            case .failure(let error):
-                print("Error crop face: \(error)")
-            }
+
+            
+        trainingDataset.saveImage(image, for: label)
+        if let img = image.rotate(radians: .pi / 20) {
+            trainingDataset.saveImage(img, for: label)
         }
-        image.rotate(radians: .pi / 12)?.face.crop({ (result) in
-            switch result {
-            case .success(let faces):
-                for face in faces {
-                    for item in face.createImageList() {
-                        if let img = item {
-                            trainingDataset.saveImage(img, for: label)
-                        }
-                    }
-                }
-            case .notFound:
-                print("Not found face")
-            case .failure(let error):
-                print("Error crop face: \(error)")
-            }
-        })
-        
-        image.rotate(radians: -.pi / 12)?.face.crop({ (result) in
-            switch result {
-            case .success(let faces):
-                for face in faces {
-                    for item in face.createImageList() {
-                        if let img = item {
-                            trainingDataset.saveImage(img, for: label)
-                        }
-                    }
-                }
-            case .notFound:
-                print("Not found face")
-            case .failure(let error):
-                print("Error crop face: \(error)")
-            }
-        })
-        
-        image.flipHorizontally()?.face.crop({ (result) in
-            switch result {
-            case .success(let faces):
-                for face in faces {
-                    for item in face.createImageList() {
-                        if let img = item {
-                            trainingDataset.saveImage(img, for: label)
-                        }
-                    }
-                }
-            case .notFound:
-                print("Not found face")
-            case .failure(let error):
-                print("Error crop face: \(error)")
-            }
-        })
-        
+        if let img = image.rotate(radians: -.pi / 20) {
+            trainingDataset.saveImage(img, for: label)
+        }
+        if let img = image.flipHorizontally() {
+            trainingDataset.saveImage(img, for: label)
+        }
     }
-    
 }
