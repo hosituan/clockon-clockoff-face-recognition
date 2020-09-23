@@ -16,6 +16,7 @@ class HomeViewController: UIViewController {
     var fps = 2
     private var generator:AVAssetImageGenerator!
     
+    @IBOutlet weak var vectorsLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         fnet.load()
@@ -26,7 +27,8 @@ class HomeViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
-        showDialog(message: "You have \(vectors.count) vectors!")
+        vectorsLabel.text = "You have \(vectors.count) vectors!"
+        //showDialog(message: "You have \(vectors.count) vectors!")
         
     }
     override func viewWillDisappear(_ animated: Bool) {

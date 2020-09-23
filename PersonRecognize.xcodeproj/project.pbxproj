@@ -30,7 +30,6 @@
 		FBA1B4CC2519058B00A31DF7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4BE2519058B00A31DF7 /* HomeViewController.swift */; };
 		FBA1B4CD2519058B00A31DF7 /* ViewFaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4BF2519058B00A31DF7 /* ViewFaceViewController.swift */; };
 		FBA1B4CE2519058B00A31DF7 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4C02519058B00A31DF7 /* UserData.swift */; };
-		FBA1B4CF2519058B00A31DF7 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4C12519058B00A31DF7 /* TestViewController.swift */; };
 		FBA1B4D02519058B00A31DF7 /* PredictImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4C22519058B00A31DF7 /* PredictImageViewController.swift */; };
 		FBA1B4D12519058B00A31DF7 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4C42519058B00A31DF7 /* VideoView.swift */; };
 		FBA1B4D22519058B00A31DF7 /* RecordVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4C52519058B00A31DF7 /* RecordVideoViewController.swift */; };
@@ -75,7 +74,6 @@
 		FBA1B4BE2519058B00A31DF7 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		FBA1B4BF2519058B00A31DF7 /* ViewFaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewFaceViewController.swift; sourceTree = "<group>"; };
 		FBA1B4C02519058B00A31DF7 /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
-		FBA1B4C12519058B00A31DF7 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		FBA1B4C22519058B00A31DF7 /* PredictImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredictImageViewController.swift; sourceTree = "<group>"; };
 		FBA1B4C42519058B00A31DF7 /* VideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		FBA1B4C52519058B00A31DF7 /* RecordVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordVideoViewController.swift; sourceTree = "<group>"; };
@@ -190,14 +188,13 @@
 		FBA1B4B42519058B00A31DF7 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				FBA1B4B52519058B00A31DF7 /* PredictOnFrame */,
-				FBA1B4B82519058B00A31DF7 /* View Log */,
 				FBA1B4BB2519058B00A31DF7 /* AddNameViewController.swift */,
 				FBA1B4BE2519058B00A31DF7 /* HomeViewController.swift */,
 				FBA1B4BF2519058B00A31DF7 /* ViewFaceViewController.swift */,
 				FBA1B4C02519058B00A31DF7 /* UserData.swift */,
-				FBA1B4C12519058B00A31DF7 /* TestViewController.swift */,
 				FBA1B4C22519058B00A31DF7 /* PredictImageViewController.swift */,
+				FBA1B4B82519058B00A31DF7 /* View Log */,
+				FBA1B4B52519058B00A31DF7 /* PredictOnFrame */,
 				FBA1B4C32519058B00A31DF7 /* RecordVideo */,
 			);
 			path = ViewController;
@@ -385,7 +382,6 @@
 				FBA1B4CC2519058B00A31DF7 /* HomeViewController.swift in Sources */,
 				FB9945E82519EA500023E174 /* Vector.swift in Sources */,
 				FBA1B48E2519052D00A31DF7 /* UIDeviceExtension.swift in Sources */,
-				FBA1B4CF2519058B00A31DF7 /* TestViewController.swift in Sources */,
 				FBA1B48D2519052D00A31DF7 /* CustomTableViewCell.swift in Sources */,
 				FBA1B4E0251905A100A31DF7 /* Labels.swift in Sources */,
 				FBA1B4E1251905A100A31DF7 /* ImageDataset.swift in Sources */,
