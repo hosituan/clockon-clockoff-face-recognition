@@ -17,17 +17,13 @@ class UserData: UIViewController, UIImagePickerControllerDelegate & UINavigation
     @IBOutlet weak var tableView: UITableView!
     private var generator:AVAssetImageGenerator!
     var valueSelected = ""
-    var userNameAdd = ""
-    var userList:[String: String] = [:]
+    //var userList:[String: String] = [:]
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        userDict = loadLabel()
-//        loadData()
         tableView.delegate = self
         tableView.dataSource = self
         self.hideKeyboardWhenTappedAround()
@@ -40,15 +36,6 @@ class UserData: UIViewController, UIImagePickerControllerDelegate & UINavigation
         }
     }
     
-//    func loadData() {
-//        for i in 0..<30 {
-//            let label = "user\(i)"
-//            if userDict[label] != "" {
-//                userList[label] = userDict[label]
-//            }
-//        }
-//
-//    }
     
     
 }

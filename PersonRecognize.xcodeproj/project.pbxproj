@@ -35,11 +35,11 @@
 		FBA1B4D22519058B00A31DF7 /* RecordVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4C52519058B00A31DF7 /* RecordVideoViewController.swift */; };
 		FBA1B4DD251905A100A31DF7 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4D6251905A100A31DF7 /* Global.swift */; };
 		FBA1B4DF251905A100A31DF7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4D8251905A100A31DF7 /* User.swift */; };
-		FBA1B4E0251905A100A31DF7 /* Labels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4D9251905A100A31DF7 /* Labels.swift */; };
 		FBA1B4E1251905A100A31DF7 /* ImageDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4DA251905A100A31DF7 /* ImageDataset.swift */; };
 		FBA1B4E2251905A100A31DF7 /* CreateUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4DB251905A100A31DF7 /* CreateUserData.swift */; };
 		FBA1B4E3251905A100A31DF7 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4DC251905A100A31DF7 /* Helper.swift */; };
 		FBA1B4E8251905A800A31DF7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBA1B4E6251905A800A31DF7 /* Main.storyboard */; };
+		FBC5AC0B251AEE6D0016995C /* UIViewController+ShowDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC5AC0A251AEE6D0016995C /* UIViewController+ShowDialog.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,11 +79,11 @@
 		FBA1B4C52519058B00A31DF7 /* RecordVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordVideoViewController.swift; sourceTree = "<group>"; };
 		FBA1B4D6251905A100A31DF7 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		FBA1B4D8251905A100A31DF7 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		FBA1B4D9251905A100A31DF7 /* Labels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Labels.swift; sourceTree = "<group>"; };
 		FBA1B4DA251905A100A31DF7 /* ImageDataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDataset.swift; sourceTree = "<group>"; };
 		FBA1B4DB251905A100A31DF7 /* CreateUserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateUserData.swift; sourceTree = "<group>"; };
 		FBA1B4DC251905A100A31DF7 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		FBA1B4E7251905A800A31DF7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FBC5AC0A251AEE6D0016995C /* UIViewController+ShowDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ShowDialog.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,10 +129,10 @@
 			isa = PBXGroup;
 			children = (
 				FBA1B4B42519058B00A31DF7 /* ViewController */,
-				951EB34922B698F100A9533B /* Tensorflow */,
 				FBA1B4832519052D00A31DF7 /* Extension */,
 				FBA1B4E5251905A800A31DF7 /* View */,
 				FBA1B4D5251905A100A31DF7 /* Core */,
+				951EB34922B698F100A9533B /* Tensorflow */,
 				951EB35822B6994100A9533B /* Bridging-Header.h */,
 				951EB34022B6986200A9533B /* LaunchScreen.storyboard */,
 				951EB33E22B6986200A9533B /* Assets.xcassets */,
@@ -176,10 +176,9 @@
 			isa = PBXGroup;
 			children = (
 				FBA1B4842519052D00A31DF7 /* UIImage+Resize.swift */,
+				FBC5AC0A251AEE6D0016995C /* UIViewController+ShowDialog.swift */,
 				FBA1B4852519052D00A31DF7 /* CustomButton.swift */,
 				FBA1B4862519052D00A31DF7 /* DismisKeyboard.swift */,
-				FBA1B4872519052D00A31DF7 /* CustomTableViewCell.swift */,
-				FBA1B4D9251905A100A31DF7 /* Labels.swift */,
 				FBA1B4882519052D00A31DF7 /* UIDeviceExtension.swift */,
 			);
 			path = Extension;
@@ -188,11 +187,11 @@
 		FBA1B4B42519058B00A31DF7 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				FBA1B4BB2519058B00A31DF7 /* AddNameViewController.swift */,
 				FBA1B4BE2519058B00A31DF7 /* HomeViewController.swift */,
-				FBA1B4BF2519058B00A31DF7 /* ViewFaceViewController.swift */,
+				FBA1B4BB2519058B00A31DF7 /* AddNameViewController.swift */,
 				FBA1B4C02519058B00A31DF7 /* UserData.swift */,
 				FBA1B4C22519058B00A31DF7 /* PredictImageViewController.swift */,
+				FBC5AC08251AED240016995C /* View Face */,
 				FBA1B4B82519058B00A31DF7 /* View Log */,
 				FBA1B4B52519058B00A31DF7 /* PredictOnFrame */,
 				FBA1B4C32519058B00A31DF7 /* RecordVideo */,
@@ -247,6 +246,15 @@
 				FBA1B4E6251905A800A31DF7 /* Main.storyboard */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		FBC5AC08251AED240016995C /* View Face */ = {
+			isa = PBXGroup;
+			children = (
+				FBA1B4872519052D00A31DF7 /* CustomTableViewCell.swift */,
+				FBA1B4BF2519058B00A31DF7 /* ViewFaceViewController.swift */,
+			);
+			path = "View Face";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -383,8 +391,8 @@
 				FB9945E82519EA500023E174 /* Vector.swift in Sources */,
 				FBA1B48E2519052D00A31DF7 /* UIDeviceExtension.swift in Sources */,
 				FBA1B48D2519052D00A31DF7 /* CustomTableViewCell.swift in Sources */,
-				FBA1B4E0251905A100A31DF7 /* Labels.swift in Sources */,
 				FBA1B4E1251905A100A31DF7 /* ImageDataset.swift in Sources */,
+				FBC5AC0B251AEE6D0016995C /* UIViewController+ShowDialog.swift in Sources */,
 				FBA1B4CA2519058B00A31DF7 /* AddNameViewController.swift in Sources */,
 				951EB35122B698F100A9533B /* FaceNet.swift in Sources */,
 				951EB35322B698F100A9533B /* tensorflow_utils.mm in Sources */,

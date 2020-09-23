@@ -12,7 +12,6 @@ import CoreML
 import RealmSwift
 
 //Machine Learning Model
-
 let fnet = FaceNet()
 let fDetector = FaceDetector()
 var vectors = [Vector]()
@@ -22,17 +21,15 @@ var vectorHelper = VectorHelper()
 let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 let trainingDataset = ImageDataset(split: .train)
 let testingDataset = ImageDataset(split: .test)
-let labelUrl = documentDirectory.appendingPathComponent("label")
+
 var currentFrame: UIImage?
 var currentLabel = "Unknown"
-//var userDict:[String: String] = loadLabel()
-var userList: [String] = []
 
 var attendList: [User] = []
 
-
+//Save User List
 let defaults = UserDefaults.standard
 var savedUserList = defaults.stringArray(forKey: "SavedUserList") ?? [String]()
 
-
+//Realm
 let realm = try! Realm()

@@ -9,7 +9,7 @@
 import Foundation
 import AVKit
 
-// Extension for Orientation
+//Extension for Orientation
 extension UIDeviceOrientation {
     var videoOrientation: AVCaptureVideoOrientation? {
         switch self {

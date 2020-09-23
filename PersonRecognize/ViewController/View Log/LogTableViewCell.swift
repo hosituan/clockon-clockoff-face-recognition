@@ -14,7 +14,7 @@ class LogTableViewCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    var iden = "cellID"
+    //var iden = "cellID"
     override func awakeFromNib() {
         super.awakeFromNib()
     }
