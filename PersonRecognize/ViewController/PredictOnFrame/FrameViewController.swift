@@ -82,7 +82,7 @@ class FrameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        fnet.load()
         session = AVCaptureSession()
         previewView.session = session
         
@@ -390,7 +390,7 @@ extension FrameViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer),
             let exifOrientation = CGImagePropertyOrientation(rawValue: exifOrientationFromDeviceOrientation()) else { return }
-        var requestOptions: [VNImageOption : Any] = [:]
+        //var requestOptions: [VNImageOption : Any] = [:]
         
         let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
 
@@ -400,11 +400,11 @@ extension FrameViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         let image = UIImage(cgImage: cgImage)
         currentFrame = image.rotate(radians: .pi/2)?.flipHorizontally()
         
-        if let cameraIntrinsicData = CMGetAttachment(sampleBuffer, key: kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix, attachmentModeOut: nil) {
-            requestOptions = [.cameraIntrinsics : cameraIntrinsicData]
-        }
+//        if let cameraIntrinsicData = CMGetAttachment(sampleBuffer, key: kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix, attachmentModeOut: nil) {
+//            requestOptions = [.cameraIntrinsics : cameraIntrinsicData]
+//        }
         
-        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: exifOrientation, options: requestOptions)
+        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: exifOrientation, options: [:])
         
         do {
             try imageRequestHandler.perform(requests)

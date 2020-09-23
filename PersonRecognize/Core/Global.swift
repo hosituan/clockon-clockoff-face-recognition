@@ -16,6 +16,7 @@ let fnet = FaceNet()
 let fDetector = FaceDetector()
 var vectors = [Vector]()
 var avgVectors = [Vector]()
+var numberOfVectors = 0
 var vectorHelper = VectorHelper()
 
 

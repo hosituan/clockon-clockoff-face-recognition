@@ -22,6 +22,7 @@ class PredictImageViewController: UIViewController, UIImagePickerControllerDeleg
     var corner:CGFloat = 35
     override func viewDidLoad() {
         super.viewDidLoad()
+        fnet.load()
         clearData()
         print(vectors.count)
     }

@@ -19,18 +19,20 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var vectorsLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        fnet.load()
         print(savedUserList)
         vectors = vectorHelper.loadVector()
         avgVectors = splitVectorByName(vector: vectors)
+        numberOfVectors = vectors.count
+        vectors = []
         print("Number of vectors: \(vectors.count)")
         print("Numver of average vectors: \(avgVectors.count)")
         
     }
     override func viewWillAppear(_ animated: Bool) {
+        fnet.clean()
         navigationController?.isNavigationBarHidden = true
         //vectorsLabel.text = "You have \(vectors.count) vectors."
-        vectorsLabel.text = "You have \(avgVectors.count) users and \(vectors.count) vectors."
+        vectorsLabel.text = "You have \(avgVectors.count) users and \(numberOfVectors) vectors."
         
     }
     override func viewWillDisappear(_ animated: Bool) {
