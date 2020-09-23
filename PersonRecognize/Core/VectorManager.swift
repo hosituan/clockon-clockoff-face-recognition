@@ -66,6 +66,8 @@ class VectorHelper  {
             let vector = Vector(name: item.name, vector: stringToArray(string: item.vector), distance: item.distance)
             vectors.append(vector)
         }
+        
+
         return vectors
     }
     func getResult(image: UIImage) -> String {
@@ -76,7 +78,8 @@ class VectorHelper  {
         if let i = img.first {
             let targetVector = fnet.run(image: i)
             //print(vectors.count)
-            for vector in vectors {
+            //for vector in vectors {
+            for vector in  avgVectors {
                 let distance = l2distance(targetVector, vector.vector)
                 if distance < result.distance && vector.name != "" {
                     result = vector
@@ -117,5 +120,34 @@ func stringToArray(string: String) -> [Double] {
         vector.append(Double(item)!)
     }
     return vector
+}
+
+
+func averageVector(vectors: [Vector]) -> Vector {
+    
+    var array: [Double] = []
+    for i in 0...127 {
+        var sum: Double = 0
+        for item in vectors {
+            sum += item.vector[i]
+        }
+        array.append(sum / 128)
+    }
+    let vector = Vector(name: vectors[0].name, vector: array)
+    return vector
+}
+
+
+func splitVectorByName(vector: [Vector]) -> [Vector] {
+    var vectorList: [Vector] = []
+    let groupedItems = Dictionary(grouping: vectors, by: {$0.name})
+    for item in groupedItems {
+        var vectors: [Vector] =  []
+        for i in item.value {
+            vectors.append(i)
+        }
+        vectorList.append(averageVector(vectors: vectors))
+    }
+    return vectorList
 }
 

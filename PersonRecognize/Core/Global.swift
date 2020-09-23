@@ -15,6 +15,7 @@ import RealmSwift
 let fnet = FaceNet()
 let fDetector = FaceDetector()
 var vectors = [Vector]()
+var avgVectors = [Vector]()
 var vectorHelper = VectorHelper()
 
 

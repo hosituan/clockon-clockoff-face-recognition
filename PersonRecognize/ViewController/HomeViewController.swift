@@ -22,17 +22,21 @@ class HomeViewController: UIViewController {
         fnet.load()
         print(savedUserList)
         vectors = vectorHelper.loadVector()
+        avgVectors = splitVectorByName(vector: vectors)
         print("Number of vectors: \(vectors.count)")
+        print("Numver of average vectors: \(avgVectors.count)")
         
     }
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
-        vectorsLabel.text = "You have \(vectors.count) vectors."
+        //vectorsLabel.text = "You have \(vectors.count) vectors."
+        vectorsLabel.text = "You have \(avgVectors.count) users and \(vectors.count) vectors."
         
     }
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: animated);
         super.viewWillDisappear(animated)
+        vectors = []
     }
     
     @IBAction func tapStart(_ sender: UIButton) {
