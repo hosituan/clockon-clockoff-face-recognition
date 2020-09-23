@@ -13,7 +13,9 @@ import FaceCropper
 
 class FrameViewController: UIViewController {
 
-
+    deinit {
+        print("FrameViewController deinit")
+    }
     //@IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var previewView: PreviewView!
     // VNRequest: Either Retangles or Landmarks
@@ -65,7 +67,7 @@ class FrameViewController: UIViewController {
             //Commit all the configuration changes at once
             session.commitConfiguration()
     }
-    private let session = AVCaptureSession()
+    private var session: AVCaptureSession!
     private var isSessionRunning = false
     private let sessionQueue = DispatchQueue(label: "session queue", attributes: [], target: nil)
     
@@ -80,6 +82,8 @@ class FrameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        session = AVCaptureSession()
         previewView.session = session
         
         // Set up Vision Request
@@ -105,13 +109,13 @@ class FrameViewController: UIViewController {
         }
         
         
-        sessionQueue.async { [unowned self] in
+        sessionQueue.async {() -> Void in
             self.configureSession()
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        sessionQueue.async { [unowned self] in
+        sessionQueue.async {() -> Void in
             switch self.setupResult {
             case .success:
                 self.addObservers()
@@ -142,16 +146,32 @@ class FrameViewController: UIViewController {
         }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        sessionQueue.async { [unowned self] in
+    fileprivate func stopCaptureSession() {
+        session.stopRunning()
+        faceDetectionRequest.cancel()
+        DispatchQueue.main.async {
+            //self.previewView.videoPreviewLayer?.removeFromSuperlayer()
+            //self.previewView.videoPreviewLayer = nil
+        }
+        
+        session = nil
+        videoDeviceInput = nil
+        videoDataOutput = nil
+        
+      }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        sessionQueue.async {[weak self]()  -> Void in
+            guard let self = self else { return }
             if self.setupResult == .success {
-                self.session.stopRunning()
                 self.isSessionRunning = self.session.isRunning
                 self.removeObservers()
+                self.stopCaptureSession()
             }
         }
         
-        super.viewWillDisappear(animated)
+        
     }
 
 }
@@ -208,7 +228,7 @@ extension FrameViewController {
                             initialVideoOrientation = videoOrientation
                         }
                     }
-                    self.previewView.videoPreviewLayer.connection!.videoOrientation = initialVideoOrientation
+                    self.previewView.videoPreviewLayer?.connection?.videoOrientation = initialVideoOrientation
                     
                 }
             }
@@ -287,7 +307,8 @@ extension FrameViewController {
     }
     
     func handleFaces(request: VNRequest, error: Error?) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async {[weak self]() -> Void in
+            guard let self = self else { return }
             //perform all the UI updates on the main queue
             guard let results = request.results as? [VNFaceObservation] else { return }
             self.previewView.removeMask()

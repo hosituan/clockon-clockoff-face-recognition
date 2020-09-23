@@ -18,19 +18,18 @@ class PreviewView: UIView {
     private var textLayer = [CATextLayer]()
     
     // MARK: AV capture properties
-    var videoPreviewLayer: AVCaptureVideoPreviewLayer {
-        return layer as! AVCaptureVideoPreviewLayer
-    }
+    var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     
-    var session: AVCaptureSession? {
+    weak var session: AVCaptureSession? {
         get {
-            videoPreviewLayer.videoGravity = .resizeAspectFill
-            return videoPreviewLayer.session
+            videoPreviewLayer?.videoGravity = .resizeAspectFill
+            return videoPreviewLayer?.session
         }
         
         set {
-            videoPreviewLayer.videoGravity = .resizeAspectFill
-            videoPreviewLayer.session = newValue
+            videoPreviewLayer = layer as? AVCaptureVideoPreviewLayer
+            videoPreviewLayer?.videoGravity = .resizeAspectFill
+            videoPreviewLayer?.session = newValue
         }
     }
     
@@ -80,7 +79,7 @@ class PreviewView: UIView {
                     currentLabel = label
                 }
                 let timestamp = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .medium, timeStyle: .medium)
-                
+
                 let detectedUser = User(name: label, image: frame, time: timestamp)
                 if attendList.count == 0 {
                     attendList.append(detectedUser)
@@ -96,7 +95,7 @@ class PreviewView: UIView {
                             //user = item
                         }
                     }
-                    
+
                     let validTime = false
                     if count == attendList.count || validTime {
                         attendList.append(detectedUser)
