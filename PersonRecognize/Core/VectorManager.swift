@@ -32,7 +32,8 @@ class VectorHelper  {
     
     func addVector(name: String) {
         let imageList = trainingDataset.getImage(label: name)
-        //print(imageList.count)
+        print(imageList.count)
+        
         if imageList.count > 0  {
             for item in imageList {
                 if let vector = createVector(name: name, image: item!) {
@@ -51,6 +52,7 @@ class VectorHelper  {
         let item = SavedVector()
         item.name = vector.name
         item.vector = arrayToString(array: vector.vector)
+        //print(vector.vector)
         item.distance = vector.distance
 
         try! realm.write {
@@ -124,12 +126,13 @@ func stringToArray(string: String) -> [Double] {
 
 
 func averageVector(vectors: [Vector]) -> Vector {
-    
+    print(vectors.count)
     var array: [Double] = []
     for i in 0...127 {
         var sum: Double = 0
         for item in vectors {
             sum += item.vector[i]
+            
         }
         array.append(sum / 128)
     }

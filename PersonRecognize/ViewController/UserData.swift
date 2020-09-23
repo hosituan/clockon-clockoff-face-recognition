@@ -11,6 +11,7 @@ import Vision
 import MobileCoreServices
 import AVFoundation
 import FaceCropper
+import MBProgressHUD
 
 class UserData: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
@@ -54,6 +55,13 @@ extension UserData: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         valueSelected = savedUserList[indexPath.row]
+//        let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
+//        loadingNotification.mode = MBProgressHUDMode.indeterminate
+//        loadingNotification.label.text = "Generating..."
+        
+        //vectorHelper.addVector(name: valueSelected)
+        
+        //MBProgressHUD.hide(for: self.view, animated: true)
         self.performSegue(withIdentifier: "viewFaceData", sender: nil)
     }
     

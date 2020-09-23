@@ -39,6 +39,7 @@ class HomeViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: animated);
         super.viewWillDisappear(animated)
         vectors = []
+        fnet.load()
     }
     
     @IBAction func tapStart(_ sender: UIButton) {
