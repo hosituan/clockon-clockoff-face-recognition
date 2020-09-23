@@ -134,7 +134,6 @@
 				FBA1B4D5251905A100A31DF7 /* Core */,
 				951EB34922B698F100A9533B /* Tensorflow */,
 				951EB35822B6994100A9533B /* Bridging-Header.h */,
-				951EB34022B6986200A9533B /* LaunchScreen.storyboard */,
 				951EB33E22B6986200A9533B /* Assets.xcassets */,
 				951EB33722B6985E00A9533B /* AppDelegate.swift */,
 				951EB34322B6986200A9533B /* Info.plist */,
@@ -244,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				FBA1B4E6251905A800A31DF7 /* Main.storyboard */,
+				951EB34022B6986200A9533B /* LaunchScreen.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";

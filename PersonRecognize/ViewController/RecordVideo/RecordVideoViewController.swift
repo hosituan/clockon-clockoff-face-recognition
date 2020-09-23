@@ -126,14 +126,4 @@ class RecordVideoViewController: UIViewController, AVCaptureFileOutputRecordingD
             outputVideoUrl = outputFileURL
         }
     }
-//    func getEmptyLabel() -> String? {
-//        userDict = loadLabel()
-//        for i in 0..<numberOfLabel {
-//            let label = "user\(i)"
-//            if userDict[label] == "" {
-//                return label
-//            }
-//        }
-//        return nil
-//    }
 }

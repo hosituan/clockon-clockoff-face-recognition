@@ -18,7 +18,6 @@ class FrameViewController: UIViewController {
     @IBOutlet weak var previewView: PreviewView!
     // VNRequest: Either Retangles or Landmarks
     private var faceDetectionRequest: VNRequest!
-    // TODO: Decide camera position --- front or back
     private var devicePosition: AVCaptureDevice.Position = .front
     
     // Session Management
@@ -34,7 +33,6 @@ class FrameViewController: UIViewController {
                 return
             }
 
-            //Indicate that some changes will be made to the session
             session.beginConfiguration()
             session.removeInput(currentCameraInput)
 
@@ -69,8 +67,6 @@ class FrameViewController: UIViewController {
     }
     private let session = AVCaptureSession()
     private var isSessionRunning = false
-    
-    // Communicate with the session and other session objects on this queue.
     private let sessionQueue = DispatchQueue(label: "session queue", attributes: [], target: nil)
     
     private var setupResult: SessionSetupResult = .success
@@ -84,10 +80,6 @@ class FrameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        tableView.delegate = self
-//        tableView.dataSource = self
-        // Set up the video preview view.
         previewView.session = session
         
         // Set up Vision Request
@@ -96,7 +88,6 @@ class FrameViewController: UIViewController {
         
         switch AVCaptureDevice.authorizationStatus(for: AVMediaType.video){
         case .authorized:
-            // The user has previously granted access to the camera.
             break
             
         case .notDetermined:
@@ -110,7 +101,6 @@ class FrameViewController: UIViewController {
             
             
         default:
-            // The user has previously denied access.
             setupResult = .notAuthorized
         }
         
@@ -124,7 +114,6 @@ class FrameViewController: UIViewController {
         sessionQueue.async { [unowned self] in
             switch self.setupResult {
             case .success:
-                // Only setup observers and start the session running if setup succeeded.
                 self.addObservers()
                 self.session.startRunning()
                 self.isSessionRunning = self.session.isRunning
@@ -174,10 +163,8 @@ extension FrameViewController {
         
         session.beginConfiguration()
         session.sessionPreset = .hd1920x1080
-        
         // Add video input.
         addVideoDataInput()
-        
         // Add video output.
         addVideoDataOutput()
         

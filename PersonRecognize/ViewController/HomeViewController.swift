@@ -27,7 +27,7 @@ class HomeViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
-        vectorsLabel.text = "You have \(vectors.count) vectors!"
+        vectorsLabel.text = "You have \(vectors.count) vectors."
         
     }
     override func viewWillDisappear(_ animated: Bool) {
