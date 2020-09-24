@@ -26,6 +26,8 @@ let testingDataset = ImageDataset(split: .test)
 
 var currentFrame: UIImage?
 var currentLabel = "Unknown"
+var numberOfFramesDeteced = 0
+let validFrames = 3
 
 var attendList: [User] = []
 

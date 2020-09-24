@@ -13,5 +13,4 @@ import Vision
 import AVFoundation
 
 class VideoView: UIView {
-    
 }

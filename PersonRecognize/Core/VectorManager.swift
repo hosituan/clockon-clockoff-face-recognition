@@ -32,7 +32,7 @@ class VectorHelper  {
     
     func addVector(name: String) {
         let imageList = trainingDataset.getImage(label: name)
-        print(imageList.count)
+        //print(imageList.count)
         
         if imageList.count > 0  {
             for item in imageList {
@@ -126,7 +126,7 @@ func stringToArray(string: String) -> [Double] {
 
 
 func averageVector(vectors: [Vector]) -> Vector {
-    print(vectors.count)
+    //print(vectors.count)
     var array: [Double] = []
     for i in 0...127 {
         var sum: Double = 0

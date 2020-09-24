@@ -75,40 +75,49 @@ class PreviewView: UIView {
             if result != "" && result != "Unknown" {
                 label = result
                 if label != currentLabel {
-                    speak(name: label)
                     currentLabel = label
+                    numberOfFramesDeteced = 0
+                } else {
+                    numberOfFramesDeteced += 1
                 }
                 let timestamp = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .medium, timeStyle: .medium)
-
+                
                 let detectedUser = User(name: label, image: frame, time: timestamp)
-                if attendList.count == 0 {
-                    attendList.append(detectedUser)
-                }
-                else {
-                    var count = 0
-                    //var user:User?
-                    for item in attendList {
-                        if item.name != label {
-                            count += 1
+                if numberOfFramesDeteced >= validFrames {
+                    
+                    if attendList.count == 0 {
+                        speak(name: label)
+                        attendList.append(detectedUser)
+                        showDiaglog3s(name: label)
+                    }
+                    else  {
+                        var count = 0
+                        //var user:User?
+                        for item in attendList {
+                            if item.name != label {
+                                count += 1
+                            }
+                            else {
+                                //user = item
+                            }
+                        }
+                        
+                        let validTime = false
+                        if count == attendList.count || validTime {
+                            speak(name: label)
+                            attendList.append(detectedUser)
+                            showDiaglog3s(name: label)
                         }
                         else {
-                            //user = item
+                            //print("User added")
                         }
-                    }
-
-                    let validTime = false
-                    if count == attendList.count || validTime {
-                        attendList.append(detectedUser)
-                    }
-                    else {
-                        //print("User added")
                     }
                 }
             }
         }
         _ = createLayer(in: facebounds, prediction: label)
         
-
+        
         
         
     }
@@ -131,10 +140,19 @@ class PreviewView: UIView {
     func speak(name: String) {
         let utterance = AVSpeechUtterance(string: "Hello \(name)")
         utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-        utterance.rate = 0.1
-
+        utterance.rate = 0.5
+        
         let synthesizer = AVSpeechSynthesizer()
         synthesizer.speak(utterance)
+    }
+    
+    func showDiaglog3s(name: String) {
+        let alert = UIAlertController(title: "Joined!", message: "\(name)", preferredStyle: .alert)
+        self.window?.rootViewController?.present(alert, animated: true, completion: nil)
+        let when = DispatchTime.now() + 2
+        DispatchQueue.main.asyncAfter(deadline: when) {
+          alert.dismiss(animated: true, completion: nil)
+        }
     }
     
 }

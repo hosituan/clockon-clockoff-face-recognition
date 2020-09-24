@@ -30,10 +30,12 @@ class HomeViewController: UIViewController {
         
     }
     override func viewWillAppear(_ animated: Bool) {
-        fnet.clean()
         navigationController?.isNavigationBarHidden = true
         vectorsLabel.text = "You have \(avgVectors.count) users and \(numberOfVectors) vectors."
         
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        fnet.clean()
     }
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: animated);
