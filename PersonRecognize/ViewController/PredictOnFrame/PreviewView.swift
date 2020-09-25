@@ -75,8 +75,8 @@ class PreviewView: UIView {
             if result != "" && result != UNKNOWN {
                 label = result
                 let timestamp = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .medium, timeStyle: .medium)
-                print(timestamp)
-                print(timeDetected)
+                //print(timestamp)
+                //print(timeDetected)
                 if label != currentLabel {
                     currentLabel = label
                     timeDetected = timestamp
@@ -103,7 +103,7 @@ class PreviewView: UIView {
                         var count = 0
                         
                         for item in localUserList {
-                            count += 1
+                            
                             if item.name == label {
 
                                 if item.time.dropLast(DROP_LAST) != timestamp.dropLast(DROP_LAST) {
@@ -118,7 +118,7 @@ class PreviewView: UIView {
                                 break
                             }
                             else {
-                                //user = item
+                                count += 1
                             }
                         }
 
