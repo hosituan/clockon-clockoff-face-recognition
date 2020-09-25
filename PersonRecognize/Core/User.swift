@@ -16,6 +16,11 @@ struct User {
     //var confidence: String
 }
 
+struct Users {
+    var name: String
+    var imageURL: String
+    var time: String
+}
 class SavedVector: Object {
     @objc dynamic var name: String = ""
     @objc dynamic var vector: String = ""

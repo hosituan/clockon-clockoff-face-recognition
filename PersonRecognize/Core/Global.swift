@@ -25,17 +25,20 @@ let trainingDataset = ImageDataset(split: .train)
 let testingDataset = ImageDataset(split: .test)
 
 var currentFrame: UIImage?
-var currentLabel = "Unknown"
-var numberOfFramesDeteced = 0
-let validFrames = 3
 
-var attendList: [User] = []
+var currentLabel = UNKNOWN
+var numberOfFramesDeteced = 0 //number frames detected
+let validFrames = 3 //after getting 3 frames, users have been verified
 
-//Save User List
+
+var attendList: [Users] = []
+
+//Save User Local List
 let defaults = UserDefaults.standard
 var savedUserList = defaults.stringArray(forKey: "SavedUserList") ?? [String]()
 
+
+
 //Realm
 let realm = try! Realm()
-
 let fb  = FirebaseManager()

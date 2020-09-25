@@ -16,6 +16,10 @@
 		951EB35422B698F100A9533B /* tfWrap.mm in Sources */ = {isa = PBXBuildFile; fileRef = 951EB35022B698F100A9533B /* tfWrap.mm */; };
 		C74123AA68AA5B08B54BAB0F /* Pods_PersonRecognize.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9E4B7E8ED1140C3AD203DB7 /* Pods_PersonRecognize.framework */; };
 		FB3D0F0E251D7E550059CCB6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FB3D0F0D251D7E550059CCB6 /* GoogleService-Info.plist */; };
+		FB3D0F97251DA5CA0059CCB6 /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3D0F96251DA5CA0059CCB6 /* Define.swift */; };
+		FB3D0F9A251DA8AD0059CCB6 /* NetworkChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3D0F99251DA8AD0059CCB6 /* NetworkChecker.swift */; };
+		FB3D0FBE251DAC760059CCB6 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3D0FBD251DAC760059CCB6 /* Date.swift */; };
+		FB3D0FC5251DAD650059CCB6 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3D0FC4251DAD650059CCB6 /* String.swift */; };
 		FB57AA76251CCA4E00B2CCF9 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB57AA75251CCA4E00B2CCF9 /* FirebaseManager.swift */; };
 		FB7502B825198B7100193FF9 /* VectorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7502B725198B7100193FF9 /* VectorManager.swift */; };
 		FB9945E82519EA500023E174 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9945E72519EA500023E174 /* Vector.swift */; };
@@ -62,6 +66,10 @@
 		B9E4B7E8ED1140C3AD203DB7 /* Pods_PersonRecognize.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PersonRecognize.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4CD8E9AA2201D33964A3CCD /* Pods-PersonRecognize.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PersonRecognize.debug.xcconfig"; path = "Target Support Files/Pods-PersonRecognize/Pods-PersonRecognize.debug.xcconfig"; sourceTree = "<group>"; };
 		FB3D0F0D251D7E550059CCB6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Core/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FB3D0F96251DA5CA0059CCB6 /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
+		FB3D0F99251DA8AD0059CCB6 /* NetworkChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkChecker.swift; sourceTree = "<group>"; };
+		FB3D0FBD251DAC760059CCB6 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		FB3D0FC4251DAD650059CCB6 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		FB57AA75251CCA4E00B2CCF9 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		FB7502B725198B7100193FF9 /* VectorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorManager.swift; sourceTree = "<group>"; };
 		FB9945E72519EA500023E174 /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
@@ -133,7 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				FBA1B4B42519058B00A31DF7 /* ViewController */,
-				FBA1B4832519052D00A31DF7 /* Extension */,
+				FBA1B4832519052D00A31DF7 /* Utils */,
 				FBA1B4E5251905A800A31DF7 /* View */,
 				FBA1B4D5251905A100A31DF7 /* Core */,
 				951EB34922B698F100A9533B /* Tensorflow */,
@@ -176,16 +184,18 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		FBA1B4832519052D00A31DF7 /* Extension */ = {
+		FBA1B4832519052D00A31DF7 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				FBA1B4842519052D00A31DF7 /* UIImage+Resize.swift */,
+				FB3D0FC4251DAD650059CCB6 /* String.swift */,
+				FB3D0FBD251DAC760059CCB6 /* Date.swift */,
 				FBC5AC0A251AEE6D0016995C /* UIViewController+ShowDialog.swift */,
 				FBA1B4852519052D00A31DF7 /* CustomButton.swift */,
 				FBA1B4862519052D00A31DF7 /* DismisKeyboard.swift */,
 				FBA1B4882519052D00A31DF7 /* UIDeviceExtension.swift */,
 			);
-			path = Extension;
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		FBA1B4B42519058B00A31DF7 /* ViewController */ = {
@@ -234,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				FBA1B4D6251905A100A31DF7 /* Global.swift */,
+				FB3D0F99251DA8AD0059CCB6 /* NetworkChecker.swift */,
 				FB9945E72519EA500023E174 /* Vector.swift */,
 				FBA1B4D8251905A100A31DF7 /* User.swift */,
 				FBA1B4DA251905A100A31DF7 /* ImageDataset.swift */,
@@ -241,6 +252,7 @@
 				FBA1B4DB251905A100A31DF7 /* CreateUserData.swift */,
 				FBA1B4DC251905A100A31DF7 /* Helper.swift */,
 				FB7502B725198B7100193FF9 /* VectorManager.swift */,
+				FB3D0F96251DA5CA0059CCB6 /* Define.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -379,6 +391,7 @@
 				FBA1B4E2251905A100A31DF7 /* CreateUserData.swift in Sources */,
 				FB7502B825198B7100193FF9 /* VectorManager.swift in Sources */,
 				FBA1B4C72519058B00A31DF7 /* FrameViewController.swift in Sources */,
+				FB3D0FBE251DAC760059CCB6 /* Date.swift in Sources */,
 				FBA1B4CD2519058B00A31DF7 /* ViewFaceViewController.swift in Sources */,
 				FBA1B4DF251905A100A31DF7 /* User.swift in Sources */,
 				FBA1B4C62519058B00A31DF7 /* PreviewView.swift in Sources */,
@@ -387,6 +400,7 @@
 				FBA1B4D12519058B00A31DF7 /* VideoView.swift in Sources */,
 				951EB35422B698F100A9533B /* tfWrap.mm in Sources */,
 				FBA1B4C92519058B00A31DF7 /* ViewLogViewController.swift in Sources */,
+				FB3D0FC5251DAD650059CCB6 /* String.swift in Sources */,
 				FBA1B48C2519052D00A31DF7 /* DismisKeyboard.swift in Sources */,
 				FBA1B4D02519058B00A31DF7 /* PredictImageViewController.swift in Sources */,
 				FBA1B4DD251905A100A31DF7 /* Global.swift in Sources */,
@@ -401,9 +415,11 @@
 				FBA1B48D2519052D00A31DF7 /* CustomTableViewCell.swift in Sources */,
 				FBA1B4E1251905A100A31DF7 /* ImageDataset.swift in Sources */,
 				FBC5AC0B251AEE6D0016995C /* UIViewController+ShowDialog.swift in Sources */,
+				FB3D0F9A251DA8AD0059CCB6 /* NetworkChecker.swift in Sources */,
 				FBA1B4CA2519058B00A31DF7 /* AddNameViewController.swift in Sources */,
 				951EB35122B698F100A9533B /* FaceNet.swift in Sources */,
 				951EB35322B698F100A9533B /* tensorflow_utils.mm in Sources */,
+				FB3D0F97251DA5CA0059CCB6 /* Define.swift in Sources */,
 				951EB33822B6985E00A9533B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

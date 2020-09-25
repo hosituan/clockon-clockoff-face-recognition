@@ -69,10 +69,10 @@ class PreviewView: UIView {
         
         let facebounds = face.boundingBox.applying(translate).applying(transform)
         
-        var label = "Unknown"
+        var label = UNKNOWN
         if let frame = currentFrame {
             let result = vectorHelper.getResult(image: frame)
-            if result != "" && result != "Unknown" {
+            if result != "" && result != UNKNOWN {
                 label = result
                 if label != currentLabel {
                     currentLabel = label
@@ -81,13 +81,11 @@ class PreviewView: UIView {
                     numberOfFramesDeteced += 1
                 }
                 let timestamp = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .medium, timeStyle: .medium)
-                
                 let detectedUser = User(name: label, image: frame, time: timestamp)
                 if numberOfFramesDeteced >= validFrames {
-                    
                     if attendList.count == 0 {
                         speak(name: label)
-                        attendList.append(detectedUser)
+                        //attendList.append(detectedUser)
                         fb.uploadLogTimes(user: detectedUser)
                         showDiaglog3s(name: label)
                     }
@@ -106,7 +104,7 @@ class PreviewView: UIView {
                         let validTime = false
                         if count == attendList.count || validTime {
                             speak(name: label)
-                            attendList.append(detectedUser)
+                            //attendList.append(detectedUser)
                             fb.uploadLogTimes(user: detectedUser)
                             showDiaglog3s(name: label)
                         }

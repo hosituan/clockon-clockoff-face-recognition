@@ -212,6 +212,7 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
+  - Alamofire (5.2.2)
   - BoringSSL-GRPC (0.0.7):
     - BoringSSL-GRPC/Implementation (= 0.0.7)
     - BoringSSL-GRPC/Interface (= 0.0.7)
@@ -331,16 +332,21 @@ PODS:
     - nanopb/encode (= 1.30906.0)
   - nanopb/decode (1.30906.0)
   - nanopb/encode (1.30906.0)
+  - ProgressHUD (13.4)
   - PromisesObjC (1.2.10)
   - Realm (5.4.3):
     - Realm/Headers (= 5.4.3)
   - Realm/Headers (5.4.3)
   - RealmSwift (5.4.3):
     - Realm (= 5.4.3)
+  - SDWebImage (5.9.1):
+    - SDWebImage/Core (= 5.9.1)
+  - SDWebImage/Core (5.9.1)
   - SkyFloatingLabelTextField (3.8.0)
   - TensorFlow-experimental (1.1.1)
 
 DEPENDENCIES:
+  - Alamofire
   - FaceCropper
   - Firebase/Core
   - Firebase/Database
@@ -348,13 +354,16 @@ DEPENDENCIES:
   - FirebaseFirestore
   - IQKeyboardManagerSwift
   - MBProgressHUD (~> 1.2.0)
+  - ProgressHUD
   - RealmSwift
+  - SDWebImage
   - SkyFloatingLabelTextField (~> 3.0)
   - TensorFlow-experimental
 
 SPEC REPOS:
   trunk:
     - abseil
+    - Alamofire
     - BoringSSL-GRPC
     - FaceCropper
     - Firebase
@@ -375,14 +384,17 @@ SPEC REPOS:
     - leveldb-library
     - MBProgressHUD
     - nanopb
+    - ProgressHUD
     - PromisesObjC
     - Realm
     - RealmSwift
+    - SDWebImage
     - SkyFloatingLabelTextField
     - TensorFlow-experimental
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
+  Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
   FaceCropper: 5037221c279db6ae3cea68e76ac4165c85c7c291
   Firebase: 47176280bfba198e531f909cfb1612dad216cb96
@@ -403,12 +415,14 @@ SPEC CHECKSUMS:
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
+  ProgressHUD: 137a7fc677487c5581668f4490563124fb35c232
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
   Realm: e3d5fcc50fd79ddf87a2d86301f6edbf57531f84
   RealmSwift: db608068eccc54bce47928e8118bde13c120c307
+  SDWebImage: a990c053fff71e388a10f3357edb0be17929c9c5
   SkyFloatingLabelTextField: 5a338412114808e961fe2d14ea2c5452c8b6e4aa
   TensorFlow-experimental: c38ed2a43acaa2d42ce4174ac076efaa76e26a12
 
-PODFILE CHECKSUM: df9fe71bad7de9e3b57166bae49aaceb616d899b
+PODFILE CHECKSUM: 54ca78ca060d8503edcc8d13eb6fc57ec852cddf
 
 COCOAPODS: 1.9.3

@@ -12,6 +12,7 @@ import MobileCoreServices
 import AVFoundation
 import FaceCropper
 import MBProgressHUD
+import ProgressHUD
 
 class UserData: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
@@ -52,20 +53,24 @@ extension UserData: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
+
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        ProgressHUD.show("Generating...")
         valueSelected = savedUserList[indexPath.row]
         vectorHelper.addVector(name: valueSelected)
         avgVectors = vectorHelper.loadVector()
-        fb.uploadVector(vectors: avgVectors, child: "Vectors")
-        fb.uploadVector(vectors: vectors, child: "All vectors")
-//        let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
-//        loadingNotification.mode = MBProgressHUDMode.indeterminate
-//        loadingNotification.label.text = "Generating..."
+        fb.uploadVector(vectors: avgVectors, child: "Vectors") {
+            
+        }
+        fb.uploadVector(vectors: vectors, child: "All vectors") {
+            ProgressHUD.dismiss()
+        }
+
         
-        //vectorHelper.addVector(name: valueSelected)
         
-        //MBProgressHUD.hide(for: self.view, animated: true)
+        
         //self.performSegue(withIdentifier: "viewFaceData", sender: nil)
     }
     

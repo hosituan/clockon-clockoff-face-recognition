@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import MBProgressHUD
 import AVFoundation
 import RealmSwift
+import ProgressHUD
 
 class HomeViewController: UIViewController {
 
@@ -19,27 +19,33 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var vectorsLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(savedUserList)
-        vectors = vectorHelper.loadVector()
-        print("Number of vectors: \(vectors.count)")
-        //avgVectors = splitVectorByName(vector: vectors)
-        numberOfVectors = vectors.count
-        //let detectedUser = User(name: "Tuan", image: UIImage(named: "LaunchImage")!, time: "abcs")
-        //fb.uploadLogTimes(user: detectedUser)
-        //vectors = []
-
-        
-        
     }
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
-        fb.loadVector { [self] (result) in
-            avgVectors = result
-            //self.showDialog(message: "Loaded 27 users.")
-            print("Numver of average vectors: \(avgVectors.count)")
-            vectorsLabel.text = "You have \(avgVectors.count) users."
-        }
         
+        vectors = vectorHelper.loadVector()
+        print("Number of vectors in your device: \(vectors.count)")
+        numberOfVectors = vectors.count
+        
+        if NetworkChecker.isConnectedToInternet {
+            ProgressHUD.show("Loading users...")
+            fb.loadVector { [self] (result) in
+                avgVectors = result
+                print("Numver of average vectors: \(avgVectors.count)")
+                vectorsLabel.text = "You have \(avgVectors.count) users."
+                ProgressHUD.dismiss()
+            }
+            fb.loadLogTimes { (result) in
+                attendList = result
+            }
+        }
+        else {
+            //code for local data
+            print(savedUserList)
+            avgVectors = splitVectorByName(vector: vectors)
+            vectorsLabel.text = "You have \(avgVectors.count) users."
+            showDialog(message: "You have not connected to internet. Using local data.")
+        }
     }
     override func viewDidAppear(_ animated: Bool) {
         fnet.clean()

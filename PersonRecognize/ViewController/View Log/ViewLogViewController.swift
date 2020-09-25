@@ -7,15 +7,28 @@
 //
 
 import UIKit
+import ProgressHUD
 
 class ViewLogViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
-        
+
+        if NetworkChecker.isConnectedToInternet {
+            ProgressHUD.show("Loading log times...")
+            fb.loadLogTimes { (result) in
+                attendList = result
+                self.tableView.delegate = self
+                self.tableView.dataSource = self
+                ProgressHUD.dismiss()
+            }
+        }
+        else {
+            //code for local data
+            showDialog(message: "You have not connected to internet. Using local data.")
+        }
+
     }
     
 
@@ -27,7 +40,9 @@ extension ViewLogViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellID") as! LogTableViewCell
-        cell.imgView.image = attendList[indexPath.row].image
+        if let url = URL(string: attendList[indexPath.row].imageURL) {
+            cell.imgView.sd_setImage(with: url, completed: nil)
+        }
         cell.nameLabel.text = attendList[indexPath.row].name
         cell.timeLabel.text = attendList[indexPath.row].time
         cell.confidenceLabel.text = "" //attendList[indexPath.row].confidence

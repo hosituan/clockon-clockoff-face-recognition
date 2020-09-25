@@ -7,6 +7,7 @@ target 'PersonRecognize' do
 
   pod 'TensorFlow-experimental'
 	pod 'FaceCropper'
+pod 'Alamofire'
 pod 'SkyFloatingLabelTextField', '~> 3.0'
 pod 'IQKeyboardManagerSwift'
 pod 'MBProgressHUD', '~> 1.2.0'
@@ -14,5 +15,7 @@ pod 'RealmSwift'
 pod 'Firebase/Core'
 pod 'Firebase/Database'
 pod 'Firebase/Storage'
+pod 'ProgressHUD'
 pod 'FirebaseFirestore'
+pod 'SDWebImage'
 end
