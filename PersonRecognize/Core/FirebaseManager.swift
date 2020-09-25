@@ -16,19 +16,31 @@ class FirebaseManager {
         FirebaseApp.configure()
     }
     
-    func uploadVector(vectors: [Vector]) {
-        for vector in vectors {
+    func uploadVector(vectors: [Vector], child: String) {
+        var childString = child
+
+        for i in 0..<vectors.count {
+            let vector = vectors[i]
             let dict: Dictionary<String, Any>  = [
                 "name": vector.name,
                 "vector": arrayToString(array: vector.vector),
                 "distance": vector.distance
             ]
-            Database.database().reference().child("Vectors").child(vector.name).updateChildValues(dict, withCompletionBlock: {
+            print(child)
+            if child == "All vectors" {
+                childString = "\(vector.name) - \(i)"
+            }
+            else {
+                childString = vector.name
+            }
+            Database.database().reference().child(child).child(childString).updateChildValues(dict, withCompletionBlock: {
                 (error, ref) in
                 if error == nil {
                     print("uploaded vector")
                 }
             })
+
+
         }
     }
     
@@ -101,6 +113,7 @@ class FirebaseManager {
         }
 
 
-
+        
     }
+    
 }

@@ -57,7 +57,8 @@ extension UserData: UITableViewDelegate, UITableViewDataSource {
         valueSelected = savedUserList[indexPath.row]
         vectorHelper.addVector(name: valueSelected)
         avgVectors = vectorHelper.loadVector()
-        fb.uploadVector(vectors: avgVectors)
+        fb.uploadVector(vectors: avgVectors, child: "Vectors")
+        fb.uploadVector(vectors: vectors, child: "All vectors")
 //        let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
 //        loadingNotification.mode = MBProgressHUDMode.indeterminate
 //        loadingNotification.label.text = "Generating..."
