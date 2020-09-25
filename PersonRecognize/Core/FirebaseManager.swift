@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 import FirebaseDatabase
-
+import FirebaseStorage
 
 class FirebaseManager {
     init() {
@@ -59,5 +59,48 @@ class FirebaseManager {
         }) { (error) in
             print(error.localizedDescription)
         }
+    }
+    
+    func uploadLogTimes(user: User) {
+        
+        let storageRef = Storage.storage().reference(forURL: "gs://person-recognition-6df29.appspot.com").child("\(user.name) - \(user.time)")
+
+        let metadata = StorageMetadata()
+
+        if let imageData = user.image.jpegData(compressionQuality: 1.0) {
+            metadata.contentType = "image/jpg"
+            print(metadata)
+            print(imageData)
+            //upload image to firebase storage
+            storageRef.putData(imageData, metadata: metadata, completion: {
+                (StorageMetadata, error) in
+                if error != nil {
+                    print(error?.localizedDescription as Any)
+                    return
+                }
+                else {
+                    storageRef.downloadURL(completion: {
+                        (url, error) in
+                        if let metaImageUrl = url?.absoluteString {
+                            let dict: Dictionary<String, Any>  = [
+                                "name": user.name,
+                                "imageURL": metaImageUrl,
+                                "time": user.time
+                            ]
+                            Database.database().reference().child("LogTimes").child("\(user.name) - \(user.time)").updateChildValues(dict, withCompletionBlock: {
+                                (error, ref) in
+                                if error == nil {
+                                    print("Uploaded log time.")
+                                }
+                            })
+
+                        }
+                    })
+                }
+            })
+        }
+
+
+
     }
 }

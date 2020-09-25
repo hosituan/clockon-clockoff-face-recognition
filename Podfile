@@ -13,5 +13,6 @@ pod 'MBProgressHUD', '~> 1.2.0'
 pod 'RealmSwift'
 pod 'Firebase/Core'
 pod 'Firebase/Database'
+pod 'Firebase/Storage'
 pod 'FirebaseFirestore'
 end

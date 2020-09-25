@@ -33,6 +33,9 @@ extension ViewLogViewController: UITableViewDelegate, UITableViewDataSource {
         cell.confidenceLabel.text = "" //attendList[indexPath.row].confidence
         return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+    }
     
     
 }

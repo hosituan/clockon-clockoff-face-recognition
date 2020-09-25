@@ -343,7 +343,7 @@
                                             <constraint firstAttribute="height" constant="50" id="W5m-bL-FbM"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                        <state key="normal" title="List of Users">
+                                        <state key="normal" title="Your users">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>

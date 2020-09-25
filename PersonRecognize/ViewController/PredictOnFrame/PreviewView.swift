@@ -88,6 +88,7 @@ class PreviewView: UIView {
                     if attendList.count == 0 {
                         speak(name: label)
                         attendList.append(detectedUser)
+                        fb.uploadLogTimes(user: detectedUser)
                         showDiaglog3s(name: label)
                     }
                     else  {
@@ -106,6 +107,7 @@ class PreviewView: UIView {
                         if count == attendList.count || validTime {
                             speak(name: label)
                             attendList.append(detectedUser)
+                            fb.uploadLogTimes(user: detectedUser)
                             showDiaglog3s(name: label)
                         }
                         else {
@@ -150,6 +152,8 @@ class PreviewView: UIView {
         let alert = UIAlertController(title: "Joined!", message: "\(name)", preferredStyle: .alert)
         self.window?.rootViewController?.present(alert, animated: true, completion: nil)
         let when = DispatchTime.now() + 1
+        
+        
         DispatchQueue.main.asyncAfter(deadline: when) {
           alert.dismiss(animated: true, completion: nil)
         }

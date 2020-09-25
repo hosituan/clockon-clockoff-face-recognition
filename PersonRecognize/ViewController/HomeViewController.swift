@@ -24,19 +24,21 @@ class HomeViewController: UIViewController {
         print("Number of vectors: \(vectors.count)")
         //avgVectors = splitVectorByName(vector: vectors)
         numberOfVectors = vectors.count
+        //let detectedUser = User(name: "Tuan", image: UIImage(named: "LaunchImage")!, time: "abcs")
+        //fb.uploadLogTimes(user: detectedUser)
         //vectors = []
-        fb.loadVector { [self] (result) in
-            avgVectors = result
-            self.showDialog(message: "Loaded 27 users.")
-            print("Numver of average vectors: \(avgVectors.count)")
-            vectorsLabel.text = "You have \(avgVectors.count) users and \(numberOfVectors) vectors."
-        }
+
         
         
     }
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
-        
+        fb.loadVector { [self] (result) in
+            avgVectors = result
+            //self.showDialog(message: "Loaded 27 users.")
+            print("Numver of average vectors: \(avgVectors.count)")
+            vectorsLabel.text = "You have \(avgVectors.count) users."
+        }
         
     }
     override func viewDidAppear(_ animated: Bool) {
