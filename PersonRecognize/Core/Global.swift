@@ -27,11 +27,13 @@ let testingDataset = ImageDataset(split: .test)
 var currentFrame: UIImage?
 
 var currentLabel = UNKNOWN
+var timeDetected = ""
 var numberOfFramesDeteced = 0 //number frames detected
 let validFrames = 3 //after getting 3 frames, users have been verified
 
 
 var attendList: [Users] = []
+var localUserList: [User] = [] //to ignore append user. 
 
 //Save User Local List
 let defaults = UserDefaults.standard

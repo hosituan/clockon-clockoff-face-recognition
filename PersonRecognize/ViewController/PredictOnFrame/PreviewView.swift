@@ -74,43 +74,63 @@ class PreviewView: UIView {
             let result = vectorHelper.getResult(image: frame)
             if result != "" && result != UNKNOWN {
                 label = result
+                let timestamp = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .medium, timeStyle: .medium)
+                print(timestamp)
+                print(timeDetected)
                 if label != currentLabel {
                     currentLabel = label
-                    numberOfFramesDeteced = 0
+                    timeDetected = timestamp
                 } else {
-                    numberOfFramesDeteced += 1
+                    
                 }
-                let timestamp = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .medium, timeStyle: .medium)
+                
+                               
                 let detectedUser = User(name: label, image: frame, time: timestamp)
-                if numberOfFramesDeteced >= validFrames {
-                    if attendList.count == 0 {
+                if timestamp > timeDetected  {
+                    print("Detected")
+                    currentLabel = UNKNOWN
+                    if localUserList.count == 0 {
                         speak(name: label)
                         //attendList.append(detectedUser)
+                        localUserList.append(detectedUser)
                         fb.uploadLogTimes(user: detectedUser)
+                        print("append 1")
+                        
                         showDiaglog3s(name: label)
                     }
                     else  {
-                        var count = 0
                         //var user:User?
-                        for item in attendList {
-                            if item.name != label {
-                                count += 1
+                        var count = 0
+                        
+                        for item in localUserList {
+                            count += 1
+                            if item.name == label {
+
+                                if item.time.dropLast(DROP_LAST) != timestamp.dropLast(DROP_LAST) {
+                                    localUserList.append(detectedUser)
+                                    localUserList = localUserList.sorted(by: { $0.time > $1.time })
+                                    speak(name: label)
+                                    fb.uploadLogTimes(user: detectedUser)
+                                    print("append 2")
+                                    showDiaglog3s(name: label)
+                                }
+
+                                break
                             }
                             else {
                                 //user = item
                             }
                         }
-                        
-                        let validTime = false
-                        if count == attendList.count || validTime {
+
+                        if count == localUserList.count {
+                            print("append 3")
                             speak(name: label)
-                            //attendList.append(detectedUser)
                             fb.uploadLogTimes(user: detectedUser)
+                            localUserList.append(detectedUser)
                             showDiaglog3s(name: label)
                         }
-                        else {
-                            //print("User added")
-                        }
+                        
+
                     }
                 }
             }

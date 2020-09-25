@@ -19,3 +19,7 @@ let DB_URL = "gs://person-recognition-6df29.appspot.com"
 //Define unknow
 
 let UNKNOWN = "Unknown"
+
+let DROP_LAST = 3
+
+let VALID_TIME = 1

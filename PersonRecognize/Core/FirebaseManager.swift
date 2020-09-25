@@ -64,7 +64,7 @@ class FirebaseManager {
                     let object = Users(name: name, imageURL: imgUrl, time: time)
                     attendList.append(object)
                 }
-                completionHandler(attendList)
+                completionHandler(attendList.sorted(by: { $0.time > $1.time }))
                 
                 
             }

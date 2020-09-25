@@ -37,6 +37,11 @@ class HomeViewController: UIViewController {
             }
             fb.loadLogTimes { (result) in
                 attendList = result
+                for user in attendList {
+                    let u = User(name: user.name, image: UIImage(named: "LaunchImage")!, time: user.time)
+                    localUserList.append(u)
+                }
+                
             }
         }
         else {
