@@ -83,6 +83,7 @@ class VectorHelper  {
             //for vector in vectors {
             for vector in  avgVectors {
                 let distance = l2distance(targetVector, vector.vector)
+                //print("\(vector.name): \(distance * 1000)")
                 if distance < result.distance && vector.name != "" {
                     result = vector
                     result.distance = distance
@@ -91,8 +92,12 @@ class VectorHelper  {
                 }
             }
         }
+        if result.distance * 1000 <= 790 {
+            return result.name
+        }
+        else { return "Unknown" }
         
-        return result.name
+        
         
     }
 }

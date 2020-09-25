@@ -11,5 +11,7 @@ pod 'SkyFloatingLabelTextField', '~> 3.0'
 pod 'IQKeyboardManagerSwift'
 pod 'MBProgressHUD', '~> 1.2.0'
 pod 'RealmSwift'
-
+pod 'Firebase/Core'
+pod 'Firebase/Database'
+pod 'FirebaseFirestore'
 end

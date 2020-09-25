@@ -149,7 +149,7 @@ class PreviewView: UIView {
     func showDiaglog3s(name: String) {
         let alert = UIAlertController(title: "Joined!", message: "\(name)", preferredStyle: .alert)
         self.window?.rootViewController?.present(alert, animated: true, completion: nil)
-        let when = DispatchTime.now() + 2
+        let when = DispatchTime.now() + 1
         DispatchQueue.main.asyncAfter(deadline: when) {
           alert.dismiss(animated: true, completion: nil)
         }

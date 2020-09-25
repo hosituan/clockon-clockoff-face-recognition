@@ -22,16 +22,21 @@ class HomeViewController: UIViewController {
         print(savedUserList)
         vectors = vectorHelper.loadVector()
         print("Number of vectors: \(vectors.count)")
-        avgVectors = splitVectorByName(vector: vectors)
+        //avgVectors = splitVectorByName(vector: vectors)
         numberOfVectors = vectors.count
-        vectors = []
-
-        print("Numver of average vectors: \(avgVectors.count)")
+        //vectors = []
+        fb.loadVector { [self] (result) in
+            avgVectors = result
+            self.showDialog(message: "Loaded 27 users.")
+            print("Numver of average vectors: \(avgVectors.count)")
+            vectorsLabel.text = "You have \(avgVectors.count) users and \(numberOfVectors) vectors."
+        }
+        
         
     }
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
-        vectorsLabel.text = "You have \(avgVectors.count) users and \(numberOfVectors) vectors."
+        
         
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -59,5 +64,13 @@ class HomeViewController: UIViewController {
     @IBAction func tapViewLog(_ sender: UIButton) {
         self.performSegue(withIdentifier: "viewLog", sender: nil)
     }
+    @IBAction func tapSyncData(_ sender: UIButton) {
+//        fb.loadVector { (result) in
+//            avgVectors = result
+//        }
+        //print("uploading")
+        //fb.uploadVector(vectors: avgVectors)
+    }
+    
 }
 

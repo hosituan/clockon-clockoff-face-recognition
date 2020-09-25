@@ -160,7 +160,7 @@ class FrameViewController: UIViewController {
         
       }
     
-    override func viewDidDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         sessionQueue.async {[weak self]()  -> Void in
             guard let self = self else { return }

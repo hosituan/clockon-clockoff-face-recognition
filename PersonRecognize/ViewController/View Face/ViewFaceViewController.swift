@@ -26,6 +26,8 @@ class ViewFaceViewController: UIViewController {
     @IBAction func generateVector(_ sender: UIBarButtonItem) {
         
         vectorHelper.addVector(name: name)
+        avgVectors = vectorHelper.loadVector()
+        fb.uploadVector(vectors: avgVectors)
 //        let url = documentDirectory.appendingPathComponent("train").appendingPathComponent("user\(indexPath)")
 //        removeIfExists(at: url)
 //        saveLabel(at: "user\(indexPath)", value: "")

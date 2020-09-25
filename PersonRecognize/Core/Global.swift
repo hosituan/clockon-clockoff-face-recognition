@@ -37,3 +37,5 @@ var savedUserList = defaults.stringArray(forKey: "SavedUserList") ?? [String]()
 
 //Realm
 let realm = try! Realm()
+
+let fb  = FirebaseManager()

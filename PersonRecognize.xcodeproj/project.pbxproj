@@ -15,6 +15,8 @@
 		951EB35322B698F100A9533B /* tensorflow_utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 951EB34E22B698F100A9533B /* tensorflow_utils.mm */; };
 		951EB35422B698F100A9533B /* tfWrap.mm in Sources */ = {isa = PBXBuildFile; fileRef = 951EB35022B698F100A9533B /* tfWrap.mm */; };
 		C74123AA68AA5B08B54BAB0F /* Pods_PersonRecognize.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9E4B7E8ED1140C3AD203DB7 /* Pods_PersonRecognize.framework */; };
+		FB3D0F0E251D7E550059CCB6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FB3D0F0D251D7E550059CCB6 /* GoogleService-Info.plist */; };
+		FB57AA76251CCA4E00B2CCF9 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB57AA75251CCA4E00B2CCF9 /* FirebaseManager.swift */; };
 		FB7502B825198B7100193FF9 /* VectorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7502B725198B7100193FF9 /* VectorManager.swift */; };
 		FB9945E82519EA500023E174 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9945E72519EA500023E174 /* Vector.swift */; };
 		FBA1B48A2519052D00A31DF7 /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4842519052D00A31DF7 /* UIImage+Resize.swift */; };
@@ -59,6 +61,8 @@
 		951EB35822B6994100A9533B /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		B9E4B7E8ED1140C3AD203DB7 /* Pods_PersonRecognize.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PersonRecognize.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4CD8E9AA2201D33964A3CCD /* Pods-PersonRecognize.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PersonRecognize.debug.xcconfig"; path = "Target Support Files/Pods-PersonRecognize/Pods-PersonRecognize.debug.xcconfig"; sourceTree = "<group>"; };
+		FB3D0F0D251D7E550059CCB6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Core/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FB57AA75251CCA4E00B2CCF9 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		FB7502B725198B7100193FF9 /* VectorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorManager.swift; sourceTree = "<group>"; };
 		FB9945E72519EA500023E174 /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
 		FBA1B4842519052D00A31DF7 /* UIImage+Resize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
@@ -137,6 +141,7 @@
 				951EB33E22B6986200A9533B /* Assets.xcassets */,
 				951EB33722B6985E00A9533B /* AppDelegate.swift */,
 				951EB34322B6986200A9533B /* Info.plist */,
+				FB3D0F0D251D7E550059CCB6 /* GoogleService-Info.plist */,
 			);
 			path = PersonRecognize;
 			sourceTree = "<group>";
@@ -232,6 +237,7 @@
 				FB9945E72519EA500023E174 /* Vector.swift */,
 				FBA1B4D8251905A100A31DF7 /* User.swift */,
 				FBA1B4DA251905A100A31DF7 /* ImageDataset.swift */,
+				FB57AA75251CCA4E00B2CCF9 /* FirebaseManager.swift */,
 				FBA1B4DB251905A100A31DF7 /* CreateUserData.swift */,
 				FBA1B4DC251905A100A31DF7 /* Helper.swift */,
 				FB7502B725198B7100193FF9 /* VectorManager.swift */,
@@ -321,6 +327,7 @@
 				FBA1B4E8251905A800A31DF7 /* Main.storyboard in Resources */,
 				951EB33F22B6986200A9533B /* Assets.xcassets in Resources */,
 				951EB35222B698F100A9533B /* modelFacenet.pb in Resources */,
+				FB3D0F0E251D7E550059CCB6 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,6 +395,7 @@
 				FBA1B48B2519052D00A31DF7 /* CustomButton.swift in Sources */,
 				FBA1B4E3251905A100A31DF7 /* Helper.swift in Sources */,
 				FBA1B4CC2519058B00A31DF7 /* HomeViewController.swift in Sources */,
+				FB57AA76251CCA4E00B2CCF9 /* FirebaseManager.swift in Sources */,
 				FB9945E82519EA500023E174 /* Vector.swift in Sources */,
 				FBA1B48E2519052D00A31DF7 /* UIDeviceExtension.swift in Sources */,
 				FBA1B48D2519052D00A31DF7 /* CustomTableViewCell.swift in Sources */,
@@ -541,16 +549,17 @@
 			baseConfigurationReference = C4CD8E9AA2201D33964A3CCD /* Pods-PersonRecognize.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon1;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = S423MR2Z88;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 2F345FGHJG;
 				INFOPLIST_FILE = PersonRecognize/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = hosituan.PersonRegcognize;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.c2c-platform.FaceRecognition.Dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "FaceRecognition Development";
 				SWIFT_OBJC_BRIDGING_HEADER = "PersonRecognize/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -563,14 +572,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon1;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = S423MR2Z88;
+				DEVELOPMENT_TEAM = U9EGC55R6Z;
 				INFOPLIST_FILE = PersonRecognize/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = hosituan.PersonRegcognize;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.c2c-platform.FaceRecognition.Dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "PersonRecognize/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
