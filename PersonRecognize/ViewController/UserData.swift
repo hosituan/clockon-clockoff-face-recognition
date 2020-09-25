@@ -55,6 +55,9 @@ extension UserData: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         valueSelected = savedUserList[indexPath.row]
+        vectorHelper.addVector(name: valueSelected)
+        avgVectors = vectorHelper.loadVector()
+        fb.uploadVector(vectors: avgVectors)
 //        let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
 //        loadingNotification.mode = MBProgressHUDMode.indeterminate
 //        loadingNotification.label.text = "Generating..."
@@ -62,7 +65,7 @@ extension UserData: UITableViewDelegate, UITableViewDataSource {
         //vectorHelper.addVector(name: valueSelected)
         
         //MBProgressHUD.hide(for: self.view, animated: true)
-        self.performSegue(withIdentifier: "viewFaceData", sender: nil)
+        //self.performSegue(withIdentifier: "viewFaceData", sender: nil)
     }
     
 }
