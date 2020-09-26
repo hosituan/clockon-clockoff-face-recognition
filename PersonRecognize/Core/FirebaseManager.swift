@@ -17,8 +17,7 @@ class FirebaseManager {
         FirebaseApp.configure()
     }
     
-    func uploadVector(vectors: [Vector], child: String, completionHandler: @escaping () -> Void) {
-        var childString = child
+    func uploadAllVectors(vectors: [Vector], child: String, completionHandler: @escaping () -> Void) {
 
         for i in 0..<vectors.count {
             let vector = vectors[i]
@@ -27,22 +26,35 @@ class FirebaseManager {
                 "vector": arrayToString(array: vector.vector),
                 "distance": vector.distance
             ]
-            print(child)
-            if child == ALL_VECTOR {
-                childString = "\(vector.name) - \(i)"
-            }
-            else {
-                childString = vector.name
-            }
-            Database.database().reference().child(child).child(childString).updateChildValues(dict, withCompletionBlock: {
+            let childString = "\(vector.name) - \(i)"
+            Database.database().reference().child(child).child(vector.name).child(childString).updateChildValues(dict, withCompletionBlock: {
                 (error, ref) in
                 if error == nil {
-                    print("uploaded vector")
+                    //print("uploaded vector")
                 }
                 completionHandler()
             })
 
 
+        }
+    }
+    func uploadKMeanVectors(vectors: [Vector], child: String, completionHandler: @escaping () -> Void) {
+
+        for i in 0..<vectors.count {
+            let vector = vectors[i]
+            let dict: Dictionary<String, Any>  = [
+                "name": vector.name,
+                "vector": arrayToString(array: vector.vector),
+                "distance": vector.distance
+            ]
+            let childString = "\(vector.name) - \(i)"
+            Database.database().reference().child(child).child(childString).updateChildValues(dict, withCompletionBlock: {
+                (error, ref) in
+                if error == nil {
+                    //print("uploaded vector")
+                }
+                completionHandler()
+            })
         }
     }
     
@@ -77,11 +89,11 @@ class FirebaseManager {
     }
     
     func loadVector(completionHandler: @escaping ([Vector]) -> Void) {
-        
-        Database.database().reference().child(AVG_VECTOR).queryLimited(toLast: 100).observeSingleEvent(of: .value, with: { (snapshot) in
+        var vectors = [Vector]()
+        Database.database().reference().child(KMEAN_VECTOR).queryLimited(toLast: 100).observeSingleEvent(of: .value, with: { (snapshot) in
             if let data = snapshot.value as? [String: Any] {
                 let dataArray = Array(data)
-                var vectors = [Vector]()
+                
                 let values = dataArray.map { $0.1 }
                 for dict in values {
                     let item = dict as! NSDictionary
@@ -103,6 +115,7 @@ class FirebaseManager {
             
         }) { (error) in
             print(error.localizedDescription)
+            completionHandler(vectors)
         }
     }
     
@@ -149,5 +162,28 @@ class FirebaseManager {
         
     }
     
-    
+    func loadUsers(completionHandler: @escaping ([String]) -> Void) {
+        var userList: [String] = []
+        Database.database().reference().child(USER_CHILD).queryLimited(toLast: 100).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as! NSDictionary
+            for item in value {
+                userList.append(item.key as! String)
+            }
+            completionHandler(userList)
+                
+            }) { (error) in
+            print(error.localizedDescription)
+            completionHandler(userList)
+        }
+    }
+    func uploadUser(name: String, completionHandler: @escaping () -> Void) {
+        let dict = [name : 0]
+        Database.database().reference().child(USER_CHILD).updateChildValues(dict, withCompletionBlock: {
+            (error, ref) in
+            if error == nil {
+                print("update user.")
+            }
+            completionHandler()
+        })
+    }
 }

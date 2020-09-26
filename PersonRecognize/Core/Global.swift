@@ -14,8 +14,11 @@ import RealmSwift
 //Machine Learning Model
 let fnet = FaceNet()
 let fDetector = FaceDetector()
-var vectors = [Vector]()
-var avgVectors = [Vector]()
+
+//the most important variable
+var kMeanVectors = [Vector]()
+
+
 var numberOfVectors = 0
 var vectorHelper = VectorHelper()
 
@@ -37,10 +40,14 @@ var localUserList: [User] = [] //to ignore append user.
 
 //Save User Local List
 let defaults = UserDefaults.standard
-var savedUserList = defaults.stringArray(forKey: "SavedUserList") ?? [String]()
+var savedUserList = defaults.stringArray(forKey: SAVED_USERS) ?? [String]()
+//defaults.set(savedUserList, forKey: SAVED_USERS)
 
 
 
 //Realm
 let realm = try! Realm()
 let fb  = FirebaseManager()
+
+
+let KMeans = KMeansSwift.sharedInstance

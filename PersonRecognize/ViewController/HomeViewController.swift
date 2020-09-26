@@ -12,7 +12,7 @@ import RealmSwift
 import ProgressHUD
 
 class HomeViewController: UIViewController {
-
+    
     var fps = 2
     private var generator:AVAssetImageGenerator!
     
@@ -23,17 +23,15 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
         
-        vectors = vectorHelper.loadVector()
-        print("Number of vectors in your device: \(vectors.count)")
-        numberOfVectors = vectors.count
-        
         if NetworkChecker.isConnectedToInternet {
             ProgressHUD.show("Loading users...")
             fb.loadVector { [self] (result) in
-                avgVectors = result
-                print("Numver of average vectors: \(avgVectors.count)")
-                vectorsLabel.text = "You have \(avgVectors.count) users."
                 ProgressHUD.dismiss()
+                kMeanVectors = result
+                print("Numver of k-Mean vectors: \(kMeanVectors.count)")
+                vectorsLabel.text = "You have \(kMeanVectors.count / 3) users."
+                ProgressHUD.dismiss()
+                
             }
             fb.loadLogTimes { (result) in
                 attendList = result
@@ -46,9 +44,9 @@ class HomeViewController: UIViewController {
         }
         else {
             //code for local data
-            print(savedUserList)
-            avgVectors = splitVectorByName(vector: vectors)
-            vectorsLabel.text = "You have \(avgVectors.count) users."
+//            print(savedUserList)
+//            //kMeanVectors = splitVectorByName(vector: vectors)
+//            vectorsLabel.text = "You have \(kMeanVectors.count / 3) users."
             showDialog(message: "You have not connected to internet. Using local data.")
         }
     }
@@ -58,7 +56,7 @@ class HomeViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: animated);
         super.viewWillDisappear(animated)
-        vectors = []
+        //vectors = []
         fnet.load()
     }
     
@@ -78,9 +76,9 @@ class HomeViewController: UIViewController {
         self.performSegue(withIdentifier: "viewLog", sender: nil)
     }
     @IBAction func tapSyncData(_ sender: UIButton) {
-//        fb.loadVector { (result) in
-//            avgVectors = result
-//        }
+        //        fb.loadVector { (result) in
+        //            avgVectors = result
+        //        }
         //print("uploading")
         //fb.uploadVector(vectors: avgVectors)
     }

@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 import SkyFloatingLabelTextField
 import MBProgressHUD
+import ProgressHUD
 
 class AddNameViewController: UIViewController {
     
@@ -36,10 +37,14 @@ class AddNameViewController: UIViewController {
     @IBAction func tapDoneButoon(_ sender: UIButton) {
         if textField.text != "" && videoURL != nil {
             
+            ProgressHUD.show("Adding...")
             let getFrames = GetFrames()
             print("Your Name is: \(textField.text!)")
-            savedUserList.append(textField.text!)
-            defaults.set(savedUserList, forKey: "SavedUserList")
+            fb.uploadUser(name: textField.text!) {
+                ProgressHUD.dismiss()
+            }
+            //savedUserList.append(textField.text!)
+            //defaults.set(savedUserList, forKey: "SavedUserList")
             getFrames.getAllFrames(videoURL!, for: textField.text!)
             self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
         }

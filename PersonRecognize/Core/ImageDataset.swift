@@ -20,7 +20,7 @@ class ImageDataset {
     
     let split: Split
     
-    let smallestSide = 224
+    let smallestSide = 1000
     
     private let baseURL: URL
     

@@ -24,7 +24,6 @@ class PredictImageViewController: UIViewController, UIImagePickerControllerDeleg
         super.viewDidLoad()
         fnet.load()
         clearData()
-        print(vectors.count)
     }
     
 

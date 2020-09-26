@@ -30,18 +30,22 @@ class VectorHelper  {
         return nil
     }
     
-    func addVector(name: String) {
+    func addVector(name: String, completionHandler: @escaping ([Vector]) -> Void) {
         let imageList = trainingDataset.getImage(label: name)
         //print(imageList.count)
-        
+        var vectors: [Vector] = []
         if imageList.count > 0  {
             for item in imageList {
                 if let vector = createVector(name: name, image: item!) {
                     vectors.append(vector)
-                    saveVector(vector: vector)
+                    //saveVector(vector: vector)
                 }
                 
             }
+            completionHandler(vectors)
+        }
+        else {
+            completionHandler(vectors)
         }
         //print(vectors.count)
         
@@ -73,6 +77,8 @@ class VectorHelper  {
         return vectors
     }
     func getResult(image: UIImage) -> String {
+        var array: [Vector] = []
+        
         var result = Vector(name: "Unknown", vector: [], distance: 10)
         let image = image
         let frame = CIImage(image: image)!
@@ -81,9 +87,13 @@ class VectorHelper  {
             let targetVector = fnet.run(image: i)
             //print(vectors.count)
             //for vector in vectors {
-            for vector in  avgVectors {
+            for vector in  kMeanVectors {
                 let distance = l2distance(targetVector, vector.vector)
-                //print("\(vector.name): \(distance * 1000)")
+                if distance * 1000 < 700 {
+                    print("\(vector.name): \(distance * 1000)")
+                    array.append(vector)
+                }
+                
                 if distance < result.distance && vector.name != "" {
                     result = vector
                     result.distance = distance
@@ -91,13 +101,89 @@ class VectorHelper  {
 //                    print("vector: \(vector.name)")
                 }
             }
+            if result.distance * 1000 <= 500 {
+                let value = "\(result.name): 100%"
+                return value
+            }
+            else if result.distance * 1000 <= 550 {
+                
+                let groupedItems = Dictionary(grouping: array, by: {$0.name})
+                var max = 0
+                var nameMax = result.name
+                for item in groupedItems {
+                    if item.value.count > max {
+                        max = item.value.count
+                        nameMax = item.key
+                    }
+                }
+                if max == 1 {
+                    return "\(result.name): 90%"
+                }
+                if max == 2 {
+                    return "\(nameMax): 90%"
+                }
+                else if max == 3 {
+                    return "\(nameMax): 90%"
+                }
+
+            }
+            else if result.distance * 1000 <= 600 {
+                
+                let groupedItems = Dictionary(grouping: array, by: {$0.name})
+                var max = 0
+                var nameMax = result.name
+                for item in groupedItems {
+                    if item.value.count > max {
+                        max = item.value.count
+                        nameMax = item.key
+                    }
+                }
+                if max == 2 {
+                    return "\(nameMax): 80%"
+                }
+                else if max == 3 {
+                    return "\(nameMax): 80%"
+                }
+                return "\(result.name): 80%"
+            }
+            else if result.distance * 1000 <= 650 {
+                
+                let groupedItems = Dictionary(grouping: array, by: {$0.name})
+                var max = 0
+                var nameMax = result.name
+                for item in groupedItems {
+                    if item.value.count > max {
+                        max = item.value.count
+                        nameMax = item.key
+                    }
+                }
+                if max == 2 {
+                    return "\(nameMax): 70%"
+                }
+                else if max == 3 {
+                    return "\(nameMax): 70%"
+                }
+                return "\(result.name): 70%"
+            }
+
+            else { return "Unknown" }
+
+            
         }
-        if result.distance * 1000 <= 790 {
-            return result.name
-        }
-        else { return "Unknown" }
+        
+//        else if result.distance <= 600 {
+//            let groupedItems = Dictionary(grouping: array, by: {$0.name})
+//            print(groupedItems.count)
+//            
+//            let value = "\(result.name): 80%"
+//            return value
+//        }
         
         
+        return "Unknown"
+        
+        
+
         
     }
 }
@@ -148,13 +234,26 @@ func averageVector(vectors: [Vector]) -> Vector {
 
 func splitVectorByName(vector: [Vector]) -> [Vector] {
     var vectorList: [Vector] = []
+    //let groupedItems = Dictionary(grouping: vectors, by: {$0.name})
+//    for item in groupedItems {
+//        var vectors: [Vector] =  []
+//        for i in item.value {
+//            vectors.append(i)
+//        }
+//        vectorList.append(averageVector(vectors: vectors))
+//    }
+    return vectorList
+}
+
+//get  KMean Vector from all
+func getKMeanVector(vectors: [Vector]) -> [Vector] {
+    var vectorList: [Vector] = []
     let groupedItems = Dictionary(grouping: vectors, by: {$0.name})
+    print(groupedItems.count)
     for item in groupedItems {
-        var vectors: [Vector] =  []
-        for i in item.value {
-            vectors.append(i)
+        getKMeanVectorSameName(vectors: item.value) { (result) in
+            vectorList.append(contentsOf: result)
         }
-        vectorList.append(averageVector(vectors: vectors))
     }
     return vectorList
 }
