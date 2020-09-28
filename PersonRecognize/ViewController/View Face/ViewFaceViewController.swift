@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ProgressHUD
 
 class ViewFaceViewController: UIViewController {
     
@@ -14,6 +15,7 @@ class ViewFaceViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var name = ""
     var imgList:[UIImage?] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         imgList = trainingDataset.getImage(label: name)
@@ -24,14 +26,29 @@ class ViewFaceViewController: UIViewController {
     }
     
     @IBAction func generateVector(_ sender: UIBarButtonItem) {
-        
-//        vectorHelper.addVector(name: name)
-//        avgVectors = vectorHelper.loadVector()
-//        fb.uploadVector(vectors: avgVectors)
-//        let url = documentDirectory.appendingPathComponent("train").appendingPathComponent("user\(indexPath)")
-//        removeIfExists(at: url)
-//        saveLabel(at: "user\(indexPath)", value: "")
-//        showDialog(message: "Cleared!")
+        let valueSelected = self.name
+        vectorHelper.addVector(name: valueSelected) { result in
+            print("All vectors for \(valueSelected): \(result.count)")
+            if result.count > 0 {
+                getKMeanVectorSameName(vectors: result) { (vectors) in
+                    print("K-mean vector for \(valueSelected): \(vectors.count)")
+                    fb.uploadKMeanVectors(vectors: vectors, child: KMEAN_VECTOR) {
+                        ProgressHUD.dismiss()
+                        self.showDialog(message: "Upload data for \(valueSelected) by \(result.count) vectors.")
+                        fb.uploadAllVectors(vectors: result, child: ALL_VECTOR) {
+                        }
+                    }
+                }
+            }
+            else {
+                ProgressHUD.dismiss()
+                DispatchQueue.main.async {
+                    self.showDialog(message: "This user is not in your local data.")
+                }
+                
+            }
+        }
+
     }
     
     

@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import ProgressHUD
 
 class FrameOperation: Operation {
     var time: Double!
@@ -63,16 +64,49 @@ class GetFrames {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 10
         
-            var i: Double = 0
-            repeat {
-                let frameOperation = FrameOperation(time: i, label: label, gen: self.generator)
-                queue.addOperation(frameOperation)
-                i = i + (1 / Double(fps))
-            } while (i < duration)
-            self.generator = nil
+        var i: Double = 0
+        repeat {
+            let frameOperation = FrameOperation(time: i, label: label, gen: self.generator)
+            queue.addOperation(frameOperation)
+            i = i + (1 / Double(self.fps))
+        } while (i < duration)
+        self.generator = nil
         queue.addBarrierBlock {
             print("Complete")
+            ProgressHUD.show("Generating...")
+            vectorHelper.addVector(name: label) { result in
+                print("All vectors for \(label): \(result.count)")
+                if result.count > 0 {
+                    getKMeanVectorSameName(vectors: result) { (vectors) in
+                        print("K-mean vector for \(label): \(vectors.count)")
+                        fb.uploadKMeanVectors(vectors: vectors, child: KMEAN_VECTOR) {
+                            ProgressHUD.dismiss()
+                            DispatchQueue.main.async {
+                                //self.showDialog(message: "Upload data for \(label) by \(result.count) vectors.")
+                            }
+                            fb.uploadAllVectors(vectors: result, child: ALL_VECTOR) {
+                            }
+                        }
+                    }
+                }
+                else {
+                    ProgressHUD.dismiss()
+                    DispatchQueue.main.async {
+                        //self.showDialog(message: "This user is not in your local data.")
+                    }
+                    
+                }
+            }
+            
             
         }
+        
+        
     }
+    //    func showDialog(message: String) {
+    //        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+    //        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+    //        alert.addAction(action)
+    //        present(alert, animated: true, completion: nil)
+    //    }
 }

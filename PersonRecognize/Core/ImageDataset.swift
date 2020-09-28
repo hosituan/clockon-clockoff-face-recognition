@@ -20,7 +20,7 @@ class ImageDataset {
     
     let split: Split
     
-    let smallestSide = 1000
+    let smallestSide = 500
     
     private let baseURL: URL
     
@@ -30,7 +30,7 @@ class ImageDataset {
         createDatasetFolder()
     }
     private func createDatasetFolder() {
-        print("Path for \(split): \(baseURL)")
+        //print("Path for \(split): \(baseURL)")
         createDirectory(at: baseURL)
     }
 }

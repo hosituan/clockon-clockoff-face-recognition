@@ -23,7 +23,7 @@ class AddNameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        fnet.load()
         if let url = videoURL {
             self.getThumbnailImageFromVideoUrl(url: url) { (thumbImage) in
                 self.faceImageView.image = thumbImage
@@ -41,7 +41,7 @@ class AddNameViewController: UIViewController {
             let getFrames = GetFrames()
             print("Your Name is: \(textField.text!)")
             fb.uploadUser(name: textField.text!) {
-                ProgressHUD.dismiss()
+                //ProgressHUD.dismiss()
             }
             //savedUserList.append(textField.text!)
             //defaults.set(savedUserList, forKey: "SavedUserList")

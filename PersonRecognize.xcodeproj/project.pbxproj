@@ -15,7 +15,8 @@
 		951EB35322B698F100A9533B /* tensorflow_utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 951EB34E22B698F100A9533B /* tensorflow_utils.mm */; };
 		951EB35422B698F100A9533B /* tfWrap.mm in Sources */ = {isa = PBXBuildFile; fileRef = 951EB35022B698F100A9533B /* tfWrap.mm */; };
 		C74123AA68AA5B08B54BAB0F /* Pods_PersonRecognize.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9E4B7E8ED1140C3AD203DB7 /* Pods_PersonRecognize.framework */; };
-		FB3D0F0E251D7E550059CCB6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FB3D0F0D251D7E550059CCB6 /* GoogleService-Info.plist */; };
+		FB16D9A52521EFE0003C8AB5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FB16D9A42521EFE0003C8AB5 /* GoogleService-Info.plist */; };
+		FB16D9A82521F0B3003C8AB5 /* KNN.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB16D9A72521F0B3003C8AB5 /* KNN.swift */; };
 		FB3D0F97251DA5CA0059CCB6 /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3D0F96251DA5CA0059CCB6 /* Define.swift */; };
 		FB3D0F9A251DA8AD0059CCB6 /* NetworkChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3D0F99251DA8AD0059CCB6 /* NetworkChecker.swift */; };
 		FB3D0FBE251DAC760059CCB6 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3D0FBD251DAC760059CCB6 /* Date.swift */; };
@@ -67,7 +68,8 @@
 		951EB35822B6994100A9533B /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		B9E4B7E8ED1140C3AD203DB7 /* Pods_PersonRecognize.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PersonRecognize.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4CD8E9AA2201D33964A3CCD /* Pods-PersonRecognize.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PersonRecognize.debug.xcconfig"; path = "Target Support Files/Pods-PersonRecognize/Pods-PersonRecognize.debug.xcconfig"; sourceTree = "<group>"; };
-		FB3D0F0D251D7E550059CCB6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Core/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FB16D9A42521EFE0003C8AB5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FB16D9A72521F0B3003C8AB5 /* KNN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KNN.swift; sourceTree = "<group>"; };
 		FB3D0F96251DA5CA0059CCB6 /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		FB3D0F99251DA8AD0059CCB6 /* NetworkChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkChecker.swift; sourceTree = "<group>"; };
 		FB3D0FBD251DAC760059CCB6 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
@@ -153,8 +155,8 @@
 				951EB35822B6994100A9533B /* Bridging-Header.h */,
 				951EB33E22B6986200A9533B /* Assets.xcassets */,
 				951EB33722B6985E00A9533B /* AppDelegate.swift */,
+				FB16D9A42521EFE0003C8AB5 /* GoogleService-Info.plist */,
 				951EB34322B6986200A9533B /* Info.plist */,
-				FB3D0F0D251D7E550059CCB6 /* GoogleService-Info.plist */,
 			);
 			path = PersonRecognize;
 			sourceTree = "<group>";
@@ -264,6 +266,7 @@
 				FBA1B4DA251905A100A31DF7 /* ImageDataset.swift */,
 				FB57AA75251CCA4E00B2CCF9 /* FirebaseManager.swift */,
 				FBA1B4DB251905A100A31DF7 /* CreateUserData.swift */,
+				FB16D9A72521F0B3003C8AB5 /* KNN.swift */,
 				FBA1B4DC251905A100A31DF7 /* Helper.swift */,
 				FB7502B725198B7100193FF9 /* VectorManager.swift */,
 				FB3D0F96251DA5CA0059CCB6 /* Define.swift */,
@@ -351,9 +354,9 @@
 			files = (
 				951EB34222B6986200A9533B /* LaunchScreen.storyboard in Resources */,
 				FBA1B4E8251905A800A31DF7 /* Main.storyboard in Resources */,
+				FB16D9A52521EFE0003C8AB5 /* GoogleService-Info.plist in Resources */,
 				951EB33F22B6986200A9533B /* Assets.xcassets in Resources */,
 				951EB35222B698F100A9533B /* modelFacenet.pb in Resources */,
-				FB3D0F0E251D7E550059CCB6 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,6 +432,7 @@
 				FBA1B48E2519052D00A31DF7 /* UIDeviceExtension.swift in Sources */,
 				FBA1B48D2519052D00A31DF7 /* CustomTableViewCell.swift in Sources */,
 				FBA1B4E1251905A100A31DF7 /* ImageDataset.swift in Sources */,
+				FB16D9A82521F0B3003C8AB5 /* KNN.swift in Sources */,
 				FBC5AC0B251AEE6D0016995C /* UIViewController+ShowDialog.swift in Sources */,
 				FB8D2EA6251F896400CBA2B3 /* facenet.mlmodel in Sources */,
 				FB3D0F9A251DA8AD0059CCB6 /* NetworkChecker.swift in Sources */,

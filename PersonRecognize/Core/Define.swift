@@ -15,7 +15,7 @@ let AVG_VECTOR = "Vectors"
 let KMEAN_VECTOR = "K-mean Vectors"
 let USER_CHILD = "Users"
 
-let DB_URL = "gs://person-recognition-6df29.appspot.com"
+let STORAGE_URL = "gs://hr-checkin.appspot.com"
 
 
 //Define unknown

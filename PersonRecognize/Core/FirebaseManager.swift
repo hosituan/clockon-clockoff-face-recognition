@@ -18,7 +18,7 @@ class FirebaseManager {
     }
     
     func uploadAllVectors(vectors: [Vector], child: String, completionHandler: @escaping () -> Void) {
-
+        
         for i in 0..<vectors.count {
             let vector = vectors[i]
             let dict: Dictionary<String, Any>  = [
@@ -34,12 +34,12 @@ class FirebaseManager {
                 }
                 completionHandler()
             })
-
-
+            
+            
         }
     }
     func uploadKMeanVectors(vectors: [Vector], child: String, completionHandler: @escaping () -> Void) {
-
+        
         for i in 0..<vectors.count {
             let vector = vectors[i]
             let dict: Dictionary<String, Any>  = [
@@ -77,20 +77,22 @@ class FirebaseManager {
                     attendList.append(object)
                 }
                 completionHandler(attendList.sorted(by: { $0.time > $1.time }))
-                
-                
+            }
+            else {
+                completionHandler(attendList)
             }
             
         }) { (error) in
             print(error.localizedDescription)
-             completionHandler(attendList)
+            completionHandler(attendList)
         }
-
+        
     }
     
     func loadVector(completionHandler: @escaping ([Vector]) -> Void) {
         var vectors = [Vector]()
-        Database.database().reference().child(KMEAN_VECTOR).queryLimited(toLast: 100).observeSingleEvent(of: .value, with: { (snapshot) in
+        Database.database().reference().child(KMEAN_VECTOR).queryLimited(toLast: 1000).observeSingleEvent(of: .value, with: { (snapshot) in
+            
             if let data = snapshot.value as? [String: Any] {
                 let dataArray = Array(data)
                 
@@ -108,10 +110,9 @@ class FirebaseManager {
                     let object = Vector(name: name, vector: stringToArray(string: vector), distance: distance)
                     vectors.append(object)
                 }
-                completionHandler(vectors)
-                
                 
             }
+            completionHandler(vectors)
             
         }) { (error) in
             print(error.localizedDescription)
@@ -121,10 +122,10 @@ class FirebaseManager {
     
     func uploadLogTimes(user: User) {
         
-        let storageRef = Storage.storage().reference(forURL: DB_URL).child("\(user.name) - \(user.time)")
-
+        let storageRef = Storage.storage().reference(forURL: STORAGE_URL).child("\(user.name) - \(user.time)")
+        
         let metadata = StorageMetadata()
-
+        
         if let imageData = user.image.jpegData(compressionQuality: 1.0) {
             metadata.contentType = "image/jpg"
             print(metadata)
@@ -151,27 +152,32 @@ class FirebaseManager {
                                     print("Uploaded log time.")
                                 }
                             })
-
+                            
                         }
                     })
                 }
             })
         }
-
-
+        
+        
         
     }
     
     func loadUsers(completionHandler: @escaping ([String]) -> Void) {
         var userList: [String] = []
         Database.database().reference().child(USER_CHILD).queryLimited(toLast: 100).observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as! NSDictionary
-            for item in value {
-                userList.append(item.key as! String)
+            if let value = snapshot.value as? NSDictionary {
+                for item in value {
+                    userList.append(item.key as! String)
+                }
+                completionHandler(userList.sorted())
             }
-            completionHandler(userList)
-                
-            }) { (error) in
+            else {
+                completionHandler(userList)
+            }
+            
+        })
+        { (error) in
             print(error.localizedDescription)
             completionHandler(userList)
         }

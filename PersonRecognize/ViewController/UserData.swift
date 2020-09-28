@@ -16,12 +16,13 @@ import ProgressHUD
 
 class UserData: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
+    
     @IBOutlet weak var tableView: UITableView!
     var userList: [String] = []
     var value = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         ProgressHUD.show("Loading...")
         fb.loadUsers(completionHandler: { (result) in
             self.userList = result
@@ -43,6 +44,17 @@ class UserData: UIViewController, UIImagePickerControllerDelegate & UINavigation
             vc.name = value
         }
     }
+    @IBAction func tapGenerateAll(_ sender: UIBarButtonItem) {
+//
+//        for user in self.userList {
+//            let queue = OperationQueue()
+//            queue.maxConcurrentOperationCount = 10
+//            ProgressHUD.show("Generating \(user)...")
+//            queue.addBarrierBlock {
+//                self.generate(valueSelected: user)
+//            }
+//        }
+    }
     
 }
 
@@ -57,7 +69,7 @@ extension UserData: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -65,30 +77,40 @@ extension UserData: UITableViewDelegate, UITableViewDataSource {
         
         let valueSelected = userList[indexPath.row]
         value = valueSelected
-//        ProgressHUD.show("Generating...")
-//        //add vector to All vectors list, and get Kmean Vectors
-//        vectorHelper.addVector(name: valueSelected) { result in
-//            print("All vectors for \(valueSelected): \(result.count)")
-//            if result.count > 0 {
-//                getKMeanVectorSameName(vectors: result) { (vectors) in
-//                    print("K-mean vector for \(valueSelected): \(vectors.count)")
-//                    fb.uploadKMeanVectors(vectors: vectors, child: KMEAN_VECTOR) {
-//                        ProgressHUD.dismiss()
-//                        self.showDialog(message: "Upload data for \(valueSelected) by \(result.count) vectors.")
-//                        fb.uploadAllVectors(vectors: result, child: ALL_VECTOR) {
-//                        }
-//                    }
-//                }
-//            }
-//            else {
-//                ProgressHUD.dismiss()
-//                self.showDialog(message: "This user is not in your local data.")
-//            }
-//        }
-        
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 10
 
+        ProgressHUD.show("Generating...")
+        queue.addBarrierBlock {
+            //add vector to All vectors list, and get Kmean Vectors
+            self.generate(valueSelected: valueSelected)
+        }
         
-        self.performSegue(withIdentifier: "viewFaceData", sender: nil)
+        //self.performSegue(withIdentifier: "viewFaceData", sender: nil)
+    }
+    
+    func generate(valueSelected: String) {
+        vectorHelper.addVector(name: valueSelected) { result in
+            print("All vectors for \(valueSelected): \(result.count)")
+            if result.count > 0 {
+                getKMeanVectorSameName(vectors: result) { (vectors) in
+                    print("K-mean vector for \(valueSelected): \(vectors.count)")
+                    fb.uploadKMeanVectors(vectors: vectors, child: KMEAN_VECTOR) {
+                        ProgressHUD.dismiss()
+                        self.showDialog(message: "Upload data for \(valueSelected) by \(result.count) vectors.")
+                        fb.uploadAllVectors(vectors: result, child: ALL_VECTOR) {
+                        }
+                    }
+                }
+            }
+            else {
+                ProgressHUD.dismiss()
+                DispatchQueue.main.async {
+                    self.showDialog(message: "This user is not in your local data.")
+                }
+                
+            }
+        }
     }
     
 }

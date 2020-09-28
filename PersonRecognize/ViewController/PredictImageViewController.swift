@@ -52,10 +52,12 @@ class PredictImageViewController: UIViewController, UIImagePickerControllerDeleg
         if let image = info[.editedImage] as? UIImage {
             print("this is image")
             self.mainImg.image = image
+            let start = DispatchTime.now()
             let result = vectorHelper.getResult(image: image)
-            
-            nameFace1.text = result
-            print(result)
+            let end = DispatchTime.now()
+            let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds
+            let timeInterval = Double(nanoTime) / 1_000_000_000
+            nameFace1.text = "\(result.name): \(result.distance)%:\(timeInterval)seconds."
             image.face.crop { [self] res in
                 switch res {
                 case .success(let faces):

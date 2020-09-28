@@ -398,7 +398,7 @@ extension FrameViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else { return  }
 
         let image = UIImage(cgImage: cgImage)
-        currentFrame = image.rotate(radians: .pi/2)?.flipHorizontally()
+        currentFrame = image.rotate(radians: .pi/2)//?.flipHorizontally()
         
 //        if let cameraIntrinsicData = CMGetAttachment(sampleBuffer, key: kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix, attachmentModeOut: nil) {
 //            requestOptions = [.cameraIntrinsics : cameraIntrinsicData]

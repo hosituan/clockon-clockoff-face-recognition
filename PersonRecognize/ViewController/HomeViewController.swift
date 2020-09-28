@@ -12,6 +12,7 @@ import RealmSwift
 import ProgressHUD
 
 class HomeViewController: UIViewController {
+    @IBOutlet weak var finalFrame: UIImageView!
     
     var fps = 2
     private var generator:AVAssetImageGenerator!
@@ -22,15 +23,15 @@ class HomeViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
-        
         if NetworkChecker.isConnectedToInternet {
             ProgressHUD.show("Loading users...")
             fb.loadVector { [self] (result) in
-                ProgressHUD.dismiss()
+                
                 kMeanVectors = result
                 print("Numver of k-Mean vectors: \(kMeanVectors.count)")
                 vectorsLabel.text = "You have \(kMeanVectors.count / 3) users."
                 ProgressHUD.dismiss()
+                
                 
             }
             fb.loadLogTimes { (result) in
@@ -44,9 +45,9 @@ class HomeViewController: UIViewController {
         }
         else {
             //code for local data
-//            print(savedUserList)
-//            //kMeanVectors = splitVectorByName(vector: vectors)
-//            vectorsLabel.text = "You have \(kMeanVectors.count / 3) users."
+            //            print(savedUserList)
+            //            //kMeanVectors = splitVectorByName(vector: vectors)
+            //            vectorsLabel.text = "You have \(kMeanVectors.count / 3) users."
             showDialog(message: "You have not connected to internet. Using local data.")
         }
     }
@@ -76,11 +77,33 @@ class HomeViewController: UIViewController {
         self.performSegue(withIdentifier: "viewLog", sender: nil)
     }
     @IBAction func tapSyncData(_ sender: UIButton) {
-        //        fb.loadVector { (result) in
-        //            avgVectors = result
-        //        }
-        //print("uploading")
-        //fb.uploadVector(vectors: avgVectors)
+        if NetworkChecker.isConnectedToInternet {
+            ProgressHUD.show("Loading users...")
+            fb.loadVector { [self] (result) in
+                
+                kMeanVectors = result
+                print("Numver of k-Mean vectors: \(kMeanVectors.count)")
+                vectorsLabel.text = "You have \(kMeanVectors.count / 3) users."
+                ProgressHUD.dismiss()
+                
+                
+            }
+            fb.loadLogTimes { (result) in
+                attendList = result
+                for user in attendList {
+                    let u = User(name: user.name, image: UIImage(named: "LaunchImage")!, time: user.time)
+                    localUserList.append(u)
+                }
+                
+            }
+        }
+        else {
+            //code for local data
+            //            print(savedUserList)
+            //            //kMeanVectors = splitVectorByName(vector: vectors)
+            //            vectorsLabel.text = "You have \(kMeanVectors.count / 3) users."
+            showDialog(message: "You have not connected to internet. Using local data.")
+        }
     }
     
 }

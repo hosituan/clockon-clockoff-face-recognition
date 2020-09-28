@@ -69,26 +69,26 @@ class PreviewView: UIView {
         
         let facebounds = face.boundingBox.applying(translate).applying(transform)
         
-        var label = UNKNOWN
+        var lb = UNKNOWN
         if let frame = currentFrame {
-            let result = vectorHelper.getResult(image: frame)
-            if result != "" && result != UNKNOWN {
-                label = result
+            let res = vectorHelper.getResult(image: frame)
+            lb = "\(res.name): \(res.distance)%"
+            let result = res.name
+            if result != UNKNOWN {
+//                label = "\(result): \(res.distance)%"
+                let  label = result
                 let timestamp = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .medium, timeStyle: .medium)
                 //print(timestamp)
                 //print(timeDetected)
                 if label != currentLabel {
                     currentLabel = label
-                    timeDetected = timestamp
+                    numberOfFramesDeteced = 1
                 } else {
-                    
+                    numberOfFramesDeteced += 1
                 }
-                
-                               
                 let detectedUser = User(name: label, image: frame, time: timestamp)
-                if timestamp > timeDetected  {
+                if numberOfFramesDeteced > validFrames  {
                     print("Detected")
-                    currentLabel = UNKNOWN
                     if localUserList.count == 0 {
                         speak(name: label)
                         //attendList.append(detectedUser)
@@ -105,7 +105,6 @@ class PreviewView: UIView {
                         for item in localUserList {
                             
                             if item.name == label {
-
                                 if item.time.dropLast(DROP_LAST) != timestamp.dropLast(DROP_LAST) {
                                     localUserList.append(detectedUser)
                                     localUserList = localUserList.sorted(by: { $0.time > $1.time })
@@ -114,7 +113,6 @@ class PreviewView: UIView {
                                     print("append 2")
                                     showDiaglog3s(name: label)
                                 }
-
                                 break
                             }
                             else {
@@ -127,15 +125,14 @@ class PreviewView: UIView {
                             speak(name: label)
                             fb.uploadLogTimes(user: detectedUser)
                             localUserList.append(detectedUser)
+                            localUserList = localUserList.sorted(by: { $0.time > $1.time })
                             showDiaglog3s(name: label)
                         }
-                        
-
                     }
                 }
             }
         }
-        _ = createLayer(in: facebounds, prediction: label)
+        _ = createLayer(in: facebounds, prediction: lb)
         
         
         
