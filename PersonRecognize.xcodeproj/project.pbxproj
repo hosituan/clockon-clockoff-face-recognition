@@ -23,7 +23,6 @@
 		FB3D0FC5251DAD650059CCB6 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3D0FC4251DAD650059CCB6 /* String.swift */; };
 		FB57AA76251CCA4E00B2CCF9 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB57AA75251CCA4E00B2CCF9 /* FirebaseManager.swift */; };
 		FB7502B825198B7100193FF9 /* VectorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7502B725198B7100193FF9 /* VectorManager.swift */; };
-		FB8D2EA6251F896400CBA2B3 /* facenet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = FB8D2EA5251F896400CBA2B3 /* facenet.mlmodel */; };
 		FB9945E82519EA500023E174 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9945E72519EA500023E174 /* Vector.swift */; };
 		FBA1B48A2519052D00A31DF7 /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4842519052D00A31DF7 /* UIImage+Resize.swift */; };
 		FBA1B48B2519052D00A31DF7 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4852519052D00A31DF7 /* CustomButton.swift */; };
@@ -76,7 +75,6 @@
 		FB3D0FC4251DAD650059CCB6 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		FB57AA75251CCA4E00B2CCF9 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		FB7502B725198B7100193FF9 /* VectorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorManager.swift; sourceTree = "<group>"; };
-		FB8D2EA5251F896400CBA2B3 /* facenet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = facenet.mlmodel; sourceTree = "<group>"; };
 		FB9945E72519EA500023E174 /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
 		FBA1B4842519052D00A31DF7 /* UIImage+Resize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
 		FBA1B4852519052D00A31DF7 /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
@@ -146,7 +144,6 @@
 		951EB33622B6985E00A9533B /* PersonRecognize */ = {
 			isa = PBXGroup;
 			children = (
-				FB8D2EA4251F895000CBA2B3 /* FaceNet Model */,
 				FBA1B4B42519058B00A31DF7 /* ViewController */,
 				FBA1B4832519052D00A31DF7 /* Utils */,
 				FBA1B4E5251905A800A31DF7 /* View */,
@@ -189,14 +186,6 @@
 				43FBB4A03133E68FA1BD6073 /* Pods-PersonRecognize.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		FB8D2EA4251F895000CBA2B3 /* FaceNet Model */ = {
-			isa = PBXGroup;
-			children = (
-				FB8D2EA5251F896400CBA2B3 /* facenet.mlmodel */,
-			);
-			path = "FaceNet Model";
 			sourceTree = "<group>";
 		};
 		FBA1B4832519052D00A31DF7 /* Utils */ = {
@@ -434,7 +423,6 @@
 				FBA1B4E1251905A100A31DF7 /* ImageDataset.swift in Sources */,
 				FB16D9A82521F0B3003C8AB5 /* KNN.swift in Sources */,
 				FBC5AC0B251AEE6D0016995C /* UIViewController+ShowDialog.swift in Sources */,
-				FB8D2EA6251F896400CBA2B3 /* facenet.mlmodel in Sources */,
 				FB3D0F9A251DA8AD0059CCB6 /* NetworkChecker.swift in Sources */,
 				FBA1B4CA2519058B00A31DF7 /* AddNameViewController.swift in Sources */,
 				951EB35122B698F100A9533B /* FaceNet.swift in Sources */,
@@ -585,6 +573,7 @@
 			baseConfigurationReference = C4CD8E9AA2201D33964A3CCD /* Pods-PersonRecognize.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon1;
+				CODE_SIGN_ENTITLEMENTS = PersonRecognize/PersonRecognize.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 2F345FGHJG;
 				INFOPLIST_FILE = PersonRecognize/Info.plist;
@@ -596,6 +585,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.c2c-platform.FaceRecognition.Dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "FaceRecognition Development";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "PersonRecognize/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -607,6 +597,7 @@
 			baseConfigurationReference = 43FBB4A03133E68FA1BD6073 /* Pods-PersonRecognize.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon1;
+				CODE_SIGN_ENTITLEMENTS = PersonRecognize/PersonRecognize.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U9EGC55R6Z;
 				INFOPLIST_FILE = PersonRecognize/Info.plist;
@@ -617,6 +608,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.c2c-platform.FaceRecognition.Dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "PersonRecognize/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

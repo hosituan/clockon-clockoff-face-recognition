@@ -21,7 +21,7 @@ public class KNNDTW: NSObject {
     
     
     //internal data structures
-    private var curves: [[Float]] = [[Float]]()
+    private var curves: [[Double]] = [[Double]]()
     private var labels: [String] = [String]()
     
     private var curve_label_pairs: [knn_curve_label_pair] = [knn_curve_label_pair]()
@@ -61,11 +61,11 @@ public class KNNDTW: NSObject {
     
     
     
-    private func dtw_cost(y: [Float], x: [Float]) -> Float {
+    private func dtw_cost(y: [Double], x: [Double]) -> Double {
         
         //FIRST, we get the distance between each point
         
-        var distances = [[Float]](repeating: [Float](repeating: 0, count: x.count), count: y.count)
+        var distances = [[Double]](repeating: [Double](repeating: 0, count: x.count), count: y.count)
         //use euclidean distance between the pairs of points.
         
         for (i,_) in y.enumerated() {
@@ -79,7 +79,7 @@ public class KNNDTW: NSObject {
         
         //SECOND, we compute the warp path (basically cost of each path)
         
-        var acc_cost = [[Float]](repeating: [Float](repeating: 0, count: x.count), count: y.count)
+        var acc_cost = [[Double]](repeating: [Double](repeating: 0, count: x.count), count: y.count)
         acc_cost[0][0] = distances[0][0]
         
         
@@ -135,7 +135,7 @@ public class KNNDTW: NSObject {
         
         
         //FOURTH, add up all the costs of the selected path
-        var cost: Float = 0.0
+        var cost: Double = 0.0
         for sub in path {
             let x: Int = sub[0]
             let y: Int = sub[1]
@@ -149,10 +149,10 @@ public class KNNDTW: NSObject {
 
     
     
-    public func predict(curve_to_test: [Float]) -> knn_certainty_label_pair {
+    public func predict(curve_to_test: [Double]) -> knn_certainty_label_pair {
         
         if (self.n_neighbors == 0) {
-            self.n_neighbors = Int(sqrt(Float(self.curve_label_pairs.count)))
+            self.n_neighbors = Int(sqrt(Double(self.curve_label_pairs.count)))
             print("No 'k' value given. Using ", self.n_neighbors, ".")
         }
         
@@ -206,13 +206,13 @@ public class KNNDTW: NSObject {
         })
         
         //return the label and a certainty
-        return knn_certainty_label_pair(probability: Float(sorted_votes!.1)/Float(self.n_neighbors), label: (sorted_votes?.0)!)
+        return knn_certainty_label_pair(probability: Double(sorted_votes!.1)/Double(self.n_neighbors), label: (sorted_votes?.0)!)
         
     }
     
     
     private struct knn_distance_label_pair {
-        let distance: Float
+        let distance: Double
         let label: String
     }
     
@@ -222,13 +222,13 @@ public class KNNDTW: NSObject {
 
 //input type
 public struct knn_curve_label_pair {
-    let curve: [Float]
+    let curve: [Double]
     let label: String
 }
 
 //output type
 public struct knn_certainty_label_pair {
-    let probability: Float
+    let probability: Double
     let label: String
 }
 

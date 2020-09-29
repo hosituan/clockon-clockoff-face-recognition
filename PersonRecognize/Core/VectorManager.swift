@@ -108,9 +108,7 @@ class VectorHelper  {
             var count = 0
             for item in groupedItems {
                 if item.value.count > max {
-                    count = 1
                     max = item.value.count
-                    result.name = item.key
                 }
                 else if item.value.count == max {
                     count += 1
