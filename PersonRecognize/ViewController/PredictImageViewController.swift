@@ -68,22 +68,23 @@ class PredictImageViewController: UIViewController, UIImagePickerControllerDeleg
             print("this is image")
             self.mainImg.image = image
             let start = DispatchTime.now()
-//
-//            let frame = CIImage(image: image)!
-//            let img = fDetector.extractFaces(frame: frame)
-//            guard let i = img.first else {
-//                return
-//            }
+
+            let frame = CIImage(image: image)!
+            let img = fDetector.extractFaces(frame: frame)
+            guard let i = img.first else {
+                return
+            }
 //            let targetVector = fnet.run(image: i)
 //            let prediction: knn_certainty_label_pair = knn.predict(curve_to_test: targetVector)
 //            print("predicted " + prediction.label, "with ", prediction.probability*100,"% certainty")
-            
+//
             let result = vectorHelper.getResult(image: image)
             
             let end = DispatchTime.now()
             let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds
             let timeInterval = Double(nanoTime) / 1_000_000_000
             //nameFace1.text = "\(timeInterval)"
+            //nameFace1.text = "\(prediction.label): \(timeInterval)seconds."
             nameFace1.text = "\(result.name): \(result.distance)%:\(timeInterval)seconds."
         
             
@@ -97,7 +98,7 @@ class PredictImageViewController: UIViewController, UIImagePickerControllerDeleg
                         self.face1.image = faces[0]
                         self.face2.image = faces[1]
                         self.nameFace1.text = "\(vectorHelper.getResult(image: faces[0]).name): \(vectorHelper.getResult(image: faces[0]).distance)%"
-                        self.nameFace2.text = "\(vectorHelper.getResult(image: faces[1]).name): \(vectorHelper.getResult(image: faces[0]).distance)%"
+                        self.nameFace2.text = "\(vectorHelper.getResult(image: faces[1]).name): \(vectorHelper.getResult(image: faces[1]).distance)%"
                     }
                     
                 case .notFound:

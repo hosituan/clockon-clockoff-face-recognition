@@ -60,7 +60,7 @@ class FirebaseManager {
     
     func loadLogTimes(completionHandler: @escaping ([Users]) -> Void) {
         var attendList: [Users] = []
-        Database.database().reference().child(LOG_TIME).queryLimited(toLast: 100).observeSingleEvent(of: .value, with: { (snapshot) in
+        Database.database().reference().child(LOG_TIME).queryLimited(toLast: 1000).observeSingleEvent(of: .value, with: { (snapshot) in
             if let data = snapshot.value as? [String: Any] {
                 let dataArray = Array(data)
                 let values = dataArray.map { $0.1 }

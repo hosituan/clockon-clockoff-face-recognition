@@ -93,7 +93,7 @@ class VectorHelper  {
                 let distance = l2distance(targetVector, vector.vector)
                 //print("\(vector.name): \(distance * 1000)")
                 if distance * 1000 < 700 {
-//                    print("\(vector.name): \(distance * 1000)")
+                    print("\(vector.name): \(distance * 1000)")
                     array.append(vector)
                     if distance < result.distance {
                         result = vector

@@ -10,6 +10,7 @@ import UIKit
 import Vision
 import AVFoundation
 import FaceCropper
+import ProgressHUD
 
 class FrameViewController: UIViewController {
 
@@ -29,6 +30,15 @@ class FrameViewController: UIViewController {
         case configurationFailed
     }
     
+    @IBAction func tapTakePhoto(_ sender: UIButton) {
+        guard let frame = currentFrame else {
+            return
+        }
+        let timestamp = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .medium, timeStyle: .medium)
+        let user = User(name: "Unknown - Take Photo", image: frame, time: timestamp)
+        fb.uploadLogTimes(user: user)
+        showDiaglog3s(name: "Unknown - Take Photo.")
+    }
     @IBAction func changeCamera(_ sender: UIBarButtonItem) {
             //Remove existing input
             guard let currentCameraInput: AVCaptureInput = session.inputs.first else {
@@ -416,6 +426,20 @@ extension FrameViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         
     }
     
+}
+
+extension FrameViewController {
+    func showDiaglog3s(name: String) {
+        let alert = UIAlertController(title: "Joined!", message: "\(name)", preferredStyle: .alert)
+        self.present(alert, animated: true, completion: nil)
+        let when = DispatchTime.now() + 1
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: when) {
+          alert.dismiss(animated: true, completion: nil)
+        }
+    }
+
 }
 
 

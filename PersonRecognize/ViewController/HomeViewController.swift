@@ -28,7 +28,7 @@ class HomeViewController: UIViewController {
             fb.loadVector { [self] (result) in
                 
                 kMeanVectors = result
-                print("Numver of k-Mean vectors: \(kMeanVectors.count)")
+                print("Numver of k-Means vectors: \(kMeanVectors.count)")
                 vectorsLabel.text = "You have \(kMeanVectors.count / 3) users."
                 ProgressHUD.dismiss()
                 
