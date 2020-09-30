@@ -232,7 +232,11 @@ func getKMeanVectorSameName(vectors: [Vector], completionHandler: @escaping ([Ve
     for i in 0..<vectors.count {
         KMeans.addVector(vectors[i].vector)
     }
+    
     KMeans.clusteringNumber = 3
+    print(KMeans.vectors.count)
+    print(KMeans.centroids.count)
+    print(KMeans.clusters.count)
     KMeans.clustering(500) { (success, centroids, clusters) -> () in
         if success {
             var vectorList:[Vector] = []

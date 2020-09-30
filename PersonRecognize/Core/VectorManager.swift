@@ -91,8 +91,9 @@ class VectorHelper  {
             //for vector in vectors {
             for vector in  kMeanVectors {
                 let distance = l2distance(targetVector, vector.vector)
+                //print("\(vector.name): \(distance * 1000)")
                 if distance * 1000 < 700 {
-                    print("\(vector.name): \(distance * 1000)")
+//                    print("\(vector.name): \(distance * 1000)")
                     array.append(vector)
                     if distance < result.distance {
                         result = vector
@@ -109,6 +110,7 @@ class VectorHelper  {
             for item in groupedItems {
                 if item.value.count > max {
                     max = item.value.count
+                    count = 1
                 }
                 else if item.value.count == max {
                     count += 1
@@ -122,7 +124,7 @@ class VectorHelper  {
             case 3:
                 result.distance = 100
             default:
-                result.distance = 80
+                result.distance = 0
             }
             return result
             /*
@@ -202,6 +204,7 @@ class VectorHelper  {
         //            let value = "\(result.name): 80%"
         //            return value
         //        }
+        result.distance = 0
         return result
     }
 }

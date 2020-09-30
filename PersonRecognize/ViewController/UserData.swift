@@ -28,6 +28,7 @@ class UserData: UIViewController, UIImagePickerControllerDelegate & UINavigation
             self.userList = result
             self.tableView.delegate = self
             self.tableView.dataSource = self
+            self.tableView.reloadData()
             savedUserList = result //for local user lists, use without internet.
             defaults.set(savedUserList, forKey: SAVED_USERS)
             ProgressHUD.dismiss()
