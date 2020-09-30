@@ -69,11 +69,11 @@ class PredictImageViewController: UIViewController, UIImagePickerControllerDeleg
             self.mainImg.image = image
             let start = DispatchTime.now()
 
-            let frame = CIImage(image: image)!
-            let img = fDetector.extractFaces(frame: frame)
-            guard let i = img.first else {
-                return
-            }
+//            let frame = CIImage(image: image)!
+//            let img = fDetector.extractFaces(frame: frame)
+//            guard let i = img.first else {
+//                return
+//            }
 //            let targetVector = fnet.run(image: i)
 //            let prediction: knn_certainty_label_pair = knn.predict(curve_to_test: targetVector)
 //            print("predicted " + prediction.label, "with ", prediction.probability*100,"% certainty")
@@ -85,7 +85,8 @@ class PredictImageViewController: UIViewController, UIImagePickerControllerDeleg
             let timeInterval = Double(nanoTime) / 1_000_000_000
             //nameFace1.text = "\(timeInterval)"
             //nameFace1.text = "\(prediction.label): \(timeInterval)seconds."
-            nameFace1.text = "\(result.name): \(result.distance)%:\(timeInterval)seconds."
+            nameFace1.text = "\(result.name): \(result.distance)%"
+            nameFace2.text = "Time taken: \(timeInterval)seconds."
         
             
             image.face.crop { [self] res in
