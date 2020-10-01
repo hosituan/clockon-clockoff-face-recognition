@@ -60,7 +60,9 @@ class HomeViewController: UIViewController {
             fb.loadVector { [self] (result) in
                 
                 kMeanVectors = result
-                print("Numver of k-Mean vectors: \(kMeanVectors.count)")
+                kMeanVectors.append(contentsOf: result)
+                kMeanVectors.append(contentsOf: result)
+                print("Number of k-Means vectors: \(kMeanVectors.count)")
                 vectorsLabel.text = "You have \(kMeanVectors.count / NUMBER_OF_K) users."
                 ProgressHUD.dismiss()
                 
@@ -85,7 +87,7 @@ class HomeViewController: UIViewController {
             ProgressHUD.show("Loading users...")
             fb.loadVector { [self] (result) in
                 kMeanVectors = result
-                print("Numver of k-Means vectors: \(kMeanVectors.count)")
+                print("Number of k-Means vectors: \(kMeanVectors.count)")
                 vectorsLabel.text = "You have \(kMeanVectors.count / NUMBER_OF_K) users."
                 ProgressHUD.dismiss()
                 try! realm.write {

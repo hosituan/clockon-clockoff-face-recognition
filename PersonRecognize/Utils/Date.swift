@@ -9,14 +9,20 @@
 import Foundation
 
 extension Date {
-    static func -(recent: Date, previous: Date) -> (month: Int?, day: Int?, hour: Int?, minute: Int?, second: Int?) {
-        let day = Calendar.current.dateComponents([.day], from: previous, to: recent).day
-        let month = Calendar.current.dateComponents([.month], from: previous, to: recent).month
-        let hour = Calendar.current.dateComponents([.hour], from: previous, to: recent).hour
-        let minute = Calendar.current.dateComponents([.minute], from: previous, to: recent).minute
-        let second = Calendar.current.dateComponents([.second], from: previous, to: recent).second
+    func secondsFromBeginningOfTheDay() -> TimeInterval {
+        let calendar = Calendar.current
+        // omitting fractions of seconds for simplicity
+        let dateComponents = calendar.dateComponents([.hour, .minute, .second], from: self)
 
-        return (month: month, day: day, hour: hour, minute: minute, second: second)
+        let dateSeconds = dateComponents.hour! * 3600 + dateComponents.minute! * 60 + dateComponents.second!
+
+        return TimeInterval(dateSeconds)
     }
 
+    // Interval between two times of the day in seconds
+    func timeOfDayInterval(toDate date: Date) -> TimeInterval {
+        let date1Seconds = self.secondsFromBeginningOfTheDay()
+        let date2Seconds = date.secondsFromBeginningOfTheDay()
+        return date2Seconds - date1Seconds
+    }
 }

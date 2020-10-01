@@ -49,3 +49,8 @@ let fb  = FirebaseManager()
 //KMeans to reduce number  of vectors
 let KMeans = KMeansSwift.sharedInstance
 var kMeanVectors = [Vector]()
+
+
+let formatter = DateFormatter()
+
+

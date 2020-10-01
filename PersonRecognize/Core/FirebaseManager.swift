@@ -122,7 +122,7 @@ class FirebaseManager {
     
     func uploadLogTimes(user: User) {
         
-        let storageRef = Storage.storage().reference(forURL: STORAGE_URL).child("\(user.name) - \(user.time)")
+        let storageRef = Storage.storage().reference(forURL: STORAGE_URL).child("\(user.name) - \(user.time.dropLast(10))")
         
         let metadata = StorageMetadata()
         
@@ -146,7 +146,7 @@ class FirebaseManager {
                                 "imageURL": metaImageUrl,
                                 "time": user.time
                             ]
-                            Database.database().reference().child(LOG_TIME).child("\(user.name) - \(user.time)").updateChildValues(dict, withCompletionBlock: {
+                            Database.database().reference().child(LOG_TIME).child("\(user.name) - \(user.time.dropLast(10))").updateChildValues(dict, withCompletionBlock: {
                                 (error, ref) in
                                 if error == nil {
                                     print("Uploaded log time.")
