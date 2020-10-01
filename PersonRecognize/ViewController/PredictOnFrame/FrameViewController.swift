@@ -21,6 +21,7 @@ class FrameViewController: UIViewController {
 //    private var faceDetectionRequest: VNRequest!
     private var devicePosition: AVCaptureDevice.Position = .front
     
+    
     // Session Management
     private enum SessionSetupResult {
         case success
@@ -159,30 +160,8 @@ class FrameViewController: UIViewController {
             }
             session.beginConfiguration()
             session.removeInput(currentCameraInput)
-            //Get new input
-            var newCamera: AVCaptureDevice! = nil
-            if let input = currentCameraInput as? AVCaptureDeviceInput {
-                if (input.device.position == .back) {
-                    newCamera = cameraWithPosition(position: .front)
-                } else {
-                    newCamera = cameraWithPosition(position: .back)
-                }
-            }
-            //Add input to session
-            var err: NSError?
-            var newVideoInput: AVCaptureDeviceInput!
-            do {
-                newVideoInput = try AVCaptureDeviceInput(device: newCamera)
-            } catch let err1 as NSError {
-                err = err1
-                newVideoInput = nil
-            }
-            if newVideoInput == nil || err != nil {
-                print("Error creating capture device input: \(err?.localizedDescription ?? "")")
-            } else {
-                session.addInput(newVideoInput)
-            }
-            //Commit all the configuration changes
+            devicePosition = .back
+            addVideoDataInput()
             session.commitConfiguration()
     }
 

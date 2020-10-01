@@ -39,7 +39,9 @@ class UserData: UIViewController, UIImagePickerControllerDelegate & UINavigation
             self.tableView.delegate = self
             self.tableView.dataSource = self
             self.tableView.reloadData()
+            ProgressHUD.dismiss()
             showDialog(message: "You have not connected to internet. Using local data.")
+            
         }
 
     }

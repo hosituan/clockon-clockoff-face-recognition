@@ -54,11 +54,10 @@ class HomeViewController: UIViewController {
         self.performSegue(withIdentifier: "viewLog", sender: nil)
     }
     @IBAction func tapSyncData(_ sender: UIButton) {
-        //loadData()
-        kMeanVectors.append(contentsOf: kMeanVectors)
-        kMeanVectors.append(contentsOf: kMeanVectors)
+        loadData()
         if !NetworkChecker.isConnectedToInternet {
             showDialog(message: "You have not connected to internet. Using local data.")
+            ProgressHUD.dismiss()
         }
     }
     
