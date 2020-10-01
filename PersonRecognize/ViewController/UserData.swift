@@ -22,17 +22,27 @@ class UserData: UIViewController, UIImagePickerControllerDelegate & UINavigation
     var value = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        ProgressHUD.show("Loading...")
-        fb.loadUsers(completionHandler: { (result) in
-            self.userList = result
+        if NetworkChecker.isConnectedToInternet {
+            ProgressHUD.show("Loading users...")
+            fb.loadUsers(completionHandler: { (result) in
+                self.userList = result
+                self.tableView.delegate = self
+                self.tableView.dataSource = self
+                self.tableView.reloadData()
+                savedUserList = result //for local user lists, use without internet.
+                defaults.set(savedUserList, forKey: SAVED_USERS)
+                ProgressHUD.dismiss()
+            })
+            
+        }
+        else {
+            self.userList = savedUserList
             self.tableView.delegate = self
             self.tableView.dataSource = self
             self.tableView.reloadData()
-            savedUserList = result //for local user lists, use without internet.
-            defaults.set(savedUserList, forKey: SAVED_USERS)
-            ProgressHUD.dismiss()
-        })
+            showDialog(message: "You have not connected to internet. Using local data.")
+        }
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,6 +56,7 @@ class UserData: UIViewController, UIImagePickerControllerDelegate & UINavigation
         }
     }
     @IBAction func tapGenerateAll(_ sender: UIBarButtonItem) {
+        //Memory issue
 //
 //        for user in self.userList {
 //            let queue = OperationQueue()
@@ -77,7 +88,6 @@ extension UserData: UITableViewDelegate, UITableViewDataSource {
         
         
         let valueSelected = userList[indexPath.row]
-        value = valueSelected
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 10
 
@@ -86,7 +96,7 @@ extension UserData: UITableViewDelegate, UITableViewDataSource {
             //add vector to All vectors list, and get Kmean Vectors
             self.generate(valueSelected: valueSelected)
         }
-        
+        //value = valueSelected
         //self.performSegue(withIdentifier: "viewFaceData", sender: nil)
     }
     

@@ -19,9 +19,7 @@ class ImageDataset {
     }
     
     let split: Split
-    
     let smallestSide = 500
-    
     private let baseURL: URL
     
     init(split: Split) {
@@ -38,6 +36,7 @@ class ImageDataset {
 // MARK: - Mutating the dataset
 
 extension ImageDataset {
+    
     func saveImage(_ image: UIImage, for label: String) {
         let fileName = UUID().uuidString + ".jpg"
         createDirectory(at: documentDirectory.appendingPathComponent(split.folderName).appendingPathComponent(label))
@@ -46,7 +45,6 @@ extension ImageDataset {
         if let image = image.resized(smallestSide: smallestSide), let data = image.jpegData(compressionQuality:  1.0),
            !FileManager.default.fileExists(atPath: fileURL.path) {
             do {
-                // writes the image data to disk
                 try data.write(to: fileURL)
                 print("saved at \(fileURL)")
             } catch {

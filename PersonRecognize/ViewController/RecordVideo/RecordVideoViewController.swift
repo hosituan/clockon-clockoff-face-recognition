@@ -15,7 +15,6 @@ class RecordVideoViewController: UIViewController, AVCaptureFileOutputRecordingD
     @IBOutlet weak var desLabel: UILabel!
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var videoView: VideoView!
-    var numberOfLabel = 50
     var captureSession: AVCaptureSession!
     var stillImageOutput: AVCapturePhotoOutput!
     var videoPreviewLayer: AVCaptureVideoPreviewLayer!
@@ -30,13 +29,13 @@ class RecordVideoViewController: UIViewController, AVCaptureFileOutputRecordingD
         
         captureSession = AVCaptureSession()
         captureSession.sessionPreset = .high
-        guard let backCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: AVMediaType.video, position: .front)
+        guard let frontCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: AVMediaType.video, position: .front)
         else {
-            print("Unable to access back camera!")
+            print("Unable to access front camera!")
             return
         }
         do {
-            let input = try AVCaptureDeviceInput(device: backCamera)
+            let input = try AVCaptureDeviceInput(device: frontCamera)
             stillImageOutput = AVCapturePhotoOutput()
             if captureSession.canAddInput(input) && captureSession.canAddOutput(stillImageOutput) {
                 captureSession.addInput(input)
@@ -45,7 +44,7 @@ class RecordVideoViewController: UIViewController, AVCaptureFileOutputRecordingD
             }
         }
         catch let error  {
-            print("Error Unable to initialize back camera:  \(error.localizedDescription)")
+            print("Error Unable to initialize front camera:  \(error.localizedDescription)")
         }
         
     }
@@ -62,8 +61,6 @@ class RecordVideoViewController: UIViewController, AVCaptureFileOutputRecordingD
     }
     
     @IBAction func startButtonTapped(_ sender: UIButton) {
-
-        
         guard AVCaptureDevice.default(.builtInWideAngleCamera, for: AVMediaType.video, position: .front) != nil else {
             showDialog(message: "Not supported in simulator!")
             return
@@ -76,12 +73,6 @@ class RecordVideoViewController: UIViewController, AVCaptureFileOutputRecordingD
             try? FileManager.default.removeItem(at: paths)
             movieOutput.startRecording(to: paths, recordingDelegate: self)
             timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
-//            if let label = getEmptyLabel() {
-//                let paths = documentDirectory.appendingPathComponent("\(label).mov")
-//                try? FileManager.default.removeItem(at: paths)
-//                movieOutput.startRecording(to: paths, recordingDelegate: self)
-//                timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
-//            }
         }
         else {
             self.captureSession.stopRunning()
@@ -101,6 +92,7 @@ class RecordVideoViewController: UIViewController, AVCaptureFileOutputRecordingD
             startButton.setTitle("Done", for: .normal)
         }
     }
+    
     func setupLivePreview() {
         videoView.layer.cornerRadius = 150
         videoView.layer.masksToBounds = true
@@ -120,6 +112,7 @@ class RecordVideoViewController: UIViewController, AVCaptureFileOutputRecordingD
             }
         }
     }
+    
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
         print("FINISHED RECORD VIDEO")
         if error == nil {

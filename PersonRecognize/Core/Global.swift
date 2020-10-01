@@ -15,11 +15,7 @@ import RealmSwift
 let fnet = FaceNet()
 let fDetector = FaceDetector()
 
-//the most important variable
-var kMeanVectors = [Vector]()
-
-
-var numberOfVectors = 0
+//var numberOfVectors = 0
 var vectorHelper = VectorHelper()
 
 
@@ -34,9 +30,8 @@ var timeDetected = ""
 var numberOfFramesDeteced = 0 //number frames detected
 let validFrames = 5 //after getting 3 frames, users have been verified
 
-
-var attendList: [Users] = []
-var localUserList: [User] = [] //to ignore append user.
+var attendList: [Users] = [] //load from firebase
+var localUserList: [User] = [] //copy of attenList, use it to ignore append user appended
 
 //Save User Local List
 let defaults = UserDefaults.standard
@@ -50,4 +45,7 @@ let realm = try! Realm()
 let fb  = FirebaseManager()
 
 
+
+//KMeans to reduce number  of vectors
 let KMeans = KMeansSwift.sharedInstance
+var kMeanVectors = [Vector]()

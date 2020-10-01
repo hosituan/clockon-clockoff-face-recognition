@@ -35,18 +35,14 @@ class FrameOperation: Operation {
             return
         }
         trainingDataset.saveImage(image, for: label)
-        //vectorHelper.createVector1(name: label, image: image)
         if let img = image.rotate(radians: .pi / 20) {
             trainingDataset.saveImage(img, for: label)
-            //vectorHelper.createVector1(name: label, image: img)
         }
         if let img = image.rotate(radians: -.pi / 20) {
             trainingDataset.saveImage(img, for: label)
-            //vectorHelper.createVector1(name: label, image: img)
         }
         if let img = image.flipHorizontally() {
             trainingDataset.saveImage(img, for: label)
-            //vectorHelper.createVector1(name: label, image: img)
         }
     }
 }
@@ -89,10 +85,6 @@ class GetFrames {
                 }
                 else {
                     ProgressHUD.dismiss()
-                    DispatchQueue.main.async {
-                        //self.showDialog(message: "This user is not in your local data.")
-                    }
-                    
                 }
             }
             
@@ -101,10 +93,4 @@ class GetFrames {
         
         
     }
-    //    func showDialog(message: String) {
-    //        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-    //        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-    //        alert.addAction(action)
-    //        present(alert, animated: true, completion: nil)
-    //    }
 }

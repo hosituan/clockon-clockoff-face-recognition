@@ -165,7 +165,7 @@ class FirebaseManager {
     
     func loadUsers(completionHandler: @escaping ([String]) -> Void) {
         var userList: [String] = []
-        Database.database().reference().child(USER_CHILD).queryLimited(toLast: 100).observeSingleEvent(of: .value, with: { (snapshot) in
+        Database.database().reference().child(USER_CHILD).queryLimited(toLast: 300).observeSingleEvent(of: .value, with: { (snapshot) in
             if let value = snapshot.value as? NSDictionary {
                 for item in value {
                     userList.append(item.key as! String)

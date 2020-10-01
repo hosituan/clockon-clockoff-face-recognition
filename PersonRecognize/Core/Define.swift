@@ -19,13 +19,11 @@ let STORAGE_URL = "gs://hr-checkin.appspot.com"
 
 
 //Define unknown
-
 let UNKNOWN = "Unknown"
 
 let DROP_LAST = 3
-
 let VALID_TIME = 1
+let NUMBER_OF_K = 3
 
 //RealM
-
 let SAVED_USERS = "SavedUserList"

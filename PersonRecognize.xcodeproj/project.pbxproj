@@ -22,9 +22,9 @@
 		FB3D0FBE251DAC760059CCB6 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3D0FBD251DAC760059CCB6 /* Date.swift */; };
 		FB3D0FC5251DAD650059CCB6 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3D0FC4251DAD650059CCB6 /* String.swift */; };
 		FB57AA76251CCA4E00B2CCF9 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB57AA75251CCA4E00B2CCF9 /* FirebaseManager.swift */; };
-		FB7502B825198B7100193FF9 /* VectorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7502B725198B7100193FF9 /* VectorManager.swift */; };
+		FB7502B825198B7100193FF9 /* VectorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7502B725198B7100193FF9 /* VectorHelper.swift */; };
 		FB9945E82519EA500023E174 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9945E72519EA500023E174 /* Vector.swift */; };
-		FBA1B48A2519052D00A31DF7 /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4842519052D00A31DF7 /* UIImage+Resize.swift */; };
+		FBA1B48A2519052D00A31DF7 /* Image+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4842519052D00A31DF7 /* Image+Resize.swift */; };
 		FBA1B48B2519052D00A31DF7 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4852519052D00A31DF7 /* CustomButton.swift */; };
 		FBA1B48C2519052D00A31DF7 /* DismisKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4862519052D00A31DF7 /* DismisKeyboard.swift */; };
 		FBA1B48D2519052D00A31DF7 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4872519052D00A31DF7 /* CustomTableViewCell.swift */; };
@@ -74,9 +74,9 @@
 		FB3D0FBD251DAC760059CCB6 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		FB3D0FC4251DAD650059CCB6 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		FB57AA75251CCA4E00B2CCF9 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
-		FB7502B725198B7100193FF9 /* VectorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorManager.swift; sourceTree = "<group>"; };
+		FB7502B725198B7100193FF9 /* VectorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorHelper.swift; sourceTree = "<group>"; };
 		FB9945E72519EA500023E174 /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
-		FBA1B4842519052D00A31DF7 /* UIImage+Resize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
+		FBA1B4842519052D00A31DF7 /* Image+Resize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+Resize.swift"; sourceTree = "<group>"; };
 		FBA1B4852519052D00A31DF7 /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		FBA1B4862519052D00A31DF7 /* DismisKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismisKeyboard.swift; sourceTree = "<group>"; };
 		FBA1B4872519052D00A31DF7 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
@@ -191,7 +191,7 @@
 		FBA1B4832519052D00A31DF7 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				FBA1B4842519052D00A31DF7 /* UIImage+Resize.swift */,
+				FBA1B4842519052D00A31DF7 /* Image+Resize.swift */,
 				FB3D0FC4251DAD650059CCB6 /* String.swift */,
 				FB3D0FBD251DAC760059CCB6 /* Date.swift */,
 				FBC5AC0A251AEE6D0016995C /* UIViewController+ShowDialog.swift */,
@@ -257,7 +257,7 @@
 				FBA1B4DB251905A100A31DF7 /* CreateUserData.swift */,
 				FB16D9A72521F0B3003C8AB5 /* KNN.swift */,
 				FBA1B4DC251905A100A31DF7 /* Helper.swift */,
-				FB7502B725198B7100193FF9 /* VectorManager.swift */,
+				FB7502B725198B7100193FF9 /* VectorHelper.swift */,
 				FB3D0F96251DA5CA0059CCB6 /* Define.swift */,
 			);
 			path = Core;
@@ -395,13 +395,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				FBA1B4E2251905A100A31DF7 /* CreateUserData.swift in Sources */,
-				FB7502B825198B7100193FF9 /* VectorManager.swift in Sources */,
+				FB7502B825198B7100193FF9 /* VectorHelper.swift in Sources */,
 				FBA1B4C72519058B00A31DF7 /* FrameViewController.swift in Sources */,
 				FB3D0FBE251DAC760059CCB6 /* Date.swift in Sources */,
 				FBA1B4CD2519058B00A31DF7 /* ViewFaceViewController.swift in Sources */,
 				FBA1B4DF251905A100A31DF7 /* User.swift in Sources */,
 				FBA1B4C62519058B00A31DF7 /* PreviewView.swift in Sources */,
-				FBA1B48A2519052D00A31DF7 /* UIImage+Resize.swift in Sources */,
+				FBA1B48A2519052D00A31DF7 /* Image+Resize.swift in Sources */,
 				FBA1B4C82519058B00A31DF7 /* LogTableViewCell.swift in Sources */,
 				FBA1B4D12519058B00A31DF7 /* VideoView.swift in Sources */,
 				951EB35422B698F100A9533B /* tfWrap.mm in Sources */,

@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift
 
+//local user
 struct User {
     var name: String
     var image: UIImage
@@ -16,11 +17,13 @@ struct User {
     //var confidence: String
 }
 
+//upload user
 struct Users {
     var name: String
     var imageURL: String
     var time: String
 }
+
 class SavedVector: Object {
     @objc dynamic var name: String = ""
     @objc dynamic var vector: String = ""

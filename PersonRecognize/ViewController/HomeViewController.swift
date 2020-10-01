@@ -26,13 +26,13 @@ class HomeViewController: UIViewController {
         if NetworkChecker.isConnectedToInternet {
             ProgressHUD.show("Loading users...")
             fb.loadVector { [self] (result) in
-                
                 kMeanVectors = result
                 print("Numver of k-Means vectors: \(kMeanVectors.count)")
-                vectorsLabel.text = "You have \(kMeanVectors.count / 3) users."
+                vectorsLabel.text = "You have \(kMeanVectors.count / NUMBER_OF_K) users."
                 ProgressHUD.dismiss()
-                
-                
+                for vector in kMeanVectors {
+                    vectorHelper.saveVector(vector)
+                }
             }
             fb.loadLogTimes { (result) in
                 attendList = result
@@ -40,14 +40,20 @@ class HomeViewController: UIViewController {
                     let u = User(name: user.name, image: UIImage(named: "LaunchImage")!, time: user.time)
                     localUserList.append(u)
                 }
-                
             }
+            
+            
         }
         else {
-            //code for local data
-            //            print(savedUserList)
-            //            //kMeanVectors = splitVectorByName(vector: vectors)
-            //            vectorsLabel.text = "You have \(kMeanVectors.count / 3) users."
+//            code for local data
+            let result = realm.objects(SavedVector.self)
+            kMeanVectors = []
+            for vector in result {
+                let v = Vector(name: vector.name, vector: stringToArray(string: vector.vector), distance: vector.distance)
+                kMeanVectors.append(v)
+            }
+
+            vectorsLabel.text = "You have \(kMeanVectors.count / NUMBER_OF_K) users."
             showDialog(message: "You have not connected to internet. Using local data.")
         }
     }
@@ -57,7 +63,6 @@ class HomeViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: animated);
         super.viewWillDisappear(animated)
-        //vectors = []
         fnet.load()
     }
     
@@ -83,7 +88,7 @@ class HomeViewController: UIViewController {
                 
                 kMeanVectors = result
                 print("Numver of k-Mean vectors: \(kMeanVectors.count)")
-                vectorsLabel.text = "You have \(kMeanVectors.count / 3) users."
+                vectorsLabel.text = "You have \(kMeanVectors.count / NUMBER_OF_K) users."
                 ProgressHUD.dismiss()
                 
                 
@@ -98,10 +103,6 @@ class HomeViewController: UIViewController {
             }
         }
         else {
-            //code for local data
-            //            print(savedUserList)
-            //            //kMeanVectors = splitVectorByName(vector: vectors)
-            //            vectorsLabel.text = "You have \(kMeanVectors.count / 3) users."
             showDialog(message: "You have not connected to internet. Using local data.")
         }
     }

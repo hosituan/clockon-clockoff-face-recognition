@@ -68,7 +68,8 @@ class PredictImageViewController: UIViewController, UIImagePickerControllerDeleg
             print("this is image")
             self.mainImg.image = image
             let start = DispatchTime.now()
-
+            
+            //kNN
 //            let frame = CIImage(image: image)!
 //            let img = fDetector.extractFaces(frame: frame)
 //            guard let i = img.first else {
@@ -83,12 +84,9 @@ class PredictImageViewController: UIViewController, UIImagePickerControllerDeleg
             let end = DispatchTime.now()
             let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds
             let timeInterval = Double(nanoTime) / 1_000_000_000
-            //nameFace1.text = "\(timeInterval)"
-            //nameFace1.text = "\(prediction.label): \(timeInterval)seconds."
             nameFace1.text = "\(result.name): \(result.distance)%"
             nameFace2.text = "Time taken: \(timeInterval)seconds."
         
-            
             image.face.crop { [self] res in
                 switch res {
                 case .success(let faces):
@@ -101,7 +99,6 @@ class PredictImageViewController: UIViewController, UIImagePickerControllerDeleg
                         self.nameFace1.text = "\(vectorHelper.getResult(image: faces[0]).name): \(vectorHelper.getResult(image: faces[0]).distance)%"
                         self.nameFace2.text = "\(vectorHelper.getResult(image: faces[1]).name): \(vectorHelper.getResult(image: faces[1]).distance)%"
                     }
-                    
                 case .notFound:
                     self.showDialog(message: "Not found any face!")
                 case .failure(let error):

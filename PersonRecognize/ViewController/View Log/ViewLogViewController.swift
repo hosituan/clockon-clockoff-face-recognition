@@ -25,8 +25,7 @@ class ViewLogViewController: UIViewController {
             }
         }
         else {
-            //code for local data
-            showDialog(message: "You have not connected to internet. Using local data.")
+            showDialog(message: "You have not connected to internet.")
         }
 
     }
@@ -51,6 +50,4 @@ extension ViewLogViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
     }
-    
-    
 }

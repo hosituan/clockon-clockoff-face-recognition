@@ -86,9 +86,8 @@ class KMeansSwift {
         finalClusters.removeAll()
     }
     
-    //MARK: Private
+    //MARK: -Private
     
-    // 1: pick initial clustering centroids randomly
     fileprivate func pickingInitialCentroidsRandomly() {
         let indexes = vectors.count.indexRandom[0..<clusteringNumber]
         var initialCenters = KMVectors()
@@ -98,7 +97,6 @@ class KMeansSwift {
         centroids = initialCenters
     }
     
-    // 2: assign each vector to the group that has the closest centroid.
     fileprivate func assignVectorsToTheGroup() {
         clusters.removeAll()
         for _ in 0..<clusteringNumber {
@@ -121,7 +119,6 @@ class KMeansSwift {
         }
     }
     
-    // 3: recalculate the positions of the K centroids. (return move distance square)
     fileprivate func recalculateCentroids() -> Double {
         var moveDistanceSquare = 0.0
         for index in 0..<clusteringNumber {
@@ -137,7 +134,6 @@ class KMeansSwift {
         return moveDistanceSquare
     }
     
-    // 4: repeat 2,3 until the new centroids cannot move larger than convergenceError or the iteration is over than maxIteration
     fileprivate func beginClustering() -> Double {
         pickingInitialCentroidsRandomly()
         var iteration = 0
@@ -150,7 +146,6 @@ class KMeansSwift {
         return costFunction()
     }
     
-    // the cost function
     fileprivate func costFunction() -> Double {
         var cost = 0.0
         for index in 0..<clusteringNumber {
@@ -161,7 +156,6 @@ class KMeansSwift {
         return cost
     }
     
-    // 5: excute again (up to the number of excution), then choose the best result
     private func beginClusteringWithNumberOfExcution(_ number:Int) {
         var number = number
         if number < 1 { return }
@@ -179,7 +173,7 @@ class KMeansSwift {
     
 }
 
-//MARK: Helper
+//MARK: -Helper
 
 //Add Vector
 private func vectorAddition(_ vector:KMVector, anotherVector:KMVector) -> KMVector {
@@ -202,7 +196,6 @@ private func EuclideanDistanceSquare(_ v1:[Double],v2:[Double]) -> Double {
     return abs(distance)
 }
 
-//Extension to pick random number. According to stackoverflow.com/questions/27259332/get-random-elements-from-array-in-swift
 private extension Int {
     var random: Int {
         return Int(arc4random_uniform(UInt32(abs(self))))
@@ -226,17 +219,17 @@ private extension Array {
     }
 }
 
-//get from the SAME Name
+//get from the same name
 func getKMeanVectorSameName(vectors: [Vector], completionHandler: @escaping ([Vector]) -> Void) {
     KMeans.reset()
     for i in 0..<vectors.count {
         KMeans.addVector(vectors[i].vector)
     }
     
-    KMeans.clusteringNumber = 3
-    print(KMeans.vectors.count)
-    print(KMeans.centroids.count)
-    print(KMeans.clusters.count)
+    KMeans.clusteringNumber = NUMBER_OF_K
+//    print(KMeans.vectors.count)
+//    print(KMeans.centroids.count)
+//    print(KMeans.clusters.count)
     KMeans.clustering(500) { (success, centroids, clusters) -> () in
         if success {
             var vectorList:[Vector] = []

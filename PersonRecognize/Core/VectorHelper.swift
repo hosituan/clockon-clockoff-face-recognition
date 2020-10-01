@@ -13,8 +13,7 @@ import RealmSwift
 
 
 class VectorHelper  {
-    
-    
+
     func createVector(name: String, image: UIImage) -> Vector? {
         //let frame = CIImage(image: image)!
         let frame = CIImage(image: image)!
@@ -42,7 +41,6 @@ class VectorHelper  {
             for item in imageList {
                 if let vector = createVector(name: name, image: item!) {
                     vectors.append(vector)
-                    //saveVector(vector: vector)
                 }
                 
             }
@@ -52,11 +50,9 @@ class VectorHelper  {
             completionHandler(vectors)
         }
         //print(vectors.count)
-        
-        
     }
     
-    func saveVector(vector: Vector) {
+    func saveVector(_ vector: Vector) {
         let item = SavedVector()
         item.name = vector.name
         item.vector = arrayToString(array: vector.vector)
@@ -65,7 +61,7 @@ class VectorHelper  {
         
         try! realm.write {
             realm.add(item)
-            print("saved vector")
+            //print("saved vector")
         }
     }
     
@@ -76,7 +72,6 @@ class VectorHelper  {
             let vector = Vector(name: item.name, vector: stringToArray(string: item.vector), distance: item.distance)
             vectors.append(vector)
         }
-        
         
         return vectors
     }
@@ -98,8 +93,8 @@ class VectorHelper  {
                     if distance < result.distance {
                         result = vector
                         result.distance = distance
-                        //                   print("result: \(result.name)")
-                        //                  print("vector: \(vector.name)")
+                        //print("result: \(result.name)")
+                        //print("vector: \(vector.name)")
                     }
                 }
             }
@@ -127,91 +122,33 @@ class VectorHelper  {
                 result.distance = 0
             }
             return result
-            /*
-             if result.distance * 1000 <= 500 {
-             let value = "\(result.name): 100%"
-             return value
-             }
-             else if result.distance * 1000 <= 550 {
-             
-             let groupedItems = Dictionary(grouping: array, by: {$0.name})
-             var max = 0
-             var nameMax = result.name
-             for item in groupedItems {
-             if item.value.count > max {
-             max = item.value.count
-             nameMax = item.key
-             }
-             }
-             if max == 1 {
-             return "\(result.name): 90%"
-             }
-             if max == 2 {
-             return "\(nameMax): 90%"
-             }
-             else if max == 3 {
-             return "\(nameMax): 90%"
-             }
-             
-             }
-             else if result.distance * 1000 <= 600 {
-             
-             let groupedItems = Dictionary(grouping: array, by: {$0.name})
-             var max = 0
-             var nameMax = result.name
-             for item in groupedItems {
-             if item.value.count > max {
-             max = item.value.count
-             nameMax = item.key
-             }
-             }
-             if max == 2 {
-             return "\(nameMax): 80%"
-             }
-             else if max == 3 {
-             return "\(nameMax): 80%"
-             }
-             return "\(result.name): 80%"
-             }
-             else if result.distance * 1000 <= 650 {
-             
-             let groupedItems = Dictionary(grouping: array, by: {$0.name})
-             var max = 0
-             var nameMax = result.name
-             for item in groupedItems {
-             if item.value.count > max {
-             max = item.value.count
-             nameMax = item.key
-             }
-             }
-             if max == 2 {
-             return "\(nameMax): 70%"
-             }
-             else if max == 3 {
-             return "\(nameMax): 70%"
-             }
-             return "\(result.name): 70%"
-             }
-             */
-            
-            //else { return "Unknown" }/
         }
-        
-        //        else if result.distance <= 600 {
-        //            let groupedItems = Dictionary(grouping: array, by: {$0.name})
-        //            print(groupedItems.count)
-        //
-        //            let value = "\(result.name): 80%"
-        //            return value
-        //        }
         result.distance = 0
         return result
     }
 }
 
+
+
+//MARK: - Global function
+
 func l2distance(_ feat1: [Double], _ feat2: [Double]) -> Double {
     return sqrt(zip(feat1, feat2).map { f1, f2 in pow(f2 - f1, 2) }.reduce(0, +))
 }
+
+//get  KMean Vector from all
+func getKMeanVector(vectors: [Vector]) -> [Vector] {
+    var vectorList: [Vector] = []
+    let groupedItems = Dictionary(grouping: vectors, by: {$0.name})
+    print(groupedItems.count)
+    for item in groupedItems {
+        getKMeanVectorSameName(vectors: item.value) { (result) in
+            vectorList.append(contentsOf: result)
+        }
+    }
+    return vectorList
+}
+
 
 func arrayToString(array: [Double]) -> String {
     var str = ""
@@ -234,48 +171,5 @@ func stringToArray(string: String) -> [Double] {
         vector.append(Double(item)!)
     }
     return vector
-}
-
-
-func averageVector(vectors: [Vector]) -> Vector {
-    //print(vectors.count)
-    var array: [Double] = []
-    for i in 0...127 {
-        var sum: Double = 0
-        for item in vectors {
-            sum += item.vector[i]
-            
-        }
-        array.append(sum / 128)
-    }
-    let vector = Vector(name: vectors[0].name, vector: array)
-    return vector
-}
-
-
-func splitVectorByName(vector: [Vector]) -> [Vector] {
-    let vectorList: [Vector] = []
-    //let groupedItems = Dictionary(grouping: vectors, by: {$0.name})
-    //    for item in groupedItems {
-    //        var vectors: [Vector] =  []
-    //        for i in item.value {
-    //            vectors.append(i)
-    //        }
-    //        vectorList.append(averageVector(vectors: vectors))
-    //    }
-    return vectorList
-}
-
-//get  KMean Vector from all
-func getKMeanVector(vectors: [Vector]) -> [Vector] {
-    var vectorList: [Vector] = []
-    let groupedItems = Dictionary(grouping: vectors, by: {$0.name})
-    print(groupedItems.count)
-    for item in groupedItems {
-        getKMeanVectorSameName(vectors: item.value) { (result) in
-            vectorList.append(contentsOf: result)
-        }
-    }
-    return vectorList
 }
 

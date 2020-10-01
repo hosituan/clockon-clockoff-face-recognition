@@ -17,9 +17,7 @@ class FrameViewController: UIViewController {
     deinit {
         print("FrameViewController deinit")
     }
-    //@IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var previewView: PreviewView!
-    // VNRequest: Either Retangles or Landmarks
     private var faceDetectionRequest: VNRequest!
     private var devicePosition: AVCaptureDevice.Position = .front
     
@@ -30,53 +28,6 @@ class FrameViewController: UIViewController {
         case configurationFailed
     }
     
-    @IBAction func tapTakePhoto(_ sender: UIButton) {
-        guard let frame = currentFrame else {
-            return
-        }
-        let timestamp = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .medium, timeStyle: .medium)
-        let user = User(name: "Unknown - Take Photo", image: frame, time: timestamp)
-        fb.uploadLogTimes(user: user)
-        showDiaglog3s(name: "Unknown - Take Photo.")
-    }
-    @IBAction func changeCamera(_ sender: UIBarButtonItem) {
-            //Remove existing input
-            guard let currentCameraInput: AVCaptureInput = session.inputs.first else {
-                return
-            }
-
-            session.beginConfiguration()
-            session.removeInput(currentCameraInput)
-
-            //Get new input
-            var newCamera: AVCaptureDevice! = nil
-            if let input = currentCameraInput as? AVCaptureDeviceInput {
-                if (input.device.position == .back) {
-                    newCamera = cameraWithPosition(position: .front)
-                } else {
-                    newCamera = cameraWithPosition(position: .back)
-                }
-            }
-
-            //Add input to session
-            var err: NSError?
-            var newVideoInput: AVCaptureDeviceInput!
-            do {
-                newVideoInput = try AVCaptureDeviceInput(device: newCamera)
-            } catch let err1 as NSError {
-                err = err1
-                newVideoInput = nil
-            }
-
-            if newVideoInput == nil || err != nil {
-                print("Error creating capture device input: \(err?.localizedDescription ?? "")")
-            } else {
-                session.addInput(newVideoInput)
-            }
-
-            //Commit all the configuration changes at once
-            session.commitConfiguration()
-    }
     private var session: AVCaptureSession!
     private var isSessionRunning = false
     private let sessionQueue = DispatchQueue(label: "session queue", attributes: [], target: nil)
@@ -156,6 +107,18 @@ class FrameViewController: UIViewController {
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        sessionQueue.async {[weak self]()  -> Void in
+            guard let self = self else { return }
+            if self.setupResult == .success {
+                self.isSessionRunning = self.session.isRunning
+                self.removeObservers()
+                self.stopCaptureSession()
+            }
+        }
+    }
+    
     fileprivate func stopCaptureSession() {
         session.stopRunning()
         faceDetectionRequest.cancel()
@@ -170,18 +133,52 @@ class FrameViewController: UIViewController {
         
       }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        sessionQueue.async {[weak self]()  -> Void in
-            guard let self = self else { return }
-            if self.setupResult == .success {
-                self.isSessionRunning = self.session.isRunning
-                self.removeObservers()
-                self.stopCaptureSession()
-            }
+
+    
+    //MARK: - User interaction
+    
+    @IBAction func tapTakePhoto(_ sender: UIButton) {
+        guard let frame = currentFrame else {
+            return
         }
-        
-        
+        let timestamp = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .medium, timeStyle: .medium)
+        let user = User(name: "Unknown - Take Photo", image: frame, time: timestamp)
+        fb.uploadLogTimes(user: user)
+        showDiaglog3s(name: "Unknown - Take Photo.")
+    }
+    
+    @IBAction func changeCamera(_ sender: UIBarButtonItem) {
+            //Remove existing input
+            guard let currentCameraInput: AVCaptureInput = session.inputs.first else {
+                return
+            }
+            session.beginConfiguration()
+            session.removeInput(currentCameraInput)
+            //Get new input
+            var newCamera: AVCaptureDevice! = nil
+            if let input = currentCameraInput as? AVCaptureDeviceInput {
+                if (input.device.position == .back) {
+                    newCamera = cameraWithPosition(position: .front)
+                } else {
+                    newCamera = cameraWithPosition(position: .back)
+                }
+            }
+            //Add input to session
+            var err: NSError?
+            var newVideoInput: AVCaptureDeviceInput!
+            do {
+                newVideoInput = try AVCaptureDeviceInput(device: newCamera)
+            } catch let err1 as NSError {
+                err = err1
+                newVideoInput = nil
+            }
+            if newVideoInput == nil || err != nil {
+                print("Error creating capture device input: \(err?.localizedDescription ?? "")")
+            } else {
+                session.addInput(newVideoInput)
+            }
+            //Commit all the configuration changes
+            session.commitConfiguration()
     }
 
 }
@@ -197,9 +194,7 @@ extension FrameViewController {
         addVideoDataInput()
         // Add video output.
         addVideoDataOutput()
-        
         session.commitConfiguration()
-        
     }
     
     private func addVideoDataInput() {
@@ -408,11 +403,7 @@ extension FrameViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else { return  }
 
         let image = UIImage(cgImage: cgImage)
-        currentFrame = image.rotate(radians: .pi/2)//?.flipHorizontally()
-        
-//        if let cameraIntrinsicData = CMGetAttachment(sampleBuffer, key: kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix, attachmentModeOut: nil) {
-//            requestOptions = [.cameraIntrinsics : cameraIntrinsicData]
-//        }
+        currentFrame = image.rotate(radians: .pi/2)//?.flipHorizontally(
         
         let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: exifOrientation, options: [:])
         

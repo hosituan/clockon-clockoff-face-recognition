@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreML
 
 let applicationDocumentsDirectory: URL = {
     FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -44,8 +43,6 @@ func removeAllData() {
     try? FileManager.default.removeItem(at: url1)
     try? FileManager.default.removeItem(at: url2)
 }
-
-
 
 func contentsOfDirectory(at url: URL, matching predicate: (URL) -> Bool) -> [URL] {
     contentsOfDirectory(at: url)?.filter(predicate) ?? []

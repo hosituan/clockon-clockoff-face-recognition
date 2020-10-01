@@ -39,7 +39,6 @@ class PreviewView: UIView {
     
     // Create a new layer drawing the bounding box
     private func createLayer(in rect: CGRect, prediction: String) -> CAShapeLayer{
-        
         let mask = CAShapeLayer()
         mask.frame = rect
         mask.cornerRadius = 10
@@ -70,77 +69,68 @@ class PreviewView: UIView {
         let facebounds = face.boundingBox.applying(translate).applying(transform)
         
         var lb = UNKNOWN
-        if let frame = currentFrame {
-            let res = vectorHelper.getResult(image: frame)
-            lb = "\(res.name): \(res.distance)%"
-            let result = res.name
-            if result != UNKNOWN {
-//                label = "\(result): \(res.distance)%"
-                let  label = result
-                let timestamp = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .medium, timeStyle: .medium)
-                //print(timestamp)
-                //print(timeDetected)
-                if label != currentLabel {
-                    currentLabel = label
-                    numberOfFramesDeteced = 1
-                } else {
-                    numberOfFramesDeteced += 1
+        guard let frame = currentFrame else {
+            return
+        }
+        let res = vectorHelper.getResult(image: frame)
+        lb = "\(res.name): \(res.distance)%"
+        let result = res.name
+        if result != UNKNOWN {
+            let  label = result
+            let timestamp = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .medium, timeStyle: .medium)
+            //print(timestamp)
+            //print(timeDetected)
+            if label != currentLabel {
+                currentLabel = label
+                numberOfFramesDeteced = 1
+            } else {
+                numberOfFramesDeteced += 1
+            }
+            let detectedUser = User(name: label, image: frame, time: timestamp)
+            if numberOfFramesDeteced > validFrames  {
+                print("Detected")
+                if localUserList.count == 0 {
+                    speak(name: label)
+                    //attendList.append(detectedUser)
+                    localUserList.append(detectedUser)
+                    fb.uploadLogTimes(user: detectedUser)
+                    print("append 1")
+                    showDiaglog3s(name: label)
                 }
-                let detectedUser = User(name: label, image: frame, time: timestamp)
-                if numberOfFramesDeteced > validFrames  {
-                    print("Detected")
-                    if localUserList.count == 0 {
-                        speak(name: label)
-                        //attendList.append(detectedUser)
-                        localUserList.append(detectedUser)
-                        fb.uploadLogTimes(user: detectedUser)
-                        print("append 1")
-                        
-                        showDiaglog3s(name: label)
+                else  {
+                    var count = 0
+                    for item in localUserList {
+                        if item.name == label {
+                            if item.time.dropLast(DROP_LAST) != timestamp.dropLast(DROP_LAST) {
+                                localUserList.append(detectedUser)
+                                localUserList = localUserList.sorted(by: { $0.time > $1.time })
+                                speak(name: label)
+                                fb.uploadLogTimes(user: detectedUser)
+                                print("append 2")
+                                showDiaglog3s(name: label)
+                            }
+                            break
+                        }
+                        else {
+                            count += 1
+                        }
                     }
-                    else  {
-                        //var user:User?
-                        var count = 0
-                        
-                        for item in localUserList {
-                            
-                            if item.name == label {
-                                if item.time.dropLast(DROP_LAST) != timestamp.dropLast(DROP_LAST) {
-                                    localUserList.append(detectedUser)
-                                    localUserList = localUserList.sorted(by: { $0.time > $1.time })
-                                    speak(name: label)
-                                    fb.uploadLogTimes(user: detectedUser)
-                                    print("append 2")
-                                    showDiaglog3s(name: label)
-                                }
-                                break
-                            }
-                            else {
-                                count += 1
-                            }
-                        }
-
-                        if count == localUserList.count {
-                            print("append 3")
-                            speak(name: label)
-                            fb.uploadLogTimes(user: detectedUser)
-                            localUserList.append(detectedUser)
-                            localUserList = localUserList.sorted(by: { $0.time > $1.time })
-                            showDiaglog3s(name: label)
-                        }
+                    
+                    if count == localUserList.count {
+                        print("append 3")
+                        speak(name: label)
+                        fb.uploadLogTimes(user: detectedUser)
+                        localUserList.append(detectedUser)
+                        localUserList = localUserList.sorted(by: { $0.time > $1.time })
+                        showDiaglog3s(name: label)
                     }
                 }
             }
         }
+        
         _ = createLayer(in: facebounds, prediction: lb)
-        
-        
-        
-        
     }
-    func ImageInRect(_ rect: CGRect) -> UIImage?
-    {
-        
+    func ImageInRect(_ rect: CGRect) -> UIImage? {
         return nil
     }
     func removeMask() {
@@ -168,9 +158,8 @@ class PreviewView: UIView {
         self.window?.rootViewController?.present(alert, animated: true, completion: nil)
         let when = DispatchTime.now() + 1
         
-        
         DispatchQueue.main.asyncAfter(deadline: when) {
-          alert.dismiss(animated: true, completion: nil)
+            alert.dismiss(animated: true, completion: nil)
         }
     }
     
