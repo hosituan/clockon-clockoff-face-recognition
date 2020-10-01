@@ -124,7 +124,7 @@ class PreviewView: UIView {
                         if count == localUserList.count {
                             print("append 3")
                             speak(name: label)
-                            //fb.uploadLogTimes(user: detectedUser)
+                            fb.uploadLogTimes(user: detectedUser)
                             localUserList.append(detectedUser)
                             localUserList = localUserList.sorted(by: { $0.time > $1.time })
                             showDiaglog3s(name: label)

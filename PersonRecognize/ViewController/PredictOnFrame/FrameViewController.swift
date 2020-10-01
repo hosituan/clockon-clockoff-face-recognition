@@ -44,6 +44,7 @@ class FrameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fnet.load()
+        print("Number of kMeans: \(kMeanVectors.count)")
         session = AVCaptureSession()
         previewView.session = session
         
