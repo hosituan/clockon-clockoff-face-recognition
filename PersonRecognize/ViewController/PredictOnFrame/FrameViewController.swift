@@ -13,12 +13,12 @@ import FaceCropper
 import ProgressHUD
 
 class FrameViewController: UIViewController {
-
+    
     deinit {
         print("FrameViewController deinit")
     }
     @IBOutlet weak var previewView: PreviewView!
-//    private var faceDetectionRequest: VNRequest!
+    //    private var faceDetectionRequest: VNRequest!
     private var devicePosition: AVCaptureDevice.Position = .front
     
     
@@ -111,7 +111,7 @@ class FrameViewController: UIViewController {
             }
         }
     }
-
+    
     
     override func viewDidDisappear(_ animated: Bool) {
         fnet.clean()
@@ -137,9 +137,9 @@ class FrameViewController: UIViewController {
         videoDeviceInput = nil
         videoDataOutput = nil
         
-      }
+    }
     
-
+    
     
     //MARK: - User interaction
     
@@ -154,17 +154,23 @@ class FrameViewController: UIViewController {
     }
     
     @IBAction func changeCamera(_ sender: UIBarButtonItem) {
-            //Remove existing input
-            guard let currentCameraInput: AVCaptureInput = session.inputs.first else {
-                return
-            }
-            session.beginConfiguration()
-            session.removeInput(currentCameraInput)
+        //Remove existing input
+        guard let currentCameraInput: AVCaptureInput = session.inputs.first else {
+            return
+        }
+        session.beginConfiguration()
+        session.removeInput(currentCameraInput)
+        if devicePosition == .back {
+            devicePosition = .front
+        }
+        else {
             devicePosition = .back
-            addVideoDataInput()
-            session.commitConfiguration()
+        }
+        
+        addVideoDataInput()
+        session.commitConfiguration()
     }
-
+    
 }
 
 
@@ -194,7 +200,7 @@ extension FrameViewController {
                 if let dualCameraDevice = AVCaptureDevice.default(.builtInDualCamera, for: AVMediaType.video, position: .back) {
                     defaultVideoDevice = dualCameraDevice
                 }
-                    
+                
                 else if let backCameraDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: AVMediaType.video, position: .back) {
                     defaultVideoDevice = backCameraDevice
                 }
@@ -205,7 +211,7 @@ extension FrameViewController {
                 return
             }
             let videoDeviceInput = try AVCaptureDeviceInput(device: videoDevice)
-           
+            
             if session.canAddInput(videoDeviceInput) {
                 session.addInput(videoDeviceInput)
                 self.videoDeviceInput = videoDeviceInput
@@ -374,19 +380,19 @@ extension FrameViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
                 return device
             }
         }
-
+        
         return nil
     }
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer),
-            let exifOrientation = CGImagePropertyOrientation(rawValue: exifOrientationFromDeviceOrientation()) else { return }
+              let exifOrientation = CGImagePropertyOrientation(rawValue: exifOrientationFromDeviceOrientation()) else { return }
         //var requestOptions: [VNImageOption : Any] = [:]
         
         let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
-
+        
         let context = CIContext()
         guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else { return  }
-
+        
         let image = UIImage(cgImage: cgImage)
         currentFrame = image.rotate(radians: .pi/2)//?.flipHorizontally(
         
@@ -395,7 +401,7 @@ extension FrameViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         do {
             try imageRequestHandler.perform(requests)
         }
-            
+        
         catch {
             print(error)
         }
@@ -412,10 +418,10 @@ extension FrameViewController {
         
         
         DispatchQueue.main.asyncAfter(deadline: when) {
-          alert.dismiss(animated: true, completion: nil)
+            alert.dismiss(animated: true, completion: nil)
         }
     }
-
+    
 }
 
 
