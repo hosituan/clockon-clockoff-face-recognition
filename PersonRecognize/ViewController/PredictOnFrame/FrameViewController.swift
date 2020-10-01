@@ -18,7 +18,7 @@ class FrameViewController: UIViewController {
         print("FrameViewController deinit")
     }
     @IBOutlet weak var previewView: PreviewView!
-    private var faceDetectionRequest: VNRequest!
+//    private var faceDetectionRequest: VNRequest!
     private var devicePosition: AVCaptureDevice.Position = .front
     
     // Session Management
@@ -43,13 +43,16 @@ class FrameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default) 
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = .clear
         fnet.load()
         print("Number of kMeans: \(kMeanVectors.count)")
         session = AVCaptureSession()
         previewView.session = session
         
         // Set up Vision Request
-        faceDetectionRequest = VNDetectFaceRectanglesRequest(completionHandler: self.handleFaces) // Default
         setupVision()
         
         switch AVCaptureDevice.authorizationStatus(for: AVMediaType.video){
@@ -107,8 +110,10 @@ class FrameViewController: UIViewController {
             }
         }
     }
+
     
-    override func viewWillDisappear(_ animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
+        fnet.clean()
         super.viewDidDisappear(animated)
         sessionQueue.async {[weak self]()  -> Void in
             guard let self = self else { return }
@@ -122,11 +127,10 @@ class FrameViewController: UIViewController {
     
     fileprivate func stopCaptureSession() {
         session.stopRunning()
-        faceDetectionRequest.cancel()
-        DispatchQueue.main.async {
-            //self.previewView.videoPreviewLayer?.removeFromSuperlayer()
-            //self.previewView.videoPreviewLayer = nil
+        for req in requests {
+            req.cancel()
         }
+        requests = []
         
         session = nil
         videoDeviceInput = nil
@@ -309,6 +313,7 @@ extension FrameViewController {
 // MARK: -- Helpers
 extension FrameViewController {
     func setupVision() {
+        let faceDetectionRequest = VNDetectFaceRectanglesRequest(completionHandler: self.handleFaces) // Default
         self.requests = [faceDetectionRequest]
     }
     

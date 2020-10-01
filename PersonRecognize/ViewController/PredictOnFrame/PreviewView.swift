@@ -77,7 +77,7 @@ class PreviewView: UIView {
                 let  label = result
                 //let timestamp = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .medium, timeStyle: .medium)
                 let today = Date()
-                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                formatter.dateFormat = DATE_FORMAT
                 let timestamp = formatter.string(from: today)
                 //print(timeDetected)
                 if label != currentLabel {
@@ -90,11 +90,11 @@ class PreviewView: UIView {
                 if numberOfFramesDeteced > validFrames  {
                     print("Detected")
                     if localUserList.count == 0 {
+                        print("append 1")
                         speak(name: label)
                         //attendList.append(detectedUser)
                         localUserList.append(detectedUser)
                         fb.uploadLogTimes(user: detectedUser)
-                        print("append 1")
                         showDiaglog3s(name: label)
                     }
                     else  {
@@ -104,16 +104,15 @@ class PreviewView: UIView {
                                 if let time = formatter.date(from: item.time) {
                                     let diff = time.timeOfDayInterval(toDate: today)
                                     if diff > 60 {
+                                        print("append 2")
                                         localUserList.append(detectedUser)
                                         localUserList = localUserList.sorted(by: { $0.time > $1.time })
                                         speak(name: label)
                                         //postLogs(user: detectedUser)
                                         fb.uploadLogTimes(user: detectedUser)
-                                        print("append 2")
                                         showDiaglog3s(name: label)
                                     }
                                 }
-                                
                                 break
                             }
                             else {

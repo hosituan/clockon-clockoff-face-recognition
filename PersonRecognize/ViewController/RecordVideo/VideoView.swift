@@ -8,10 +8,6 @@
 
 import UIKit
 
-import UIKit
-import Vision
-import AVFoundation
-
 class VideoView: UIView {
     
 }

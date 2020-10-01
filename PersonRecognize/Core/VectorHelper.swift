@@ -13,7 +13,7 @@ import RealmSwift
 
 
 class VectorHelper  {
-
+    
     func createVector(name: String, image: UIImage) -> Vector? {
         //let frame = CIImage(image: image)!
         let frame = CIImage(image: image)!
@@ -72,9 +72,9 @@ class VectorHelper  {
             let vector = Vector(name: item.name, vector: stringToArray(string: item.vector), distance: item.distance)
             vectors.append(vector)
         }
-        
         return vectors
     }
+    
     func getResult(image: UIImage) -> Vector {
         var array: [Vector] = []
         var result = Vector(name: "Unknown", vector: [], distance: 10)
@@ -98,7 +98,10 @@ class VectorHelper  {
                     }
                 }
             }
-            
+            if result.distance * 1000 < 400  {
+                result.distance = 100
+                return result
+            }
             let groupedItems = Dictionary(grouping: array, by: {$0.name})
             var max = 0
             var count = 0
@@ -112,14 +115,14 @@ class VectorHelper  {
                 }
             }
             switch max {
-            case 1:
-                result.distance = 70
-            case 2:
-                result.distance = 90
-            case 3:
-                result.distance = 100
-            default:
-                result.distance = 0
+                case 1:
+                    result.distance = 70
+                case 2:
+                    result.distance = 90
+                case 3:
+                    result.distance = 100
+                default:
+                    result.distance = 0
             }
             return result
         }

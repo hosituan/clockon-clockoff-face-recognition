@@ -38,7 +38,6 @@ func postLogs(user: Users) {
 }
 
 func getMethod() {
-    
     AF.request("", parameters: nil, headers: nil).validate(statusCode: 200 ..< 299).responseJSON { AFdata in
         do {
             guard let jsonObject = try JSONSerialization.jsonObject(with: AFdata.data!) as? [String: Any] else {

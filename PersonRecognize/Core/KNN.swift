@@ -12,13 +12,10 @@
 import Foundation
 
 public class KNNDTW: NSObject {
-    
-    
     //meta parameters
     private var n_neighbors: Int = 0
     private var max_warping_window: Int = 1000 // this isn't implemented yet
     private var unique_labels: [String] = [String]()
-    
     
     //internal data structures
     private var curves: [[Double]] = [[Double]]()
@@ -176,12 +173,6 @@ public class KNNDTW: NSObject {
             }
         })
         
-        
-        
-        
-        /*
-            tally up the votes, but keep the correlation between labels
-        */
         
         //populate the vote counter array
         var votes: [String:Int] = [String:Int]()

@@ -48,6 +48,7 @@ class FrameOperation: Operation {
 }
 
 class GetFrames {
+    
     var fps = 2
     private var generator:AVAssetImageGenerator!
     

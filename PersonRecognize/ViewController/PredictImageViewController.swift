@@ -18,6 +18,7 @@ class PredictImageViewController: UIViewController, UIImagePickerControllerDeleg
     @IBOutlet weak var face2: UIImageView!
     @IBOutlet weak var nameFace2: UILabel!
     @IBOutlet weak var nameFace1: UILabel!
+
     
     let knn: KNNDTW = KNNDTW()
     var corner:CGFloat = 35
@@ -25,20 +26,15 @@ class PredictImageViewController: UIViewController, UIImagePickerControllerDeleg
         super.viewDidLoad()
         fnet.load()
         clearData()
+
 //        var training_samples: [knn_curve_label_pair] = [knn_curve_label_pair]()
-//
 //        for vector in kMeanVectors {
 //            training_samples.append(knn_curve_label_pair(curve: vector.vector, label: vector.name))
 //        }
-//
-//
-//
-//
-//
-//        knn.configure(neighbors: 3, max_warp: 0) //max_warp isn't implemented yet
+//        knn.configure(neighbors: 1, max_warp: 0)
 //
 //        knn.train(data_sets: training_samples)
-    
+//
     }
     
     
@@ -70,15 +66,18 @@ class PredictImageViewController: UIViewController, UIImagePickerControllerDeleg
             let start = DispatchTime.now()
             
             //kNN
-//            let frame = CIImage(image: image)!
-//            let img = fDetector.extractFaces(frame: frame)
-//            guard let i = img.first else {
-//                return
-//            }
-//            let targetVector = fnet.run(image: i)
+            let frame = CIImage(image: image)!
+            let img = fDetector.extractFaces(frame: frame)
+            guard let i = img.first else {
+                return
+            }
+            let targetVector = fnet.run(image: i)
+            
+            //nameFace1.text = dict[re![0]]
 //            let prediction: knn_certainty_label_pair = knn.predict(curve_to_test: targetVector)
 //            print("predicted " + prediction.label, "with ", prediction.probability*100,"% certainty")
-//
+//            nameFace1.text = "\(prediction.label): \(prediction.probability*100)%"
+
             let result = vectorHelper.getResult(image: image)
             
             let end = DispatchTime.now()

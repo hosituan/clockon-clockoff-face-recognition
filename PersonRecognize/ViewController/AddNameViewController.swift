@@ -20,7 +20,6 @@ class AddNameViewController: UIViewController {
     @IBOutlet weak var textField: SkyFloatingLabelTextField!
     var videoURL: URL?
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         fnet.load()
@@ -31,7 +30,7 @@ class AddNameViewController: UIViewController {
             }
         }
         hideKeyboardWhenTappedAround()
-
+        
     }
     
     @IBAction func tapDoneButoon(_ sender: UIButton) {
@@ -43,6 +42,7 @@ class AddNameViewController: UIViewController {
                 //ProgressHUD.dismiss()
             }
             
+            //saved to local data
             savedUserList.append(textField.text!)
             defaults.set(savedUserList, forKey: SAVED_USERS)
             

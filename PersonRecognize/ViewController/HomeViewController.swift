@@ -13,8 +13,7 @@ import ProgressHUD
 
 class HomeViewController: UIViewController {
     @IBOutlet weak var finalFrame: UIImageView!
-    
-    var fps = 2
+
     private var generator:AVAssetImageGenerator!
     
     @IBOutlet weak var vectorsLabel: UILabel!
@@ -24,14 +23,14 @@ class HomeViewController: UIViewController {
         if !NetworkChecker.isConnectedToInternet {
             showDialog(message: "You have not connected to internet. Using local data.")
         }
-
     }
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
-        loadData()
+
     }
     override func viewDidAppear(_ animated: Bool) {
         fnet.clean()
+        loadData()
     }
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: animated);
@@ -55,29 +54,10 @@ class HomeViewController: UIViewController {
         self.performSegue(withIdentifier: "viewLog", sender: nil)
     }
     @IBAction func tapSyncData(_ sender: UIButton) {
-        if NetworkChecker.isConnectedToInternet {
-            ProgressHUD.show("Loading users...")
-            fb.loadVector { [self] (result) in
-                
-                kMeanVectors = result
-                kMeanVectors.append(contentsOf: result)
-                kMeanVectors.append(contentsOf: result)
-                print("Number of k-Means vectors: \(kMeanVectors.count)")
-                vectorsLabel.text = "You have \(kMeanVectors.count / NUMBER_OF_K) users."
-                ProgressHUD.dismiss()
-                
-                
-            }
-            fb.loadLogTimes { (result) in
-                attendList = result
-                for user in attendList {
-                    let u = User(name: user.name, image: UIImage(named: "LaunchImage")!, time: user.time)
-                    localUserList.append(u)
-                }
-                
-            }
-        }
-        else {
+        //loadData()
+        kMeanVectors.append(contentsOf: kMeanVectors)
+        kMeanVectors.append(contentsOf: kMeanVectors)
+        if !NetworkChecker.isConnectedToInternet {
             showDialog(message: "You have not connected to internet. Using local data.")
         }
     }
@@ -91,7 +71,7 @@ class HomeViewController: UIViewController {
                 vectorsLabel.text = "You have \(kMeanVectors.count / NUMBER_OF_K) users."
                 ProgressHUD.dismiss()
                 try! realm.write {
-                  realm.deleteAll()
+                    realm.deleteAll()
                 }
                 for vector in kMeanVectors {
                     vectorHelper.saveVector(vector)
@@ -106,7 +86,7 @@ class HomeViewController: UIViewController {
             }
         }
         else {
-//            code for local data
+            //code for local data
             let result = realm.objects(SavedVector.self)
             print(result.count)
             kMeanVectors = []

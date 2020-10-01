@@ -11,7 +11,6 @@ import Foundation
 extension Date {
     func secondsFromBeginningOfTheDay() -> TimeInterval {
         let calendar = Calendar.current
-        // omitting fractions of seconds for simplicity
         let dateComponents = calendar.dateComponents([.hour, .minute, .second], from: self)
 
         let dateSeconds = dateComponents.hour! * 3600 + dateComponents.minute! * 60 + dateComponents.second!

@@ -33,7 +33,6 @@ class UserData: UIViewController, UIImagePickerControllerDelegate & UINavigation
                 defaults.set(savedUserList, forKey: SAVED_USERS)
                 ProgressHUD.dismiss()
             })
-            
         }
         else {
             self.userList = savedUserList
