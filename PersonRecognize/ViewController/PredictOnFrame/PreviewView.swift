@@ -93,9 +93,13 @@ class PreviewView: UIView {
                         speak(name: label)
                         //attendList.append(detectedUser)
                         localUserList.append(detectedUser)
-                        uploadLogs(user: detectedUser) {}
+                        uploadLogs(user: detectedUser) { error in
+                            if error != nil {
+                                self.showDiaglog3s(name: label, false)
+                            }
+                        }
                         //fb.uploadLogTimes(user: detectedUser) //upload to firebase db
-                        showDiaglog3s(name: label)
+                        showDiaglog3s(name: label, true)
                     }
                     else  {
                         var count = 0
@@ -103,15 +107,19 @@ class PreviewView: UIView {
                             if item.name == label {
                                 if let time = formatter.date(from: item.time) {
                                     let diff = abs(time.timeOfDayInterval(toDate: today))
-                                    print(diff)
+                                    print("Diffrent: \(diff) seconds")
                                     if diff > 60 {
                                         print("append 2")
                                         localUserList.append(detectedUser)
                                         localUserList = localUserList.sorted(by: { $0.time > $1.time })
                                         speak(name: label)
-                                        uploadLogs(user: detectedUser) {}
+                                        uploadLogs(user: detectedUser) { error in
+                                                if error != nil {
+                                                    self.showDiaglog3s(name: label, false)
+                                                }
+                                        }
                                         //fb.uploadLogTimes(user: detectedUser) //upload to firebase db
-                                        showDiaglog3s(name: label)
+                                        showDiaglog3s(name: label, true)
                                     }
                                 }
                                 break
@@ -124,11 +132,15 @@ class PreviewView: UIView {
                         if count == localUserList.count {
                             print("append 3")
                             speak(name: label)
-                            uploadLogs(user: detectedUser) {}
+                            uploadLogs(user: detectedUser) { error in
+                                if error != nil {
+                                    self.showDiaglog3s(name: label, false)
+                                }
+                            }
                             //fb.uploadLogTimes(user: detectedUser) //upload to firebase db
                             localUserList.append(detectedUser)
                             localUserList = localUserList.sorted(by: { $0.time > $1.time })
-                            showDiaglog3s(name: label)
+                            showDiaglog3s(name: label, true)
                         }
                     }
                 }
@@ -160,8 +172,10 @@ class PreviewView: UIView {
         synthesizer.speak(utterance)
     }
     
-    func showDiaglog3s(name: String) {
-        let alert = UIAlertController(title: "Joined!", message: "\(name)", preferredStyle: .alert)
+    
+    func showDiaglog3s(name: String,_ success: Bool) {
+        let title = success == false ?  "Can't join!" : "Joining..."
+        let alert = UIAlertController(title: title, message: "\(name)", preferredStyle: .alert)
         self.window?.rootViewController?.present(alert, animated: true, completion: nil)
         let when = DispatchTime.now() + 1
         
@@ -170,6 +184,7 @@ class PreviewView: UIView {
         }
     }
     
+
 }
 
 

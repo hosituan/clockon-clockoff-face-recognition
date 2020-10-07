@@ -12,7 +12,7 @@ import Alamofire
 let postTimeURL = ""
 
 
-func postLogs(user: Users, completionHandler: @escaping () -> Void) {
+func postLogs(user: Users, completionHandler: @escaping (Error?) -> Void) {
     let api_url = "\(SERVER_URL)/api/timeLog/create"
     let status = user.name != "Unknown - Take Photo" ? "FACE_CHECKED" : "PENDING"
     var dictionary: [String: Any]
@@ -29,39 +29,39 @@ func postLogs(user: Users, completionHandler: @escaping () -> Void) {
             "time_log" : user.time,
             "image" : user.imageURL,
             "status": status
+        ]
+    }
+    
+    print(dictionary)
+    let params = dictionary
+    let headers: HTTPHeaders = [
+        "X-HHR-Secret-Key" : API_KEY,
+        "Content-Type": "application/x-www-form-urlencoded"
     ]
-}
-
-print(dictionary)
-let params = dictionary
-let headers: HTTPHeaders = [
-    "X-HHR-Secret-Key" : API_KEY,
-    "Content-Type": "application/x-www-form-urlencoded"
-]
-AF.request(api_url, method: .post, parameters: params , encoding: URLEncoding.httpBody, headers: headers).responseJSON { AFdata in
-    do {
-        guard let jsonObject = try JSONSerialization.jsonObject(with: AFdata.data!) as? [String: Any] else {
-            print("Error: Cannot convert data to JSON object")
+    AF.request(api_url, method: .post, parameters: params , encoding: URLEncoding.httpBody, headers: headers).responseJSON { AFdata in
+        do {
+            guard let jsonObject = try JSONSerialization.jsonObject(with: AFdata.data!) as? [String: Any] else {
+                print("Error: Cannot convert data to JSON object")
+                return
+            }
+            guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
+                print("Error: Cannot convert JSON object to Pretty JSON data")
+                return
+            }
+            guard let prettyPrintedJson = String(data: prettyJsonData, encoding: .utf8) else {
+                print("Error: Could print JSON in String")
+                return
+            }
+            
+            print(prettyPrintedJson)
+        } catch {
+            print("Error: Trying to convert JSON data to string")
             return
         }
-        guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
-            print("Error: Cannot convert JSON object to Pretty JSON data")
-            return
-        }
-        guard let prettyPrintedJson = String(data: prettyJsonData, encoding: .utf8) else {
-            print("Error: Could print JSON in String")
-            return
-        }
-        
-        print(prettyPrintedJson)
-    } catch {
-        print("Error: Trying to convert JSON data to string")
-        return
     }
 }
-}
 
-func uploadLogs(user: User, completionHandler: @escaping () -> Void) {
+func uploadLogs(user: User, completionHandler: @escaping (Error?) -> Void) {
     
     let api_url = "\(SERVER_URL)/api/files/upload"
     guard let imgData = user.image.jpegData(compressionQuality: 0.9) else {
@@ -84,19 +84,24 @@ func uploadLogs(user: User, completionHandler: @escaping () -> Void) {
                         return
                     }
                     let userLog = Users(name: user.name, imageURL: imgURL, time: user.time)
-                    postLogs(user: userLog) {
-                        print("Uploaded time log")
+                    postLogs(user: userLog) { (error) in
+                        if error != nil {
+                            completionHandler(error)
+                        } else {
+                            completionHandler(nil)
+                            
+                        }
                     }
-                    completionHandler()
+                    //completionHandler(nil)
                 }
                 catch {
                     print("error")
-                    
                 }
                 break
                 
             case .failure(_):
                 print("failure")
+                
                 
                 break
                 

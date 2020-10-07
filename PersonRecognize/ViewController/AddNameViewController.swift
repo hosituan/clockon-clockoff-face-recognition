@@ -37,6 +37,7 @@ class AddNameViewController: UIViewController {
     @IBAction func tapDoneButoon(_ sender: UIButton) {
         if textField.text != "" && videoURL != nil && idTextField.text != "" {
             guard let user_id = Int(idTextField.text!) else {
+                showDialog(message: "ID is only number!")
                 return
             }
             ProgressHUD.show("Adding...")

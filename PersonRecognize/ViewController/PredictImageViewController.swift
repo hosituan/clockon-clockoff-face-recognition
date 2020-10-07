@@ -101,15 +101,18 @@ class PredictImageViewController: UIViewController, UIImagePickerControllerDeleg
             nameFace1.text = "\(result.name): \(result.distance)%"
             nameFace2.text = "Time taken: \(timeInterval)seconds."
             //
-            let today = Date()
-            formatter.dateFormat = DATE_FORMAT
-            let timestamp = formatter.string(from: today)
-            let detectedUser = User(name: result.name, image: image, time: timestamp)
-            ProgressHUD.show("Uploading")
-            uploadLogs(user: detectedUser) {
-                ProgressHUD.dismiss()
-                
-            }
+//            let today = Date()
+//            formatter.dateFormat = DATE_FORMAT
+//            let timestamp = formatter.string(from: today)
+//            let detectedUser = User(name: result.name, image: image, time: timestamp)
+//            ProgressHUD.show("Uploading")
+//            uploadLogs(user: detectedUser) {  error in
+//                    if error != nil {
+//                        self.showDialog(message: "Error uploading.")
+//                    }
+//                ProgressHUD.dismiss()
+//
+//            }
             
             image.face.crop { [self] res in
                 switch res {
