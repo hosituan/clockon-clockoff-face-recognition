@@ -17,6 +17,8 @@ class FrameViewController: UIViewController {
     deinit {
         print("FrameViewController deinit")
     }
+    
+    var currentFrame: UIImage?
     @IBOutlet weak var previewView: PreviewView!
     //    private var faceDetectionRequest: VNRequest!
     private var devicePosition: AVCaptureDevice.Position = .front
@@ -147,9 +149,13 @@ class FrameViewController: UIViewController {
         guard let frame = currentFrame else {
             return
         }
-        let timestamp = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .medium, timeStyle: .medium)
+        let today = Date()
+        formatter.dateFormat = DATE_FORMAT
+        let timestamp = formatter.string(from: today)
         let user = User(name: "Unknown - Take Photo", image: frame, time: timestamp)
-        fb.uploadLogTimes(user: user)
+        uploadLogs(user: user) {
+        }
+        //fb.uploadLogTimes(user: user)
         showDiaglog3s(name: "Unknown - Take Photo.")
     }
     
@@ -310,10 +316,86 @@ extension FrameViewController {
             self.previewView.removeMask()
             for face in results {
                 
-                self.previewView.drawFaceboundingBox(face: face)
+                self.previewView.drawFaceboundingBox(face: face, currentFrame: self.currentFrame)
                 
             }
         }
+    }
+    
+     /* func getLabel() {
+        var lb = UNKNOWN
+        if let frame = currentFrame {
+            let res = vectorHelper.getResult(image: frame)
+            lb = "\(res.name): \(res.distance)%"
+            let result = res.name
+            if result != UNKNOWN {
+                let  label = result
+                let today = Date()
+                formatter.dateFormat = DATE_FORMAT
+                let timestamp = formatter.string(from: today)
+                if label != currentLabel {
+                    currentLabel = label
+                    numberOfFramesDeteced = 1
+                } else {
+                    numberOfFramesDeteced += 1
+                }
+                let detectedUser = User(name: label, image: frame, time: timestamp)
+                if numberOfFramesDeteced > validFrames  {
+                    print("Detected")
+                    if localUserList.count == 0 {
+                        print("append 1")
+                        speak(name: label)
+                        //attendList.append(detectedUser)
+                        localUserList.append(detectedUser)
+                        fb.uploadLogTimes(user: detectedUser)
+                        showDiaglog3s(name: label)
+                    }
+                    else  {
+                        var count = 0
+                        for item in localUserList {
+                            if item.name == label {
+                                if let time = formatter.date(from: item.time) {
+                                    let diff = abs(time.timeOfDayInterval(toDate: today))
+                                    print(diff)
+                                    if diff > 60 {
+                                        print("append 2")
+                                        localUserList.append(detectedUser)
+                                        localUserList = localUserList.sorted(by: { $0.time > $1.time })
+                                        speak(name: label)
+                                        //postLogs(user: detectedUser)
+                                        fb.uploadLogTimes(user: detectedUser)
+                                        showDiaglog3s(name: label)
+                                    }
+                                }
+                                break
+                            }
+                            else {
+                                count += 1
+                            }
+                        }
+                        
+                        if count == localUserList.count {
+                            print("append 3")
+                            speak(name: label)
+                            fb.uploadLogTimes(user: detectedUser)
+                            localUserList.append(detectedUser)
+                            localUserList = localUserList.sorted(by: { $0.time > $1.time })
+                            showDiaglog3s(name: label)
+                        }
+                    }
+                }
+            }
+            
+        }
+    } */
+    
+    func speak(name: String) {
+        let utterance = AVSpeechUtterance(string: "Hello \(name)")
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        utterance.rate = 0.5
+        
+        let synthesizer = AVSpeechSynthesizer()
+        synthesizer.speak(utterance)
     }
 }
 
@@ -394,7 +476,7 @@ extension FrameViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else { return  }
         
         let image = UIImage(cgImage: cgImage)
-        currentFrame = image.rotate(radians: .pi/2)//?.flipHorizontally(
+        self.currentFrame = image.rotate(radians: .pi/2)//?.flipHorizontally(
         
         let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: exifOrientation, options: [:])
         

@@ -10,6 +10,8 @@ import UIKit
 import AVFoundation
 import RealmSwift
 import ProgressHUD
+//import KDTree
+
 
 class HomeViewController: UIViewController {
     @IBOutlet weak var finalFrame: UIImageView!
@@ -30,7 +32,7 @@ class HomeViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         fnet.clean()
-        loadData()
+        //loadData()
     }
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: animated);
@@ -68,7 +70,10 @@ class HomeViewController: UIViewController {
                 kMeanVectors = result
                 print("Number of k-Means vectors: \(kMeanVectors.count)")
                 vectorsLabel.text = "You have \(kMeanVectors.count / NUMBER_OF_K) users."
+                //tree = KDTree(values: kMeanVectors)
                 ProgressHUD.dismiss()
+                
+                //save to local data
                 try! realm.write {
                     realm.deleteAll()
                 }
@@ -76,6 +81,7 @@ class HomeViewController: UIViewController {
                     vectorHelper.saveVector(vector)
                 }
             }
+            
             fb.loadLogTimes { (result) in
                 attendList = result
                 for user in attendList {
@@ -83,6 +89,12 @@ class HomeViewController: UIViewController {
                     localUserList.append(u)
                 }
             }
+            fb.loadUsers(completionHandler: { (result) in
+                userDict = result
+                print("Number of user: \(userDict.count)")
+                ProgressHUD.dismiss()
+            })
+            
         }
         else {
             //code for local data

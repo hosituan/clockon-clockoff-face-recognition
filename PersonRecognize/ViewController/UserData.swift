@@ -18,24 +18,29 @@ class UserData: UIViewController, UIImagePickerControllerDelegate & UINavigation
     
     
     @IBOutlet weak var tableView: UITableView!
-    var userList: [String] = []
+
     var value = ""
+    var userList = [[String: Int]]()
     override func viewDidLoad() {
         super.viewDidLoad()
         if NetworkChecker.isConnectedToInternet {
             ProgressHUD.show("Loading users...")
             fb.loadUsers(completionHandler: { (result) in
-                self.userList = result
+                userDict = result
+                for (key, value) in userDict {
+                    let user = [key:value]
+                    self.userList.append(user)
+                }
                 self.tableView.delegate = self
                 self.tableView.dataSource = self
                 self.tableView.reloadData()
-                savedUserList = result //for local user lists, use without internet.
-                defaults.set(savedUserList, forKey: SAVED_USERS)
+//                savedUserList = result //for local user lists, use without internet.
+//                defaults.set(savedUserList, forKey: SAVED_USERS)
                 ProgressHUD.dismiss()
             })
         }
         else {
-            self.userList = savedUserList
+            //userList = savedUserList
             self.tableView.delegate = self
             self.tableView.dataSource = self
             self.tableView.reloadData()
@@ -73,12 +78,12 @@ class UserData: UIViewController, UIImagePickerControllerDelegate & UINavigation
 
 extension UserData: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        userList.count
+        userDict.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "cellID")
-        cell.textLabel?.text = "\(indexPath.row). \(userList[indexPath.row])"
+        cell.textLabel?.text = "\(userList[indexPath.row].values.first!). \(userList[indexPath.row].keys.first!)"
         
         return cell
     }
@@ -88,14 +93,14 @@ extension UserData: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         
         
-        let valueSelected = userList[indexPath.row]
+        //let valueSelected = userList[indexPath.row]
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 10
 
         ProgressHUD.show("Generating...")
         queue.addBarrierBlock {
             //add vector to All vectors list, and get Kmean Vectors
-            self.generate(valueSelected: valueSelected)
+            //self.generate(valueSelected: valueSelected)
         }
         //value = valueSelected
         //self.performSegue(withIdentifier: "viewFaceData", sender: nil)

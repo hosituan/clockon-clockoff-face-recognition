@@ -10,6 +10,8 @@ import UIKit
 import AVFoundation
 import FaceCropper
 import MBProgressHUD
+import ProgressHUD
+//import KDTree
 
 class PredictImageViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -18,23 +20,26 @@ class PredictImageViewController: UIViewController, UIImagePickerControllerDeleg
     @IBOutlet weak var face2: UIImageView!
     @IBOutlet weak var nameFace2: UILabel!
     @IBOutlet weak var nameFace1: UILabel!
-
     
-    let knn: KNNDTW = KNNDTW()
+    
+    //let knn: KNNDTW = KNNDTW()
     var corner:CGFloat = 35
     override func viewDidLoad() {
         super.viewDidLoad()
         fnet.load()
         clearData()
-
-//        var training_samples: [knn_curve_label_pair] = [knn_curve_label_pair]()
-//        for vector in kMeanVectors {
-//            training_samples.append(knn_curve_label_pair(curve: vector.vector, label: vector.name))
-//        }
-//        knn.configure(neighbors: 1, max_warp: 0)
-//
-//        knn.train(data_sets: training_samples)
-//
+        
+        print(kMeanVectors.count)
+        //        tree = KDTree(values: kMeanVectors)
+        //
+        //
+        //        var training_samples: [knn_curve_label_pair] = [knn_curve_label_pair]()
+        //        for vector in kMeanVectors {
+        //            training_samples.append(knn_curve_label_pair(curve: vector.vector, label: vector.name))
+        //        }
+        //        knn.configure(neighbors: 1, max_warp: 0)
+        //        knn.train(data_sets: training_samples)
+        //
     }
     
     
@@ -63,29 +68,49 @@ class PredictImageViewController: UIViewController, UIImagePickerControllerDeleg
         if let image = info[.editedImage] as? UIImage {
             print("this is image")
             self.mainImg.image = image
-            let start = DispatchTime.now()
             
-            //kNN
-            let frame = CIImage(image: image)!
-            let img = fDetector.extractFaces(frame: frame)
-            guard let i = img.first else {
-                return
-            }
-            let targetVector = fnet.run(image: i)
+            let start = DispatchTime.now()
+            /*
+            
+            //            let frame = CIImage(image: image)!
+            //            let img = fDetector.extractFaces(frame: frame)
+            //            guard let i = img.first else {
+            //                return
+            //            }
+            //            let targetVector = fnet.run(image: i)
+            
+            //
+            //
+            //
+            //
+            //let re = find(vector: Vector(name: "abc", vector: targetVector, distance: 0))
+     
             
             //nameFace1.text = dict[re![0]]
-//            let prediction: knn_certainty_label_pair = knn.predict(curve_to_test: targetVector)
-//            print("predicted " + prediction.label, "with ", prediction.probability*100,"% certainty")
-//            nameFace1.text = "\(prediction.label): \(prediction.probability*100)%"
-
+            //            let prediction: knn_certainty_label_pair = knn.predict(curve_to_test: targetVector)
+            //            print("predicted " + prediction.label, "with ", prediction.probability*100,"% certainty")
+            //            nameFace1.text = "\(prediction.label): \(prediction.probability*100)%"
+             */
             let result = vectorHelper.getResult(image: image)
-            
             let end = DispatchTime.now()
             let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds
             let timeInterval = Double(nanoTime) / 1_000_000_000
+            //
+            //print(re)
+            //nameFace1.text = re
             nameFace1.text = "\(result.name): \(result.distance)%"
             nameFace2.text = "Time taken: \(timeInterval)seconds."
-        
+            //
+            let today = Date()
+            formatter.dateFormat = DATE_FORMAT
+            let timestamp = formatter.string(from: today)
+            let detectedUser = User(name: result.name, image: image, time: timestamp)
+            ProgressHUD.show("Uploading")
+            uploadLogs(user: detectedUser) {
+                ProgressHUD.dismiss()
+                
+            }
+            
             image.face.crop { [self] res in
                 switch res {
                 case .success(let faces):

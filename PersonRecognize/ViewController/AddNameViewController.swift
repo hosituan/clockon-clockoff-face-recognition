@@ -16,6 +16,7 @@ class AddNameViewController: UIViewController {
     
     private var generator:AVAssetImageGenerator!
     
+    @IBOutlet weak var idTextField: SkyFloatingLabelTextField!
     @IBOutlet weak var faceImageView: UIImageView!
     @IBOutlet weak var textField: SkyFloatingLabelTextField!
     var videoURL: URL?
@@ -34,11 +35,14 @@ class AddNameViewController: UIViewController {
     }
     
     @IBAction func tapDoneButoon(_ sender: UIButton) {
-        if textField.text != "" && videoURL != nil {
+        if textField.text != "" && videoURL != nil && idTextField.text != "" {
+            guard let user_id = Int(idTextField.text!) else {
+                return
+            }
             ProgressHUD.show("Adding...")
             let getFrames = GetFrames()
             print("Your Name is: \(textField.text!)")
-            fb.uploadUser(name: textField.text!) {
+            fb.uploadUser(name: textField.text!, user_id: user_id) {
                 //ProgressHUD.dismiss()
             }
             

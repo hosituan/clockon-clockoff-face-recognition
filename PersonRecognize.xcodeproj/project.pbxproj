@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,7 @@
 		951EB35422B698F100A9533B /* tfWrap.mm in Sources */ = {isa = PBXBuildFile; fileRef = 951EB35022B698F100A9533B /* tfWrap.mm */; };
 		C74123AA68AA5B08B54BAB0F /* Pods_PersonRecognize.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9E4B7E8ED1140C3AD203DB7 /* Pods_PersonRecognize.framework */; };
 		FB16D9A82521F0B3003C8AB5 /* KNN.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB16D9A72521F0B3003C8AB5 /* KNN.swift */; };
+		FB3B2E1C2529AE7B00117249 /* K-dTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3B2E1B2529AE7B00117249 /* K-dTree.swift */; };
 		FB3D0F97251DA5CA0059CCB6 /* DefineString.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3D0F96251DA5CA0059CCB6 /* DefineString.swift */; };
 		FB3D0F9A251DA8AD0059CCB6 /* NetworkChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3D0F99251DA8AD0059CCB6 /* NetworkChecker.swift */; };
 		FB3D0FBE251DAC760059CCB6 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3D0FBD251DAC760059CCB6 /* Date.swift */; };
@@ -69,6 +70,7 @@
 		B9E4B7E8ED1140C3AD203DB7 /* Pods_PersonRecognize.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PersonRecognize.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4CD8E9AA2201D33964A3CCD /* Pods-PersonRecognize.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PersonRecognize.debug.xcconfig"; path = "Target Support Files/Pods-PersonRecognize/Pods-PersonRecognize.debug.xcconfig"; sourceTree = "<group>"; };
 		FB16D9A72521F0B3003C8AB5 /* KNN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KNN.swift; sourceTree = "<group>"; };
+		FB3B2E1B2529AE7B00117249 /* K-dTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "K-dTree.swift"; sourceTree = "<group>"; };
 		FB3D0F96251DA5CA0059CCB6 /* DefineString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefineString.swift; sourceTree = "<group>"; };
 		FB3D0F99251DA8AD0059CCB6 /* NetworkChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkChecker.swift; sourceTree = "<group>"; };
 		FB3D0FBD251DAC760059CCB6 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				FBB893722525CE3800F11E32 /* kNN-2.swift */,
 				FBA1B4DC251905A100A31DF7 /* Helper.swift */,
 				FB7502B725198B7100193FF9 /* VectorHelper.swift */,
+				FB3B2E1B2529AE7B00117249 /* K-dTree.swift */,
 				FB3D0F96251DA5CA0059CCB6 /* DefineString.swift */,
 			);
 			path = Core;
@@ -302,6 +305,8 @@
 			dependencies = (
 			);
 			name = PersonRecognize;
+			packageProductDependencies = (
+			);
 			productName = SimpleFacenet;
 			productReference = 951EB33422B6985E00A9533B /* PersonRecognize.app */;
 			productType = "com.apple.product-type.application";
@@ -330,6 +335,9 @@
 				Base,
 			);
 			mainGroup = 951EB32B22B6985D00A9533B;
+			packageReferences = (
+				FB3B2E172529AE4D00117249 /* XCRemoteSwiftPackageReference "KDTree" */,
+			);
 			productRefGroup = 951EB33522B6985E00A9533B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -408,6 +416,7 @@
 				FBB893732525CE3800F11E32 /* kNN-2.swift in Sources */,
 				FBA1B4C82519058B00A31DF7 /* LogTableViewCell.swift in Sources */,
 				FBA1B4D12519058B00A31DF7 /* VideoView.swift in Sources */,
+				FB3B2E1C2529AE7B00117249 /* K-dTree.swift in Sources */,
 				951EB35422B698F100A9533B /* tfWrap.mm in Sources */,
 				FBA1B4C92519058B00A31DF7 /* ViewLogViewController.swift in Sources */,
 				FBDD06AC251DDFA0002AF9F9 /* KMean.swift in Sources */,
@@ -641,6 +650,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FB3B2E172529AE4D00117249 /* XCRemoteSwiftPackageReference "KDTree" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Bersaelor/KDTree.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 951EB32C22B6985D00A9533B /* Project object */;
 }

@@ -10,12 +10,12 @@
 import UIKit
 import CoreML
 import RealmSwift
+//import KDTree
 
 //Machine Learning Model
 let fnet = FaceNet()
 let fDetector = FaceDetector()
 
-//var numberOfVectors = 0
 var vectorHelper = VectorHelper()
 
 
@@ -23,15 +23,16 @@ let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .u
 let trainingDataset = ImageDataset(split: .train)
 let testingDataset = ImageDataset(split: .test)
 
-var currentFrame: UIImage?
+//var currentFrame: UIImage?
 
 var currentLabel = UNKNOWN
-var timeDetected = ""
+
 var numberOfFramesDeteced = 0 //number frames detected
-let validFrames = 5 //after getting 3 frames, users have been verified
+let validFrames = 5 //after getting 5 frames, users have been verified
 
 var attendList: [Users] = [] //load from firebase
-var localUserList: [User] = [] //copy of attenList, use it to ignore append user appended
+var localUserList: [User] = [] //copy of attenList, use it to ignore appended users
+var userDict = [String: Int]()
 
 //Save User Local List
 let defaults = UserDefaults.standard
@@ -44,13 +45,14 @@ var savedUserList = defaults.stringArray(forKey: SAVED_USERS) ?? [String]()
 let realm = try! Realm()
 let fb  = FirebaseManager()
 
-
-
 //KMeans to reduce number  of vectors
 let KMeans = KMeansSwift.sharedInstance
 var kMeanVectors = [Vector]()
 
-
+//date time formatter
 let formatter = DateFormatter()
+
+
+//var tree: KDTree<Vector>?
 
 

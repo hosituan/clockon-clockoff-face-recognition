@@ -14,6 +14,7 @@ import AVFoundation
 
 class PreviewView: UIView {
     
+    //let api = API()
     private var maskLayer = [CAShapeLayer]()
     private var textLayer = [CATextLayer]()
     
@@ -60,7 +61,7 @@ class PreviewView: UIView {
     }
     
     
-    func drawFaceboundingBox(face : VNFaceObservation) {
+    func drawFaceboundingBox(face : VNFaceObservation, currentFrame: UIImage?) {
         
         let transform = CGAffineTransform(scaleX: 1, y: -1).translatedBy(x: 0, y: -frame.height)
         
@@ -75,11 +76,9 @@ class PreviewView: UIView {
             let result = res.name
             if result != UNKNOWN {
                 let  label = result
-                //let timestamp = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .medium, timeStyle: .medium)
                 let today = Date()
                 formatter.dateFormat = DATE_FORMAT
                 let timestamp = formatter.string(from: today)
-                //print(timeDetected)
                 if label != currentLabel {
                     currentLabel = label
                     numberOfFramesDeteced = 1
@@ -88,13 +87,14 @@ class PreviewView: UIView {
                 }
                 let detectedUser = User(name: label, image: frame, time: timestamp)
                 if numberOfFramesDeteced > validFrames  {
-                    print("Detected")
+                    //print("Detected")
                     if localUserList.count == 0 {
                         print("append 1")
                         speak(name: label)
                         //attendList.append(detectedUser)
                         localUserList.append(detectedUser)
-                        fb.uploadLogTimes(user: detectedUser)
+                        uploadLogs(user: detectedUser) {}
+                        //fb.uploadLogTimes(user: detectedUser) //upload to firebase db
                         showDiaglog3s(name: label)
                     }
                     else  {
@@ -102,14 +102,15 @@ class PreviewView: UIView {
                         for item in localUserList {
                             if item.name == label {
                                 if let time = formatter.date(from: item.time) {
-                                    let diff = time.timeOfDayInterval(toDate: today)
+                                    let diff = abs(time.timeOfDayInterval(toDate: today))
+                                    print(diff)
                                     if diff > 60 {
                                         print("append 2")
                                         localUserList.append(detectedUser)
                                         localUserList = localUserList.sorted(by: { $0.time > $1.time })
                                         speak(name: label)
-                                        //postLogs(user: detectedUser)
-                                        fb.uploadLogTimes(user: detectedUser)
+                                        uploadLogs(user: detectedUser) {}
+                                        //fb.uploadLogTimes(user: detectedUser) //upload to firebase db
                                         showDiaglog3s(name: label)
                                     }
                                 }
@@ -123,7 +124,8 @@ class PreviewView: UIView {
                         if count == localUserList.count {
                             print("append 3")
                             speak(name: label)
-                            fb.uploadLogTimes(user: detectedUser)
+                            uploadLogs(user: detectedUser) {}
+                            //fb.uploadLogTimes(user: detectedUser) //upload to firebase db
                             localUserList.append(detectedUser)
                             localUserList = localUserList.sorted(by: { $0.time > $1.time })
                             showDiaglog3s(name: label)

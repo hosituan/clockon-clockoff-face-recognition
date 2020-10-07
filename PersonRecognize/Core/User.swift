@@ -22,14 +22,6 @@ struct Users: Codable {
     var name: String
     var imageURL: String
     var time: String
-    
-    var dictionaryRepresentation: [String: Any] {
-            return [
-                "name" : name,
-                "imageUrl" : imageURL,
-                "time" : time
-            ]
-        }
 }
 
 class SavedVector: Object {

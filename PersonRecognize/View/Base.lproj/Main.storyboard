@@ -460,7 +460,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x6j-HM-px9" customClass="CustomButton" customModule="PersonRecognize" customModuleProvider="target">
-                                <rect key="frame" x="37.666666666666657" y="589.33333333333337" width="300" height="50"/>
+                                <rect key="frame" x="37.666666666666657" y="595.33333333333337" width="300" height="50"/>
                                 <color key="backgroundColor" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="2cR-Kj-hSs"/>
@@ -475,7 +475,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yxJ-M2-SEu" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                <rect key="frame" x="37.666666666666657" y="499.99999999999994" width="300" height="39.333333333333314"/>
+                                <rect key="frame" x="37.666666666666657" y="499.99999999999994" width="300" height="45.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
@@ -489,22 +489,35 @@
                                     <constraint firstAttribute="height" constant="300" id="XeH-sE-miC"/>
                                 </constraints>
                             </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Wu-Na-YZv" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                <rect key="frame" x="37.666666666666657" y="440" width="300" height="39.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Enter your ID"/>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kos-Z6-1ey"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="9Wu-Na-YZv" firstAttribute="centerX" secondItem="MvC-dr-M7o" secondAttribute="centerX" id="6k3-Ja-KXb"/>
                             <constraint firstItem="dEn-5Q-2tc" firstAttribute="top" secondItem="kos-Z6-1ey" secondAttribute="top" constant="100" id="LNK-2t-vKt"/>
                             <constraint firstItem="yxJ-M2-SEu" firstAttribute="width" secondItem="x6j-HM-px9" secondAttribute="width" id="Ljy-Da-Uyi"/>
+                            <constraint firstItem="9Wu-Na-YZv" firstAttribute="width" secondItem="yxJ-M2-SEu" secondAttribute="width" id="O4a-d3-bXS"/>
                             <constraint firstItem="x6j-HM-px9" firstAttribute="top" secondItem="yxJ-M2-SEu" secondAttribute="bottom" constant="50" id="SHE-vD-vp3"/>
                             <constraint firstItem="x6j-HM-px9" firstAttribute="centerX" secondItem="MvC-dr-M7o" secondAttribute="centerX" id="XNr-vI-RMo"/>
                             <constraint firstItem="dEn-5Q-2tc" firstAttribute="centerX" secondItem="MvC-dr-M7o" secondAttribute="centerX" id="gEi-Bb-e5C"/>
                             <constraint firstItem="yxJ-M2-SEu" firstAttribute="centerX" secondItem="MvC-dr-M7o" secondAttribute="centerX" id="kP5-Yo-rVE"/>
                             <constraint firstItem="yxJ-M2-SEu" firstAttribute="top" secondItem="dEn-5Q-2tc" secondAttribute="bottom" constant="100" id="mw9-lg-FzH"/>
+                            <constraint firstItem="9Wu-Na-YZv" firstAttribute="height" secondItem="yxJ-M2-SEu" secondAttribute="height" multiplier="0.864407" id="pef-Fc-2bf"/>
+                            <constraint firstItem="9Wu-Na-YZv" firstAttribute="top" secondItem="dEn-5Q-2tc" secondAttribute="bottom" constant="40" id="q9y-BA-ne0"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="1uM-W4-Bu4"/>
                     <connections>
                         <outlet property="faceImageView" destination="dEn-5Q-2tc" id="6UT-6N-835"/>
+                        <outlet property="idTextField" destination="9Wu-Na-YZv" id="2eJ-mc-rPr"/>
                         <outlet property="textField" destination="yxJ-M2-SEu" id="so1-8j-UoE"/>
                     </connections>
                 </viewController>
@@ -645,6 +658,9 @@
         </scene>
     </scenes>
     <designables>
+        <designable name="9Wu-Na-YZv">
+            <size key="intrinsicContentSize" width="300" height="39.220703125"/>
+        </designable>
         <designable name="DeU-le-8YQ">
             <size key="intrinsicContentSize" width="335" height="39.220703125"/>
         </designable>

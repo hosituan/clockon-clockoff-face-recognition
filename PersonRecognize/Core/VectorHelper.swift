@@ -83,12 +83,13 @@ class VectorHelper  {
         let img = fDetector.extractFaces(frame: frame)
         if let i = img.first {
             let targetVector = fnet.run(image: i)
-            //for vector in vectors {
+            //let start = DispatchTime.now()
+            
             for vector in  kMeanVectors {
                 let distance = l2distance(targetVector, vector.vector)
                 //print("\(vector.name): \(distance * 1000)")
                 if distance * 1000 < 700 {
-                    print("\(vector.name): \(distance * 1000)")
+                    //print("\(vector.name): \(distance * 1000)")
                     array.append(vector)
                     if distance < result.distance {
                         result = vector
@@ -98,6 +99,12 @@ class VectorHelper  {
                     }
                 }
             }
+//            let end = DispatchTime.now()
+//            let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds
+//            let timeInterval = Double(nanoTime) / 1_000_000_000
+            //print("for loop in: \(timeInterval)")
+            
+            
             if result.distance * 1000 < 400  {
                 result.distance = 100
                 return result
@@ -115,20 +122,77 @@ class VectorHelper  {
                 }
             }
             switch max {
-                case 1:
-                    result.distance = 70
-                case 2:
-                    result.distance = 90
-                case 3:
-                    result.distance = 100
-                default:
-                    result.distance = 0
+            case 1:
+                result.distance = 70
+            case 2:
+                result.distance = 90
+            case 0:
+                result.distance = 0
+            default:
+                result.distance = 100
             }
             return result
         }
-        result.distance = 0
+        result.distance = 100
         return result
     }
+    
+    func getResult1(image: UIImage) -> Vector {
+        var array: [Vector] = []
+        var result = Vector(name: "Unknown", vector: [], distance: 100)
+        guard let i = image.ciImage else { return result }
+        let targetVector = fnet.run(image: i)
+        let start = DispatchTime.now()
+        
+        for vector in  kMeanVectors {
+            let distance = l2distance(targetVector, vector.vector)
+            //print("\(vector.name): \(distance * 1000)")
+            if distance * 1000 < 700 {
+                print("\(vector.name): \(distance * 1000)")
+                array.append(vector)
+                if distance < result.distance {
+                    result = vector
+                    result.distance = distance
+                    //print("result: \(result.name)")
+                    //print("vector: \(vector.name)")
+                }
+            }
+        }
+        let end = DispatchTime.now()
+        let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds
+        let timeInterval = Double(nanoTime) / 1_000_000_000
+        print("for loop in: \(timeInterval)")
+        
+        
+        if result.distance * 1000 < 400  {
+            result.distance = 100
+            return result
+        }
+        let groupedItems = Dictionary(grouping: array, by: {$0.name})
+        var max = 0
+        var count = 0
+        for item in groupedItems {
+            if item.value.count > max {
+                max = item.value.count
+                count = 1
+            }
+            else if item.value.count == max {
+                count += 1
+            }
+        }
+        switch max {
+        case 1:
+            result.distance = 70
+        case 2:
+            result.distance = 90
+        case 0:
+            result.distance = 100
+        default:
+            result.distance = 100
+        }
+        return result
+    }
+    
 }
 
 
@@ -138,6 +202,8 @@ class VectorHelper  {
 func l2distance(_ feat1: [Double], _ feat2: [Double]) -> Double {
     return sqrt(zip(feat1, feat2).map { f1, f2 in pow(f2 - f1, 2) }.reduce(0, +))
 }
+
+
 
 //get  KMean Vector from all
 func getKMeanVector(vectors: [Vector]) -> [Vector] {

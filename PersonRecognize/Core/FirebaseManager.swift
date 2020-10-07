@@ -163,14 +163,13 @@ class FirebaseManager {
         
     }
     
-    func loadUsers(completionHandler: @escaping ([String]) -> Void) {
-        var userList: [String] = []
+    func loadUsers(completionHandler: @escaping ([String: Int]) -> Void) {
+        var userList: [String: Int] = [:]
         Database.database().reference().child(USER_CHILD).queryLimited(toLast: 300).observeSingleEvent(of: .value, with: { (snapshot) in
-            if let value = snapshot.value as? NSDictionary {
-                for item in value {
-                    userList.append(item.key as! String)
-                }
-                completionHandler(userList.sorted())
+            if let data = snapshot.value as? [String: Any] {
+                userList = data as! [String: Int]
+                completionHandler(userList)
+                
             }
             else {
                 completionHandler(userList)
@@ -182,8 +181,8 @@ class FirebaseManager {
             completionHandler(userList)
         }
     }
-    func uploadUser(name: String, completionHandler: @escaping () -> Void) {
-        let dict = [name : 0]
+    func uploadUser(name: String, user_id: Int, completionHandler: @escaping () -> Void) {
+        let dict = [name : user_id]
         Database.database().reference().child(USER_CHILD).updateChildValues(dict, withCompletionBlock: {
             (error, ref) in
             if error == nil {
