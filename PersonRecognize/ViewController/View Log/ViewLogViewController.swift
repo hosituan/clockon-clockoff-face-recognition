@@ -16,13 +16,13 @@ class ViewLogViewController: UIViewController {
         super.viewDidLoad()
         fnet.clean()
         if NetworkChecker.isConnectedToInternet {
-            ProgressHUD.show("Loading log times...")
-            fb.loadLogTimes { (result) in
-                attendList = result
-                self.tableView.delegate = self
-                self.tableView.dataSource = self
-                ProgressHUD.dismiss()
-            }
+//           ProgressHUD.show("Loading log times...")
+//            fb.loadLogTimes { (result) in
+//                attendList = result
+//                self.tableView.delegate = self
+//                self.tableView.dataSource = self
+//                ProgressHUD.dismiss()
+//            }
         }
         else {
             showDialog(message: "You have not connected to internet.")

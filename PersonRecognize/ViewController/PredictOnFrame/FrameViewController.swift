@@ -145,18 +145,17 @@ class FrameViewController: UIViewController {
     
     @IBAction func tapTakePhoto(_ sender: UIButton) {
         guard let frame = currentFrame else {
+            print("nil frame")
             return
         }
         let today = Date()
         formatter.dateFormat = DATE_FORMAT
         let timestamp = formatter.string(from: today)
         let user = User(name: TAKE_PHOTO_NAME, image: frame, time: timestamp)
+        showDiaglog3s(name: TAKE_PHOTO_NAME, true)
         api.uploadLogs(user: user) { error in
             if error != nil {
                 self.showDiaglog3s(name: TAKE_PHOTO_NAME, false)
-            }
-            else {
-                self.showDiaglog3s(name: TAKE_PHOTO_NAME, true)
             }
         }
         //fb.uploadLogTimes(user: user)
@@ -318,80 +317,96 @@ extension FrameViewController {
             //perform all the UI updates on the main queue
             guard let results = request.results as? [VNFaceObservation] else { return }
             self.previewView.removeMask()
+            let lb = self.getLabel(image: self.currentFrame)
             for face in results {
-                
-                self.previewView.drawFaceboundingBox(face: face, currentFrame: self.currentFrame)
-                
+                self.previewView.drawFaceboundingBox(face: face, label: lb)
             }
         }
     }
     
-    /* func getLabel() {
-     var lb = UNKNOWN
-     if let frame = currentFrame {
-     let res = vectorHelper.getResult(image: frame)
-     lb = "\(res.name): \(res.distance)%"
-     let result = res.name
-     if result != UNKNOWN {
-     let  label = result
-     let today = Date()
-     formatter.dateFormat = DATE_FORMAT
-     let timestamp = formatter.string(from: today)
-     if label != currentLabel {
-     currentLabel = label
-     numberOfFramesDeteced = 1
-     } else {
-     numberOfFramesDeteced += 1
-     }
-     let detectedUser = User(name: label, image: frame, time: timestamp)
-     if numberOfFramesDeteced > validFrames  {
-     print("Detected")
-     if localUserList.count == 0 {
-     print("append 1")
-     speak(name: label)
-     //attendList.append(detectedUser)
-     localUserList.append(detectedUser)
-     fb.uploadLogTimes(user: detectedUser)
-     showDiaglog3s(name: label)
-     }
-     else  {
-     var count = 0
-     for item in localUserList {
-     if item.name == label {
-     if let time = formatter.date(from: item.time) {
-     let diff = abs(time.timeOfDayInterval(toDate: today))
-     print(diff)
-     if diff > 60 {
-     print("append 2")
-     localUserList.append(detectedUser)
-     localUserList = localUserList.sorted(by: { $0.time > $1.time })
-     speak(name: label)
-     //postLogs(user: detectedUser)
-     fb.uploadLogTimes(user: detectedUser)
-     showDiaglog3s(name: label)
-     }
-     }
-     break
-     }
-     else {
-     count += 1
-     }
-     }
-     
-     if count == localUserList.count {
-     print("append 3")
-     speak(name: label)
-     fb.uploadLogTimes(user: detectedUser)
-     localUserList.append(detectedUser)
-     localUserList = localUserList.sorted(by: { $0.time > $1.time })
-     showDiaglog3s(name: label)
-     }
-     }
-     }
-     }
-     
-     }
-     } */
+    func getLabel(image: UIImage?) -> String {
+        var lb = UNKNOWN
+        if let frame = image {
+            let res = vectorHelper.getResult(image: frame)
+            lb = "\(res.name): \(res.distance)%"
+            let result = res.name
+            if result != UNKNOWN {
+                let  label = result
+                let today = Date()
+                formatter.dateFormat = DATE_FORMAT
+                let timestamp = formatter.string(from: today)
+                if label != currentLabel {
+                    currentLabel = label
+                    numberOfFramesDeteced = 1
+                } else {
+                    numberOfFramesDeteced += 1
+                }
+                let detectedUser = User(name: label, image: frame, time: timestamp)
+                if numberOfFramesDeteced > validFrames  {
+                    //print("Detected")
+                    if localUserList.count == 0 {
+                        print("append 1")
+                        speak(name: label)
+                        //attendList.append(detectedUser)
+                        localUserList.append(detectedUser)
+                        api.uploadLogs(user: detectedUser) { error in
+                            if error != nil {
+                                self.showDiaglog3s(name: label, false)
+                            }
+                        }
+                        //fb.uploadLogTimes(user: detectedUser) //upload to firebase db
+                        showDiaglog3s(name: label, true)
+                    }
+                    else  {
+                        var count = 0
+                        for item in localUserList {
+                            if item.name == label {
+                                if let time = formatter.date(from: item.time) {
+                                    let diff = abs(time.timeOfDayInterval(toDate: today))
+                                    print("Diffrent: \(diff) seconds")
+                                    if diff > 60 {
+                                        print("append 2")
+                                        localUserList.append(detectedUser)
+                                        localUserList = localUserList.sorted(by: { $0.time > $1.time })
+                                        speak(name: label)
+                                        api.uploadLogs(user: detectedUser) { error in
+                                            if error != nil {
+                                                self.showDiaglog3s(name: label, false)
+                                            }
+                                        }
+                                        //fb.uploadLogTimes(user: detectedUser) //upload to firebase db
+                                        showDiaglog3s(name: label, true)
+                                    }
+                                }
+                                break
+                            }
+                            else {
+                                count += 1
+                            }
+                        }
+                        
+                        if count == localUserList.count {
+                            print("append 3")
+                            speak(name: label)
+                            api.uploadLogs(user: detectedUser) { error in
+                                if error != nil {
+                                    self.showDiaglog3s(name: label, false)
+                                }
+                            }
+                            //fb.uploadLogTimes(user: detectedUser) //upload to firebase db
+                            localUserList.append(detectedUser)
+                            localUserList = localUserList.sorted(by: { $0.time > $1.time })
+                            showDiaglog3s(name: label, true)
+                        }
+                    }
+                    
+                }
+                
+            }
+        }
+        return lb
+        
+    }
     
     func speak(name: String) {
         let utterance = AVSpeechUtterance(string: "Hello \(name)")

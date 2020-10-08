@@ -137,16 +137,17 @@ class VectorHelper  {
         return result
     }
     
-    func getResult1(image: UIImage) -> Vector {
+    func getResult1(image: CIImage) -> Vector {
         var array: [Vector] = []
         var result = Vector(name: "Unknown", vector: [], distance: 100)
-        guard let i = image.ciImage else { return result }
-        let targetVector = fnet.run(image: i)
+//        guard let i = image.ciImage else { print("nil")
+//            return result }
+        let targetVector = fnet.run(image: image)
         let start = DispatchTime.now()
         
         for vector in  kMeanVectors {
             let distance = l2distance(targetVector, vector.vector)
-            //print("\(vector.name): \(distance * 1000)")
+            print("\(vector.name): \(distance * 1000)")
             if distance * 1000 < 700 {
                 print("\(vector.name): \(distance * 1000)")
                 array.append(vector)
@@ -161,7 +162,7 @@ class VectorHelper  {
         let end = DispatchTime.now()
         let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds
         let timeInterval = Double(nanoTime) / 1_000_000_000
-        print("for loop in: \(timeInterval)")
+        //print("for loop in: \(timeInterval)")
         
         
         if result.distance * 1000 < 400  {

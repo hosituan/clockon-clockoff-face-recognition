@@ -13,7 +13,7 @@ let postTimeURL = ""
 
 class API {
     
-    func postLogs(user: Users, completionHandler: @escaping (Error?) -> Void) {
+    func postLogs(user: Users, completionHandler: @escaping (String?) -> Void) {
         let api_url = "\(SERVER_URL)/api/timeLog/create"
         let status = user.name != TAKE_PHOTO_NAME ? "FACE_CHECKED" : "PENDING"
         var dictionary: [String: Any]
@@ -41,17 +41,25 @@ class API {
             do {
                 guard let jsonObject = try JSONSerialization.jsonObject(with: AFdata.data!) as? [String: Any] else {
                     print("Error: Cannot convert data to JSON object")
+                    completionHandler("Error")
                     return
+                }
+                if let json = jsonObject["success"], json as! Bool == false {
+                    completionHandler("Error")
                 }
                 guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
                     print("Error: Cannot convert JSON object to Pretty JSON data")
+                    
+                    completionHandler("Error")
                     return
                 }
                 guard let prettyPrintedJson = String(data: prettyJsonData, encoding: .utf8) else {
                     print("Error: Could print JSON in String")
+                    completionHandler("Error")
                     return
                 }
                 print(prettyPrintedJson)
+                
             } catch {
                 print("Error: Trying to convert JSON data to string")
                 return
@@ -59,7 +67,7 @@ class API {
         }
     }
     
-    func uploadLogs(user: User, completionHandler: @escaping (Error?) -> Void) {
+    func uploadLogs(user: User, completionHandler: @escaping (String?) -> Void) {
         
         let api_url = "\(SERVER_URL)/api/files/upload"
         guard let imgData = user.image.jpegData(compressionQuality: 0.9) else {
@@ -84,7 +92,7 @@ class API {
                         let userLog = Users(name: user.name, imageURL: imgURL, time: user.time)
                         self.postLogs(user: userLog) { (error) in
                             if error != nil {
-                                completionHandler(error)
+                                completionHandler("Error")
                             } else {
                                 completionHandler(nil)
                                 

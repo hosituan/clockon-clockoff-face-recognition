@@ -14,10 +14,8 @@ import ProgressHUD
 
 
 class HomeViewController: UIViewController {
-    @IBOutlet weak var finalFrame: UIImageView!
-
-    private var generator:AVAssetImageGenerator!
     
+    @IBOutlet weak var img: UIImageView!
     @IBOutlet weak var vectorsLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +26,10 @@ class HomeViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
-
+        if let i = current {
+            img.image  = UIImage(cgImage: i)
+        }
+        
     }
     override func viewDidAppear(_ animated: Bool) {
         fnet.clean()
@@ -38,6 +39,9 @@ class HomeViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: animated);
         super.viewWillDisappear(animated)
         fnet.load()
+        
+        
+        
     }
     
     @IBAction func tapStart(_ sender: UIButton) {
@@ -82,13 +86,13 @@ class HomeViewController: UIViewController {
                 }
             }
             
-            fb.loadLogTimes { (result) in
-                attendList = result
-                for user in attendList {
-                    let u = User(name: user.name, image: UIImage(named: "LaunchImage")!, time: user.time)
-                    localUserList.append(u)
-                }
-            }
+            //            fb.loadLogTimes { (result) in
+            //                attendList = result
+            //                for user in attendList {
+            //                    let u = User(name: user.name, image: UIImage(named: "LaunchImage")!, time: user.time)
+            //                    localUserList.append(u)
+            //                }
+            //            }
             fb.loadUsers(completionHandler: { (result) in
                 userDict = result
                 print("Number of user: \(userDict.count)")
@@ -97,7 +101,7 @@ class HomeViewController: UIViewController {
             
         }
         else {
-            //code for local data
+            //for local data
             let result = realm.objects(SavedVector.self)
             print(result.count)
             kMeanVectors = []

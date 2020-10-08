@@ -58,36 +58,36 @@ class FirebaseManager {
         }
     }
     
-    func loadLogTimes(completionHandler: @escaping ([Users]) -> Void) {
-        var attendList: [Users] = []
-        Database.database().reference().child(LOG_TIME).queryLimited(toLast: 1000).observeSingleEvent(of: .value, with: { (snapshot) in
-            if let data = snapshot.value as? [String: Any] {
-                let dataArray = Array(data)
-                let values = dataArray.map { $0.1 }
-                for dict in values {
-                    let item = dict as! NSDictionary
-                    guard let name = item["name"] as? String,
-                          let imgUrl = item["imageURL"] as? String,
-                          let time = item["time"] as? String
-                    else {
-                        print("Error at get log times.")
-                        continue
-                    }
-                    let object = Users(name: name, imageURL: imgUrl, time: time)
-                    attendList.append(object)
-                }
-                completionHandler(attendList.sorted(by: { $0.time > $1.time }))
-            }
-            else {
-                completionHandler(attendList)
-            }
-            
-        }) { (error) in
-            print(error.localizedDescription)
-            completionHandler(attendList)
-        }
-        
-    }
+//    func loadLogTimes(completionHandler: @escaping ([Users]) -> Void) {
+//        var attendList: [Users] = []
+//        Database.database().reference().child(LOG_TIME).queryLimited(toLast: 1000).observeSingleEvent(of: .value, with: { (snapshot) in
+//            if let data = snapshot.value as? [String: Any] {
+//                let dataArray = Array(data)
+//                let values = dataArray.map { $0.1 }
+//                for dict in values {
+//                    let item = dict as! NSDictionary
+//                    guard let name = item["name"] as? String,
+//                          let imgUrl = item["imageURL"] as? String,
+//                          let time = item["time"] as? String
+//                    else {
+//                        print("Error at get log times.")
+//                        continue
+//                    }
+//                    let object = Users(name: name, imageURL: imgUrl, time: time)
+//                    attendList.append(object)
+//                }
+//                completionHandler(attendList.sorted(by: { $0.time > $1.time }))
+//            }
+//            else {
+//                completionHandler(attendList)
+//            }
+//            
+//        }) { (error) in
+//            print(error.localizedDescription)
+//            completionHandler(attendList)
+//        }
+//        
+//    }
     
     func loadVector(completionHandler: @escaping ([Vector]) -> Void) {
         var vectors = [Vector]()
