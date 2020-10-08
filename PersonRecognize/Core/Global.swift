@@ -23,8 +23,6 @@ let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .u
 let trainingDataset = ImageDataset(split: .train)
 let testingDataset = ImageDataset(split: .test)
 
-//var currentFrame: UIImage?
-
 var currentLabel = UNKNOWN
 
 var numberOfFramesDeteced = 0 //number frames detected
@@ -37,8 +35,6 @@ var userDict = [String: Int]()
 //Save User Local List
 let defaults = UserDefaults.standard
 var savedUserList = defaults.stringArray(forKey: SAVED_USERS) ?? [String]()
-//defaults.set(savedUserList, forKey: SAVED_USERS)
-
 
 
 //Realm
@@ -52,7 +48,5 @@ var kMeanVectors = [Vector]()
 //date time formatter
 let formatter = DateFormatter()
 
-
-//var tree: KDTree<Vector>?
 
 

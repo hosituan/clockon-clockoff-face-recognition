@@ -54,6 +54,9 @@ class AddNameViewController: UIViewController {
             getFrames.getAllFrames(videoURL!, for: textField.text!)
             self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
         }
+        else {
+            self.showDialog(message: "Please fill User ID and Name!")
+        }
     }
     
     func getThumbnailImageFromVideoUrl(url: URL, completion: @escaping ((_ image: UIImage?)->Void)) {

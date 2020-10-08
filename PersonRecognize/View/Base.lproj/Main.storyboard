@@ -86,7 +86,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ht0-Nw-Ofr" customClass="CustomButton" customModule="PersonRecognize" customModuleProvider="target">
-                                        <rect key="frame" x="30" y="692" width="315" height="50"/>
+                                        <rect key="frame" x="30" y="692" width="325" height="50"/>
                                         <color key="backgroundColor" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="tlT-KG-WU9"/>
@@ -100,7 +100,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't worry. Please take a photo in case we can't recognize." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5yh-VX-zhM">
-                                        <rect key="frame" x="17.666666666666657" y="752" width="339.66666666666674" height="14.333333333333371"/>
+                                        <rect key="frame" x="17.666666666666657" y="752" width="340" height="14.666666666666629"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -109,7 +109,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="5yh-VX-zhM" firstAttribute="centerX" secondItem="Uue-3y-EMc" secondAttribute="centerX" id="JVY-tt-sTF"/>
-                                    <constraint firstAttribute="trailing" secondItem="ht0-Nw-Ofr" secondAttribute="trailing" constant="30" id="NwQ-yW-4JY"/>
+                                    <constraint firstAttribute="trailing" secondItem="ht0-Nw-Ofr" secondAttribute="trailing" constant="20" symbolic="YES" id="NwQ-yW-4JY"/>
                                     <constraint firstAttribute="bottom" secondItem="ht0-Nw-Ofr" secondAttribute="bottom" constant="70" id="OAX-bc-dNR"/>
                                     <constraint firstItem="ht0-Nw-Ofr" firstAttribute="leading" secondItem="Uue-3y-EMc" secondAttribute="leading" constant="30" id="QqK-kY-7PB"/>
                                     <constraint firstItem="5yh-VX-zhM" firstAttribute="top" secondItem="ht0-Nw-Ofr" secondAttribute="bottom" constant="10" id="Wrv-Eu-REl"/>
@@ -259,13 +259,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vzu-ec-G0l">
-                                                    <rect key="frame" x="186" y="72" width="153" height="14.333333333333329"/>
+                                                    <rect key="frame" x="186" y="72" width="153" height="14.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZDv-4s-BO0">
-                                                    <rect key="frame" x="241" y="31" width="15.333333333333314" height="21"/>
+                                                    <rect key="frame" x="241" y="31" width="15.666666666666686" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -321,7 +321,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Dnn-mE-laO">
-                                <rect key="frame" x="50" y="206" width="275" height="400"/>
+                                <rect key="frame" x="50" y="241" width="275" height="330"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JEy-4m-0pP" customClass="CustomButton" customModule="PersonRecognize" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="275" height="50"/>
@@ -337,22 +337,8 @@
                                             <action selector="tapStart:" destination="VbX-vL-wM5" eventType="touchUpInside" id="1lL-SM-NTS"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VZN-dn-WwS" customClass="CustomButton" customModule="PersonRecognize" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="70" width="275" height="50"/>
-                                        <color key="backgroundColor" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="wE1-x0-0Tc"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                        <state key="normal" title="Test Image">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="tapPredictImage:" destination="VbX-vL-wM5" eventType="touchUpInside" id="4zm-fU-FjH"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D4V-78-HD5" customClass="CustomButton" customModule="PersonRecognize" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="140" width="275" height="50"/>
+                                        <rect key="frame" x="0.0" y="70" width="275" height="50"/>
                                         <color key="backgroundColor" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="fqA-G0-1Yj"/>
@@ -365,6 +351,20 @@
                                             <action selector="tapAddUser:" destination="VbX-vL-wM5" eventType="touchUpInside" id="Xu2-9a-VIw"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VZN-dn-WwS" customClass="CustomButton" customModule="PersonRecognize" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="140" width="275" height="50"/>
+                                        <color key="backgroundColor" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="wE1-x0-0Tc"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <state key="normal" title="Test Image">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="tapPredictImage:" destination="VbX-vL-wM5" eventType="touchUpInside" id="4zm-fU-FjH"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cPf-Gm-f02" customClass="CustomButton" customModule="PersonRecognize" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="210" width="275" height="50"/>
                                         <color key="backgroundColor" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
@@ -372,15 +372,15 @@
                                             <constraint firstAttribute="height" constant="50" id="W5m-bL-FbM"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                        <state key="normal" title="Users list">
+                                        <state key="normal" title="All Users">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="tapViewData:" destination="VbX-vL-wM5" eventType="touchUpInside" id="aJj-hF-oQO"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jbc-w5-Dr5" customClass="CustomButton" customModule="PersonRecognize" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="280" width="275" height="50"/>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jbc-w5-Dr5" customClass="CustomButton" customModule="PersonRecognize" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="270" width="275" height="50"/>
                                         <color key="backgroundColor" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="qxC-Gr-I0G"/>
@@ -394,7 +394,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8XF-Me-PPy" customClass="CustomButton" customModule="PersonRecognize" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="350" width="275" height="50"/>
+                                        <rect key="frame" x="0.0" y="280" width="275" height="50"/>
                                         <color key="backgroundColor" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Dhp-xC-Nhn"/>
@@ -416,7 +416,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have 0 users" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uBH-HR-29w">
-                                <rect key="frame" x="123.00000000000001" y="656" width="129.33333333333337" height="20.333333333333371"/>
+                                <rect key="frame" x="123.00000000000001" y="621" width="129.33333333333337" height="20.333333333333371"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -460,7 +460,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x6j-HM-px9" customClass="CustomButton" customModule="PersonRecognize" customModuleProvider="target">
-                                <rect key="frame" x="37.666666666666657" y="595.33333333333337" width="300" height="50"/>
+                                <rect key="frame" x="37.666666666666657" y="589.33333333333337" width="300" height="50"/>
                                 <color key="backgroundColor" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="2cR-Kj-hSs"/>
@@ -475,7 +475,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yxJ-M2-SEu" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                <rect key="frame" x="37.666666666666657" y="499.99999999999994" width="300" height="45.333333333333314"/>
+                                <rect key="frame" x="37.666666666666657" y="499.99999999999994" width="300" height="39.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
@@ -490,7 +490,7 @@
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Wu-Na-YZv" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                <rect key="frame" x="37.666666666666657" y="440" width="300" height="39.333333333333314"/>
+                                <rect key="frame" x="37.666666666666657" y="440" width="300" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
@@ -594,7 +594,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eAX-o4-GhI">
-                                <rect key="frame" x="0.0" y="167.33333333333331" width="375" height="580.66666666666674"/>
+                                <rect key="frame" x="0.0" y="162" width="375" height="586"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="wYz-yf-Dhr">
@@ -608,7 +608,7 @@
                                 </prototypes>
                             </tableView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DeU-le-8YQ" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                <rect key="frame" x="20" y="108" width="335" height="39.333333333333343"/>
+                                <rect key="frame" x="20" y="108" width="335" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
@@ -659,13 +659,13 @@
     </scenes>
     <designables>
         <designable name="9Wu-Na-YZv">
-            <size key="intrinsicContentSize" width="300" height="39.220703125"/>
+            <size key="intrinsicContentSize" width="112" height="34"/>
         </designable>
         <designable name="DeU-le-8YQ">
-            <size key="intrinsicContentSize" width="335" height="39.220703125"/>
+            <size key="intrinsicContentSize" width="103.66666666666667" height="34"/>
         </designable>
         <designable name="yxJ-M2-SEu">
-            <size key="intrinsicContentSize" width="300" height="39.220703125"/>
+            <size key="intrinsicContentSize" width="103.66666666666667" height="34"/>
         </designable>
     </designables>
     <resources>

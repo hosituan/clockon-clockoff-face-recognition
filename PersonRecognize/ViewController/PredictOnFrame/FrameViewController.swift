@@ -14,10 +14,8 @@ import ProgressHUD
 
 class FrameViewController: UIViewController {
     
-    deinit {
-        print("FrameViewController deinit")
-    }
     
+    let api = API()
     var currentFrame: UIImage?
     @IBOutlet weak var previewView: PreviewView!
     //    private var faceDetectionRequest: VNRequest!
@@ -152,13 +150,13 @@ class FrameViewController: UIViewController {
         let today = Date()
         formatter.dateFormat = DATE_FORMAT
         let timestamp = formatter.string(from: today)
-        let user = User(name: "Unknown - Take Photo", image: frame, time: timestamp)
-        uploadLogs(user: user) { error in
+        let user = User(name: TAKE_PHOTO_NAME, image: frame, time: timestamp)
+        api.uploadLogs(user: user) { error in
             if error != nil {
-                self.showDiaglog3s(name: "Unknown - Take Photo", false)
+                self.showDiaglog3s(name: TAKE_PHOTO_NAME, false)
             }
             else {
-                self.showDiaglog3s(name: "Unknown - Take Photo.", true)
+                self.showDiaglog3s(name: TAKE_PHOTO_NAME, true)
             }
         }
         //fb.uploadLogTimes(user: user)
@@ -494,20 +492,6 @@ extension FrameViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
             print(error)
         }
         
-    }
-    
-}
-
-extension FrameViewController {
-    func showDiaglog3s(name: String,_ success: Bool) {
-        let title = success == false ?  "Can't join!" : "Joining..."
-        let alert = UIAlertController(title: title, message: "\(name)", preferredStyle: .alert)
-        self.present(alert, animated: true, completion: nil)
-        let when = DispatchTime.now() + 1
-        
-        DispatchQueue.main.asyncAfter(deadline: when) {
-            alert.dismiss(animated: true, completion: nil)
-        }
     }
     
 }

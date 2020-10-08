@@ -15,5 +15,16 @@ extension UIViewController {
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
+    
+    func showDiaglog3s(name: String,_ success: Bool) {
+        let title = success == false ?  "Can't join!" : "Joining..."
+        let alert = UIAlertController(title: title, message: "\(name)", preferredStyle: .alert)
+        self.present(alert, animated: true, completion: nil)
+        let when = DispatchTime.now() + 1
+        
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            alert.dismiss(animated: true, completion: nil)
+        }
+    }
 }
 

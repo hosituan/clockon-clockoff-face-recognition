@@ -5,8 +5,8 @@ target 'PersonRecognize' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
 
 
-  pod 'TensorFlow-experimental'
-	pod 'FaceCropper'
+pod 'TensorFlow-experimental'
+pod 'FaceCropper'
 pod 'Alamofire'
 pod 'SkyFloatingLabelTextField', '~> 3.0'
 pod 'IQKeyboardManagerSwift'

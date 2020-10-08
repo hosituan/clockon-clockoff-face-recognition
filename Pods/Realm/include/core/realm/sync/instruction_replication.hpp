@@ -118,8 +118,6 @@ public:
 
     void create_object(const Table*, ObjKey) override;
     void remove_object(const Table*, ObjKey) override;
-    /// \param prior_num_rows The number of rows in the table prior to the
-    /// modification.
     void set_link_type(const Table*, ColKey col_key, LinkType) override;
     void clear_table(const Table*, size_t prior_num_rows) override;
 

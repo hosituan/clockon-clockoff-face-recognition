@@ -17,7 +17,7 @@
 		C74123AA68AA5B08B54BAB0F /* Pods_PersonRecognize.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9E4B7E8ED1140C3AD203DB7 /* Pods_PersonRecognize.framework */; };
 		FB16D9A82521F0B3003C8AB5 /* KNN.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB16D9A72521F0B3003C8AB5 /* KNN.swift */; };
 		FB3B2E1C2529AE7B00117249 /* K-dTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3B2E1B2529AE7B00117249 /* K-dTree.swift */; };
-		FB3D0F97251DA5CA0059CCB6 /* DefineString.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3D0F96251DA5CA0059CCB6 /* DefineString.swift */; };
+		FB3D0F97251DA5CA0059CCB6 /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3D0F96251DA5CA0059CCB6 /* Define.swift */; };
 		FB3D0F9A251DA8AD0059CCB6 /* NetworkChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3D0F99251DA8AD0059CCB6 /* NetworkChecker.swift */; };
 		FB3D0FBE251DAC760059CCB6 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3D0FBD251DAC760059CCB6 /* Date.swift */; };
 		FB57AA76251CCA4E00B2CCF9 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB57AA75251CCA4E00B2CCF9 /* FirebaseManager.swift */; };
@@ -71,7 +71,7 @@
 		C4CD8E9AA2201D33964A3CCD /* Pods-PersonRecognize.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PersonRecognize.debug.xcconfig"; path = "Target Support Files/Pods-PersonRecognize/Pods-PersonRecognize.debug.xcconfig"; sourceTree = "<group>"; };
 		FB16D9A72521F0B3003C8AB5 /* KNN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KNN.swift; sourceTree = "<group>"; };
 		FB3B2E1B2529AE7B00117249 /* K-dTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "K-dTree.swift"; sourceTree = "<group>"; };
-		FB3D0F96251DA5CA0059CCB6 /* DefineString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefineString.swift; sourceTree = "<group>"; };
+		FB3D0F96251DA5CA0059CCB6 /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		FB3D0F99251DA8AD0059CCB6 /* NetworkChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkChecker.swift; sourceTree = "<group>"; };
 		FB3D0FBD251DAC760059CCB6 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		FB57AA75251CCA4E00B2CCF9 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
@@ -250,21 +250,16 @@
 		FBA1B4D5251905A100A31DF7 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				FBF954E1252EA5720058FFD4 /* Object */,
+				FBE4AFB1252EA5FE00BEF636 /* ML Algorithm */,
 				FBA1B4D6251905A100A31DF7 /* Global.swift */,
 				FBDF07AD2525952A00620F33 /* API.swift */,
-				FB3D0F99251DA8AD0059CCB6 /* NetworkChecker.swift */,
-				FBDD06AB251DDFA0002AF9F9 /* KMean.swift */,
-				FB9945E72519EA500023E174 /* Vector.swift */,
-				FBA1B4D8251905A100A31DF7 /* User.swift */,
+				FBA1B4DC251905A100A31DF7 /* Helper.swift */,
 				FBA1B4DA251905A100A31DF7 /* ImageDataset.swift */,
 				FB57AA75251CCA4E00B2CCF9 /* FirebaseManager.swift */,
 				FBA1B4DB251905A100A31DF7 /* CreateUserData.swift */,
-				FB16D9A72521F0B3003C8AB5 /* KNN.swift */,
-				FBB893722525CE3800F11E32 /* kNN-2.swift */,
-				FBA1B4DC251905A100A31DF7 /* Helper.swift */,
 				FB7502B725198B7100193FF9 /* VectorHelper.swift */,
-				FB3B2E1B2529AE7B00117249 /* K-dTree.swift */,
-				FB3D0F96251DA5CA0059CCB6 /* DefineString.swift */,
+				FB3D0F96251DA5CA0059CCB6 /* Define.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -285,6 +280,27 @@
 				FBA1B4BF2519058B00A31DF7 /* ViewFaceViewController.swift */,
 			);
 			path = "View Face";
+			sourceTree = "<group>";
+		};
+		FBE4AFB1252EA5FE00BEF636 /* ML Algorithm */ = {
+			isa = PBXGroup;
+			children = (
+				FB3B2E1B2529AE7B00117249 /* K-dTree.swift */,
+				FBDD06AB251DDFA0002AF9F9 /* KMean.swift */,
+				FBB893722525CE3800F11E32 /* kNN-2.swift */,
+				FB16D9A72521F0B3003C8AB5 /* KNN.swift */,
+			);
+			path = "ML Algorithm";
+			sourceTree = "<group>";
+		};
+		FBF954E1252EA5720058FFD4 /* Object */ = {
+			isa = PBXGroup;
+			children = (
+				FB3D0F99251DA8AD0059CCB6 /* NetworkChecker.swift */,
+				FB9945E72519EA500023E174 /* Vector.swift */,
+				FBA1B4D8251905A100A31DF7 /* User.swift */,
+			);
+			path = Object;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -440,7 +456,7 @@
 				FBA1B4CA2519058B00A31DF7 /* AddNameViewController.swift in Sources */,
 				951EB35122B698F100A9533B /* FaceNet.swift in Sources */,
 				951EB35322B698F100A9533B /* tensorflow_utils.mm in Sources */,
-				FB3D0F97251DA5CA0059CCB6 /* DefineString.swift in Sources */,
+				FB3D0F97251DA5CA0059CCB6 /* Define.swift in Sources */,
 				951EB33822B6985E00A9533B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -586,7 +602,8 @@
 			baseConfigurationReference = C4CD8E9AA2201D33964A3CCD /* Pods-PersonRecognize.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon1;
-				CODE_SIGN_ENTITLEMENTS = PersonRecognize/PersonRecognize.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 2F345FGHJG;
 				INFOPLIST_FILE = PersonRecognize/Info.plist;
@@ -598,6 +615,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.c2c-platform.FaceRecognition.Dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "FaceRecognition Development";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "PersonRecognize/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -610,7 +628,7 @@
 			baseConfigurationReference = 43FBB4A03133E68FA1BD6073 /* Pods-PersonRecognize.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon1;
-				CODE_SIGN_ENTITLEMENTS = PersonRecognize/PersonRecognize.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U9EGC55R6Z;
 				INFOPLIST_FILE = PersonRecognize/Info.plist;

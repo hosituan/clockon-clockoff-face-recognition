@@ -14,7 +14,7 @@ import AVFoundation
 
 class PreviewView: UIView {
     
-    //let api = API()
+    let api = API()
     private var maskLayer = [CAShapeLayer]()
     private var textLayer = [CATextLayer]()
     
@@ -93,7 +93,7 @@ class PreviewView: UIView {
                         speak(name: label)
                         //attendList.append(detectedUser)
                         localUserList.append(detectedUser)
-                        uploadLogs(user: detectedUser) { error in
+                        api.uploadLogs(user: detectedUser) { error in
                             if error != nil {
                                 self.showDiaglog3s(name: label, false)
                             }
@@ -113,7 +113,7 @@ class PreviewView: UIView {
                                         localUserList.append(detectedUser)
                                         localUserList = localUserList.sorted(by: { $0.time > $1.time })
                                         speak(name: label)
-                                        uploadLogs(user: detectedUser) { error in
+                                        api.uploadLogs(user: detectedUser) { error in
                                                 if error != nil {
                                                     self.showDiaglog3s(name: label, false)
                                                 }
@@ -132,7 +132,7 @@ class PreviewView: UIView {
                         if count == localUserList.count {
                             print("append 3")
                             speak(name: label)
-                            uploadLogs(user: detectedUser) { error in
+                            api.uploadLogs(user: detectedUser) { error in
                                 if error != nil {
                                     self.showDiaglog3s(name: label, false)
                                 }

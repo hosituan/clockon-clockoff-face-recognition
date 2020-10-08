@@ -204,7 +204,6 @@ func l2distance(_ feat1: [Double], _ feat2: [Double]) -> Double {
 }
 
 
-
 //get  KMean Vector from all
 func getKMeanVector(vectors: [Vector]) -> [Vector] {
     var vectorList: [Vector] = []

@@ -31,6 +31,7 @@ class UserData: UIViewController, UIImagePickerControllerDelegate & UINavigation
                     let user = [key:value]
                     self.userList.append(user)
                 }
+                self.userList = self.userList.sorted(by: { $0.values.first! < $1.values.first!})
                 self.tableView.delegate = self
                 self.tableView.dataSource = self
                 self.tableView.reloadData()
@@ -93,14 +94,14 @@ extension UserData: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         
         
-        //let valueSelected = userList[indexPath.row]
+        let valueSelected = userList[indexPath.row].keys.first! as String
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 10
 
         ProgressHUD.show("Generating...")
         queue.addBarrierBlock {
             //add vector to All vectors list, and get Kmean Vectors
-            //self.generate(valueSelected: valueSelected)
+            self.generate(valueSelected: valueSelected)
         }
         //value = valueSelected
         //self.performSegue(withIdentifier: "viewFaceData", sender: nil)
