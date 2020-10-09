@@ -16,6 +16,5 @@ pod 'Firebase/Core'
 pod 'Firebase/Database'
 pod 'Firebase/Storage'
 pod 'ProgressHUD'
-pod 'FirebaseFirestore'
 pod 'SDWebImage'
 end
