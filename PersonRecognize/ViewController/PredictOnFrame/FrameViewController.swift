@@ -347,6 +347,7 @@ extension FrameViewController {
                     if localUserList.count == 0 {
                         print("append 1")
                         speak(name: label)
+                        trainingDataset.saveImage(detectedUser.image, for: detectedUser.name)
                         //attendList.append(detectedUser)
                         localUserList.append(detectedUser)
                         api.uploadLogs(user: detectedUser) { error in
@@ -369,11 +370,13 @@ extension FrameViewController {
                                         localUserList.append(detectedUser)
                                         localUserList = localUserList.sorted(by: { $0.time > $1.time })
                                         speak(name: label)
+                                        trainingDataset.saveImage(detectedUser.image, for: detectedUser.name)
                                         api.uploadLogs(user: detectedUser) { error in
                                             if error != nil {
                                                 self.showDiaglog3s(name: label, false)
                                             }
                                         }
+                                        
                                         //fb.uploadLogTimes(user: detectedUser) //upload to firebase db
                                         showDiaglog3s(name: label, true)
                                     }
@@ -388,6 +391,7 @@ extension FrameViewController {
                         if count == localUserList.count {
                             print("append 3")
                             speak(name: label)
+                            trainingDataset.saveImage(detectedUser.image, for: detectedUser.name)
                             api.uploadLogs(user: detectedUser) { error in
                                 if error != nil {
                                     self.showDiaglog3s(name: label, false)

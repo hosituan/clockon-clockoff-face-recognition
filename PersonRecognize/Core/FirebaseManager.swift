@@ -120,6 +120,38 @@ class FirebaseManager {
         }
     }
     
+    func loadAllVector(name: String, completionHandler: @escaping ([Vector]) -> Void) {
+        var vectors = [Vector]()
+        Database.database().reference().child(ALL_VECTOR).child(name).queryLimited(toLast: 1000).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            if let data = snapshot.value as? [String: Any] {
+                let dataArray = Array(data)
+                
+                let values = dataArray.map { $0.1 }
+                for dict in values {
+                    let item = dict as! NSDictionary
+                    
+                    guard let name = item["name"] as? String,
+                          let vector = item["vector"] as? String,
+                          let distance = item["distance"] as? Double
+                    else {
+                        print("Error at get vectors")
+                        continue
+                    }
+                    let object = Vector(name: name, vector: stringToArray(string: vector), distance: distance)
+                    vectors.append(object)
+                }
+                
+            }
+            completionHandler(vectors)
+            
+        }) { (error) in
+            print(error.localizedDescription)
+            completionHandler(vectors)
+        }
+
+    }
+    
     func uploadLogTimes(user: User) {
         
         let storageRef = Storage.storage().reference(forURL: STORAGE_URL).child("\(user.name) - \(user.time.dropLast(10))")

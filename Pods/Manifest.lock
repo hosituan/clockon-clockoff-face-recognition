@@ -84,6 +84,12 @@ PODS:
   - Realm/Headers (5.4.8)
   - RealmSwift (5.4.8):
     - Realm (= 5.4.8)
+  - RxCocoa (5.1.1):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxRelay (5.1.1):
+    - RxSwift (~> 5)
+  - RxSwift (5.1.1)
   - SDWebImage (5.9.2):
     - SDWebImage/Core (= 5.9.2)
   - SDWebImage/Core (5.9.2)
@@ -100,6 +106,8 @@ DEPENDENCIES:
   - MBProgressHUD (~> 1.2.0)
   - ProgressHUD
   - RealmSwift
+  - RxCocoa
+  - RxSwift
   - SDWebImage
   - SkyFloatingLabelTextField (~> 3.0)
   - TensorFlow-experimental
@@ -127,6 +135,9 @@ SPEC REPOS:
     - PromisesObjC
     - Realm
     - RealmSwift
+    - RxCocoa
+    - RxRelay
+    - RxSwift
     - SDWebImage
     - SkyFloatingLabelTextField
     - TensorFlow-experimental
@@ -153,10 +164,13 @@ SPEC CHECKSUMS:
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
   Realm: 042bbb59227a0159eda397b8a5a49fbd67495ce7
   RealmSwift: 15ddd6b3398ebfc99810811c44f095df1313adb3
+  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
+  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
+  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SDWebImage: 0b42b8719ab0c5257177d5894306e8a336b21cbb
   SkyFloatingLabelTextField: 5a338412114808e961fe2d14ea2c5452c8b6e4aa
   TensorFlow-experimental: c38ed2a43acaa2d42ce4174ac076efaa76e26a12
 
-PODFILE CHECKSUM: fed631f69e2340167f598386bc7364bc4e3e36e0
+PODFILE CHECKSUM: a30f5d18e60b487d42d991e6d442a41c23ca0e62
 
 COCOAPODS: 1.9.3

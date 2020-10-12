@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -352,7 +352,6 @@
 			);
 			mainGroup = 951EB32B22B6985D00A9533B;
 			packageReferences = (
-				FB3B2E172529AE4D00117249 /* XCRemoteSwiftPackageReference "KDTree" */,
 			);
 			productRefGroup = 951EB33522B6985E00A9533B /* Products */;
 			projectDirPath = "";
@@ -668,17 +667,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		FB3B2E172529AE4D00117249 /* XCRemoteSwiftPackageReference "KDTree" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Bersaelor/KDTree.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.4.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 951EB32C22B6985D00A9533B /* Project object */;
 }

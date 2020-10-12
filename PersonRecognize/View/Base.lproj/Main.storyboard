@@ -460,7 +460,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x6j-HM-px9" customClass="CustomButton" customModule="PersonRecognize" customModuleProvider="target">
-                                <rect key="frame" x="37.666666666666657" y="589.33333333333337" width="300" height="50"/>
+                                <rect key="frame" x="37.666666666666657" y="595.33333333333337" width="300" height="50"/>
                                 <color key="backgroundColor" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="2cR-Kj-hSs"/>
@@ -475,7 +475,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yxJ-M2-SEu" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                <rect key="frame" x="37.666666666666657" y="499.99999999999994" width="300" height="39.333333333333314"/>
+                                <rect key="frame" x="37.666666666666657" y="499.99999999999994" width="300" height="45.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
@@ -490,7 +490,7 @@
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Wu-Na-YZv" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                <rect key="frame" x="37.666666666666657" y="440" width="300" height="34"/>
+                                <rect key="frame" x="37.666666666666657" y="440" width="300" height="39.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
@@ -585,7 +585,7 @@
             </objects>
             <point key="canvasLocation" x="-55" y="807"/>
         </scene>
-        <!--Users list-->
+        <!--All Users-->
         <scene sceneID="ndQ-6k-xl8">
             <objects>
                 <viewController id="r5k-rA-yX8" customClass="UserData" customModule="PersonRecognize" customModuleProvider="target" sceneMemberID="viewController">
@@ -594,10 +594,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eAX-o4-GhI">
-                                <rect key="frame" x="0.0" y="162" width="375" height="586"/>
+                                <rect key="frame" x="0.0" y="167.33333333333331" width="375" height="580.66666666666674"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="wYz-yf-Dhr">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellID" id="wYz-yf-Dhr">
                                         <rect key="frame" x="0.0" y="28" width="375" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wYz-yf-Dhr" id="M1T-JO-Ai4">
@@ -608,7 +608,7 @@
                                 </prototypes>
                             </tableView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DeU-le-8YQ" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                <rect key="frame" x="20" y="108" width="335" height="34"/>
+                                <rect key="frame" x="20" y="108" width="335" height="39.333333333333343"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
@@ -628,8 +628,9 @@
                             <constraint firstItem="eAX-o4-GhI" firstAttribute="trailing" secondItem="Zhe-qP-v7O" secondAttribute="trailing" id="ucx-LA-fpy"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Users list" id="Prj-Il-0Eg"/>
+                    <navigationItem key="navigationItem" title="All Users" id="Prj-Il-0Eg"/>
                     <connections>
+                        <outlet property="findName" destination="DeU-le-8YQ" id="nB7-9h-4nb"/>
                         <outlet property="tableView" destination="eAX-o4-GhI" id="N9V-Ad-INT"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="viewFaceData" id="Da2-hy-Odr"/>
                     </connections>
@@ -659,13 +660,13 @@
     </scenes>
     <designables>
         <designable name="9Wu-Na-YZv">
-            <size key="intrinsicContentSize" width="112" height="34"/>
+            <size key="intrinsicContentSize" width="300" height="39.220703125"/>
         </designable>
         <designable name="DeU-le-8YQ">
-            <size key="intrinsicContentSize" width="103.66666666666667" height="34"/>
+            <size key="intrinsicContentSize" width="335" height="39.220703125"/>
         </designable>
         <designable name="yxJ-M2-SEu">
-            <size key="intrinsicContentSize" width="103.66666666666667" height="34"/>
+            <size key="intrinsicContentSize" width="300" height="39.220703125"/>
         </designable>
     </designables>
     <resources>

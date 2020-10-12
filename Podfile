@@ -17,4 +17,6 @@ pod 'Firebase/Database'
 pod 'Firebase/Storage'
 pod 'ProgressHUD'
 pod 'SDWebImage'
+pod 'RxSwift'
+pod 'RxCocoa'
 end
