@@ -23,8 +23,6 @@ class UserData: UIViewController, UIImagePickerControllerDelegate & UINavigation
     @IBOutlet weak var findName: SkyFloatingLabelTextField!
     @IBOutlet weak var tableView: UITableView!
     
-    
-    //    var searchInput = BehaviorRelay<String?>(value: "")
     var searchResult = BehaviorRelay<[[String: Int]]>(value: [])
     let dispose = DisposeBag()
     
@@ -125,6 +123,7 @@ extension UserData: UITableViewDelegate {
                     let allVector = oldVectors + result
                     let a = allVector.uniq()
                     print("New vector:\(a.count)")
+                    if a.count > 10 {
                     getKMeanVectorSameName(vectors: a) { (vectors) in
                         print("K-mean vector for \(valueSelected): \(vectors.count)")
                         fb.uploadKMeanVectors(vectors: vectors, child: KMEAN_VECTOR) {
@@ -133,6 +132,7 @@ extension UserData: UITableViewDelegate {
                             fb.uploadAllVectors(vectors: a, child: ALL_VECTOR) {
                             }
                         }
+                    }
                     }
                     
                 }

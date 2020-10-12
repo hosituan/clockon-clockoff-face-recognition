@@ -222,6 +222,7 @@ private extension Array {
 //get from the same name
 func getKMeanVectorSameName(vectors: [Vector], completionHandler: @escaping ([Vector]) -> Void) {
     KMeans.reset()
+    
     for i in 0..<vectors.count {
         KMeans.addVector(vectors[i].vector)
     }

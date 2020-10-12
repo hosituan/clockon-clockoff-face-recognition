@@ -95,7 +95,7 @@ class HomeViewController: UIViewController {
             //            }
             fb.loadUsers(completionHandler: { (result) in
                 userDict = result
-                print("Number of user: \(userDict.count)")
+                print("Number of users: \(userDict.count)")
                 ProgressHUD.dismiss()
             })
             

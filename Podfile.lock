@@ -47,7 +47,7 @@ PODS:
     - GoogleUtilities/Network (~> 6.7)
     - "GoogleUtilities/NSData+zlib (~> 6.7)"
     - nanopb (~> 1.30906.0)
-  - GoogleDataTransport (7.5.0):
+  - GoogleDataTransport (7.5.1):
     - nanopb (~> 1.30906.0)
   - GoogleUtilities/AppDelegateSwizzler (6.7.2):
     - GoogleUtilities/Environment
@@ -153,7 +153,7 @@ SPEC CHECKSUMS:
   FirebaseInstallations: 466c7b4d1f58fe16707693091da253726a731ed2
   FirebaseStorage: 15e0f15ef3c7fec3d1899d68623e47d4447066b4
   GoogleAppMeasurement: a6a3a066369828db64eda428cb2856dc1cdc7c4e
-  GoogleDataTransport: 445302b7da4216da63071a4c29e7023f47192e5a
+  GoogleDataTransport: f56af7caa4ed338dc8e138a5d7c5973e66440833
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe

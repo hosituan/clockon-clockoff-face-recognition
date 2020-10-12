@@ -25,6 +25,7 @@ class API {
                 "status": status
             ]
         }
+        
         else {
             dictionary = [
                 "time_log" : user.time,
@@ -32,6 +33,7 @@ class API {
                 "status": status
             ]
         }
+        print(dictionary)
         let params = dictionary
         let headers: HTTPHeaders = [
             "X-HHR-Secret-Key" : API_KEY,

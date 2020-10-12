@@ -21,7 +21,7 @@ let STORAGE_URL = "gs://hr-checkin.appspot.com"
 let UNKNOWN = "Unknown"
 let TAKE_PHOTO_NAME = "Unknown - Take Photo"
 
-let VALID_TIME = 1
+
 let NUMBER_OF_K = 3
 
 //RealM
@@ -34,3 +34,6 @@ let DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
 
 let SERVER_URL = "https://hr.scrum-dev.com"
 let API_KEY = "$2y$12$653MWmgCoa499gtC379xy..wP3dz7r8N9Hs2E6Ar/5Qqs5EPknEru"
+
+
+let VALID_TIME = 60

@@ -326,90 +326,89 @@ extension FrameViewController {
     
     func getLabel(image: UIImage?) -> String {
         var lb = UNKNOWN
-        if let frame = image {
-            let res = vectorHelper.getResult(image: frame)
-            lb = "\(res.name): \(res.distance)%"
-            let result = res.name
-            if result != UNKNOWN {
-                let  label = result
-                let today = Date()
-                formatter.dateFormat = DATE_FORMAT
-                let timestamp = formatter.string(from: today)
-                if label != currentLabel {
-                    currentLabel = label
-                    numberOfFramesDeteced = 1
-                } else {
-                    numberOfFramesDeteced += 1
+        guard let frame = image else { return UNKNOWN }
+        let res = vectorHelper.getResult(image: frame)
+        lb = "\(res.name): \(res.distance)%"
+        let result = res.name
+        if result != UNKNOWN {
+            let  label = result
+            let today = Date()
+            formatter.dateFormat = DATE_FORMAT
+            let timestamp = formatter.string(from: today)
+            if label != currentLabel {
+                currentLabel = label
+                numberOfFramesDeteced = 1
+            } else {
+                numberOfFramesDeteced += 1
+            }
+            let detectedUser = User(name: label, image: frame, time: timestamp)
+            if numberOfFramesDeteced > validFrames  {
+                //print("Detected")
+                if localUserList.count == 0 {
+                    print("append 1")
+                    speak(name: label)
+                    trainingDataset.saveImage(detectedUser.image, for: detectedUser.name)
+                    //attendList.append(detectedUser)
+                    localUserList.append(detectedUser)
+                    api.uploadLogs(user: detectedUser) { error in
+                        if error != nil {
+                            self.showDiaglog3s(name: label, false)
+                        }
+                    }
+                    //fb.uploadLogTimes(user: detectedUser) //upload to firebase db
+                    showDiaglog3s(name: label, true)
                 }
-                let detectedUser = User(name: label, image: frame, time: timestamp)
-                if numberOfFramesDeteced > validFrames  {
-                    //print("Detected")
-                    if localUserList.count == 0 {
-                        print("append 1")
+                else  {
+                    var count = 0
+                    for item in localUserList {
+                        if item.name == label {
+                            if let time = formatter.date(from: item.time) {
+                                let diff = abs(time.timeOfDayInterval(toDate: today))
+                                print("Diffrent: \(diff) seconds")
+                                if Int(diff) > VALID_TIME {
+                                    print("append 2")
+                                    localUserList.append(detectedUser)
+                                    localUserList = localUserList.sorted(by: { $0.time > $1.time })
+                                    speak(name: label)
+                                    trainingDataset.saveImage(detectedUser.image, for: detectedUser.name)
+                                    api.uploadLogs(user: detectedUser) { error in
+                                        if error != nil {
+                                            self.showDiaglog3s(name: label, false)
+                                        }
+                                    }
+                                    
+                                    //fb.uploadLogTimes(user: detectedUser) //upload to firebase db
+                                    showDiaglog3s(name: label, true)
+                                }
+                            }
+                            break
+                        }
+                        else {
+                            count += 1
+                        }
+                    }
+                    
+                    if count == localUserList.count {
+                        print("append 3")
                         speak(name: label)
                         trainingDataset.saveImage(detectedUser.image, for: detectedUser.name)
-                        //attendList.append(detectedUser)
-                        localUserList.append(detectedUser)
                         api.uploadLogs(user: detectedUser) { error in
                             if error != nil {
                                 self.showDiaglog3s(name: label, false)
                             }
                         }
                         //fb.uploadLogTimes(user: detectedUser) //upload to firebase db
+                        localUserList.append(detectedUser)
+                        localUserList = localUserList.sorted(by: { $0.time > $1.time })
                         showDiaglog3s(name: label, true)
                     }
-                    else  {
-                        var count = 0
-                        for item in localUserList {
-                            if item.name == label {
-                                if let time = formatter.date(from: item.time) {
-                                    let diff = abs(time.timeOfDayInterval(toDate: today))
-                                    print("Diffrent: \(diff) seconds")
-                                    if diff > 60 {
-                                        print("append 2")
-                                        localUserList.append(detectedUser)
-                                        localUserList = localUserList.sorted(by: { $0.time > $1.time })
-                                        speak(name: label)
-                                        trainingDataset.saveImage(detectedUser.image, for: detectedUser.name)
-                                        api.uploadLogs(user: detectedUser) { error in
-                                            if error != nil {
-                                                self.showDiaglog3s(name: label, false)
-                                            }
-                                        }
-                                        
-                                        //fb.uploadLogTimes(user: detectedUser) //upload to firebase db
-                                        showDiaglog3s(name: label, true)
-                                    }
-                                }
-                                break
-                            }
-                            else {
-                                count += 1
-                            }
-                        }
-                        
-                        if count == localUserList.count {
-                            print("append 3")
-                            speak(name: label)
-                            trainingDataset.saveImage(detectedUser.image, for: detectedUser.name)
-                            api.uploadLogs(user: detectedUser) { error in
-                                if error != nil {
-                                    self.showDiaglog3s(name: label, false)
-                                }
-                            }
-                            //fb.uploadLogTimes(user: detectedUser) //upload to firebase db
-                            localUserList.append(detectedUser)
-                            localUserList = localUserList.sorted(by: { $0.time > $1.time })
-                            showDiaglog3s(name: label, true)
-                        }
-                    }
-                    
                 }
                 
             }
+            
         }
+        //}
         return lb
-        
     }
     
     func speak(name: String) {
