@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1041816595679-85i7nqrpgd6ef3o42lg6ipoui9jbmdma.apps.googleusercontent.com</string>
+	<string>403964136808-o9p67qsdsv5ovc082bsi9ja37eg554l8.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1041816595679-85i7nqrpgd6ef3o42lg6ipoui9jbmdma</string>
+	<string>com.googleusercontent.apps.403964136808-o9p67qsdsv5ovc082bsi9ja37eg554l8</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAomggvYRF36m1kz8VmcWRrztOulz9O-Zw</string>
+	<string>AIzaSyB-lUGNxRdQUYNSScal2u4MexJyCBgYguA</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1041816595679</string>
+	<string>403964136808</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.c2c-platform.FaceRecognition.Dev</string>
 	<key>PROJECT_ID</key>
-	<string>hr-checkin</string>
+	<string>personalregcozine</string>
 	<key>STORAGE_BUCKET</key>
-	<string>hr-checkin.appspot.com</string>
+	<string>personalregcozine.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1041816595679:ios:8494228c0418c527780d6a</string>
+	<string>1:403964136808:ios:41a8e987d3c2cd40021add</string>
 	<key>DATABASE_URL</key>
-	<string>https://hr-checkin.firebaseio.com</string>
+	<string>https://personalregcozine-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

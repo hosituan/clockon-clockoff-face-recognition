@@ -30,7 +30,7 @@ class FirebaseManager {
             Database.database().reference().child(child).child(vector.name).child(childString).updateChildValues(dict, withCompletionBlock: {
                 (error, ref) in
                 if error == nil {
-                    //print("uploaded vector")
+                    print("uploaded vector")
                 }
                 completionHandler()
             })
@@ -51,43 +51,43 @@ class FirebaseManager {
             Database.database().reference().child(child).child(childString).updateChildValues(dict, withCompletionBlock: {
                 (error, ref) in
                 if error == nil {
-                    //print("uploaded vector")
+                    print("uploaded vector")
                 }
                 completionHandler()
             })
         }
     }
     
-//    func loadLogTimes(completionHandler: @escaping ([Users]) -> Void) {
-//        var attendList: [Users] = []
-//        Database.database().reference().child(LOG_TIME).queryLimited(toLast: 1000).observeSingleEvent(of: .value, with: { (snapshot) in
-//            if let data = snapshot.value as? [String: Any] {
-//                let dataArray = Array(data)
-//                let values = dataArray.map { $0.1 }
-//                for dict in values {
-//                    let item = dict as! NSDictionary
-//                    guard let name = item["name"] as? String,
-//                          let imgUrl = item["imageURL"] as? String,
-//                          let time = item["time"] as? String
-//                    else {
-//                        print("Error at get log times.")
-//                        continue
-//                    }
-//                    let object = Users(name: name, imageURL: imgUrl, time: time)
-//                    attendList.append(object)
-//                }
-//                completionHandler(attendList.sorted(by: { $0.time > $1.time }))
-//            }
-//            else {
-//                completionHandler(attendList)
-//            }
-//            
-//        }) { (error) in
-//            print(error.localizedDescription)
-//            completionHandler(attendList)
-//        }
-//        
-//    }
+    func loadLogTimes(completionHandler: @escaping ([Users]) -> Void) {
+        var attendList: [Users] = []
+        Database.database().reference().child(LOG_TIME).queryLimited(toLast: 1000).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let data = snapshot.value as? [String: Any] {
+                let dataArray = Array(data)
+                let values = dataArray.map { $0.1 }
+                for dict in values {
+                    let item = dict as! NSDictionary
+                    guard let name = item["name"] as? String,
+                          let imgUrl = item["imageURL"] as? String,
+                          let time = item["time"] as? String
+                    else {
+                        print("Error at get log times.")
+                        continue
+                    }
+                    let object = Users(name: name, imageURL: imgUrl, time: time)
+                    attendList.append(object)
+                }
+                completionHandler(attendList.sorted(by: { $0.time > $1.time }))
+            }
+            else {
+                completionHandler(attendList)
+            }
+            
+        }) { (error) in
+            print(error.localizedDescription)
+            completionHandler(attendList)
+        }
+        
+    }
     
     func loadVector(completionHandler: @escaping ([Vector]) -> Void) {
         var vectors = [Vector]()
@@ -152,7 +152,7 @@ class FirebaseManager {
 
     }
     
-    func uploadLogTimes(user: User) {
+    func uploadLogTimes(user: User, completionHandler: @escaping (Error?) -> Void) {
         
         let storageRef = Storage.storage().reference(forURL: STORAGE_URL).child("\(user.name) - \(user.time.dropLast(10))")
         
@@ -167,6 +167,7 @@ class FirebaseManager {
                 (StorageMetadata, error) in
                 if error != nil {
                     print(error?.localizedDescription as Any)
+                    completionHandler(error)
                     return
                 }
                 else {
@@ -182,6 +183,7 @@ class FirebaseManager {
                                 (error, ref) in
                                 if error == nil {
                                     print("Uploaded log time.")
+                                    completionHandler(nil)
                                 }
                             })
                             

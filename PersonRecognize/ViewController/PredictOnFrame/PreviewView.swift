@@ -14,7 +14,7 @@ import AVFoundation
 
 class PreviewView: UIView {
     
-    let api = API()
+//    let api = API()
     private var maskLayer = [CAShapeLayer]()
     private var textLayer = [CATextLayer]()
     

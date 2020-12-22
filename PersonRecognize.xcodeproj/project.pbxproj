@@ -45,9 +45,9 @@
 		FBA1B4E2251905A100A31DF7 /* CreateUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4DB251905A100A31DF7 /* CreateUserData.swift */; };
 		FBA1B4E3251905A100A31DF7 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA1B4DC251905A100A31DF7 /* Helper.swift */; };
 		FBA1B4E8251905A800A31DF7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBA1B4E6251905A800A31DF7 /* Main.storyboard */; };
-		FBB8936D2525AFF700F11E32 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FBB8936C2525AFF700F11E32 /* GoogleService-Info.plist */; };
 		FBB893732525CE3800F11E32 /* kNN-2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB893722525CE3800F11E32 /* kNN-2.swift */; };
 		FBC5AC0B251AEE6D0016995C /* UIViewController+ShowDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC5AC0A251AEE6D0016995C /* UIViewController+ShowDialog.swift */; };
+		FBD3BEE72591CA100098010E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FBD3BEE62591CA0F0098010E /* GoogleService-Info.plist */; };
 		FBDD06AC251DDFA0002AF9F9 /* KMean.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDD06AB251DDFA0002AF9F9 /* KMean.swift */; };
 		FBDF07AE2525952A00620F33 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDF07AD2525952A00620F33 /* API.swift */; };
 /* End PBXBuildFile section */
@@ -99,9 +99,10 @@
 		FBA1B4DB251905A100A31DF7 /* CreateUserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateUserData.swift; sourceTree = "<group>"; };
 		FBA1B4DC251905A100A31DF7 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		FBA1B4E7251905A800A31DF7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		FBB8936C2525AFF700F11E32 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FBB893722525CE3800F11E32 /* kNN-2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "kNN-2.swift"; sourceTree = "<group>"; };
 		FBC5AC0A251AEE6D0016995C /* UIViewController+ShowDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ShowDialog.swift"; sourceTree = "<group>"; };
+		FBD3BEE62591CA0F0098010E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FBD3BEEA2591CC630098010E /* modelFacenet.pb */ = {isa = PBXFileReference; lastKnownFileType = file; path = modelFacenet.pb; sourceTree = "<group>"; };
 		FBDD06AB251DDFA0002AF9F9 /* KMean.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMean.swift; sourceTree = "<group>"; };
 		FBDF07AD2525952A00620F33 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -156,8 +157,8 @@
 				951EB35822B6994100A9533B /* Bridging-Header.h */,
 				951EB33E22B6986200A9533B /* Assets.xcassets */,
 				951EB33722B6985E00A9533B /* AppDelegate.swift */,
+				FBD3BEE62591CA0F0098010E /* GoogleService-Info.plist */,
 				951EB34322B6986200A9533B /* Info.plist */,
-				FBB8936C2525AFF700F11E32 /* GoogleService-Info.plist */,
 			);
 			path = PersonRecognize;
 			sourceTree = "<group>";
@@ -178,6 +179,7 @@
 		951EB34B22B698F100A9533B /* Graph */ = {
 			isa = PBXGroup;
 			children = (
+				FBD3BEEA2591CC630098010E /* modelFacenet.pb */,
 				951EB34C22B698F100A9533B /* modelFacenet.pb */,
 			);
 			path = Graph;
@@ -367,9 +369,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FBD3BEE72591CA100098010E /* GoogleService-Info.plist in Resources */,
 				951EB34222B6986200A9533B /* LaunchScreen.storyboard in Resources */,
 				FBA1B4E8251905A800A31DF7 /* Main.storyboard in Resources */,
-				FBB8936D2525AFF700F11E32 /* GoogleService-Info.plist in Resources */,
 				951EB33F22B6986200A9533B /* Assets.xcassets in Resources */,
 				951EB35222B698F100A9533B /* modelFacenet.pb in Resources */,
 			);

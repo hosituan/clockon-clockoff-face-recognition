@@ -15,7 +15,7 @@ import ProgressHUD
 class FrameViewController: UIViewController {
     
     
-    let api = API()
+    //let api = API()
     var currentFrame: UIImage?
     @IBOutlet weak var previewView: PreviewView!
     //    private var faceDetectionRequest: VNRequest!
@@ -153,12 +153,17 @@ class FrameViewController: UIViewController {
         let timestamp = formatter.string(from: today)
         let user = User(name: TAKE_PHOTO_NAME, image: frame, time: timestamp)
         showDiaglog3s(name: TAKE_PHOTO_NAME, true)
-        api.uploadLogs(user: user) { error in
+        
+        //        api.uploadLogs(user: user) { error in
+        //            if error != nil {
+        //                self.showDiaglog3s(name: TAKE_PHOTO_NAME, false)
+        //            }
+        //        }
+        fb.uploadLogTimes(user: user) { error in
             if error != nil {
                 self.showDiaglog3s(name: TAKE_PHOTO_NAME, false)
             }
         }
-        //fb.uploadLogTimes(user: user)
         
     }
     
@@ -343,19 +348,21 @@ extension FrameViewController {
             }
             let detectedUser = User(name: label, image: frame, time: timestamp)
             if numberOfFramesDeteced > validFrames  {
-                //print("Detected")
+                print("Detected")
                 if localUserList.count == 0 {
                     print("append 1")
                     speak(name: label)
                     trainingDataset.saveImage(detectedUser.image, for: detectedUser.name)
-                    //attendList.append(detectedUser)
                     localUserList.append(detectedUser)
-                    api.uploadLogs(user: detectedUser) { error in
+                    
+                    //upload to firebase db
+                    fb.uploadLogTimes(user: detectedUser)  {
+                        error in
                         if error != nil {
                             self.showDiaglog3s(name: label, false)
                         }
+                        
                     }
-                    //fb.uploadLogTimes(user: detectedUser) //upload to firebase db
                     showDiaglog3s(name: label, true)
                 }
                 else  {
@@ -371,13 +378,15 @@ extension FrameViewController {
                                     localUserList = localUserList.sorted(by: { $0.time > $1.time })
                                     speak(name: label)
                                     trainingDataset.saveImage(detectedUser.image, for: detectedUser.name)
-                                    api.uploadLogs(user: detectedUser) { error in
+                                    
+                                    
+                                    //upload to firebase db
+                                    fb.uploadLogTimes(user: detectedUser)  {
+                                        error in
                                         if error != nil {
                                             self.showDiaglog3s(name: label, false)
                                         }
                                     }
-                                    
-                                    //fb.uploadLogTimes(user: detectedUser) //upload to firebase db
                                     showDiaglog3s(name: label, true)
                                 }
                             }
@@ -392,12 +401,12 @@ extension FrameViewController {
                         print("append 3")
                         speak(name: label)
                         trainingDataset.saveImage(detectedUser.image, for: detectedUser.name)
-                        api.uploadLogs(user: detectedUser) { error in
+                        //upload to firebase db
+                        fb.uploadLogTimes(user: detectedUser) { error in
                             if error != nil {
                                 self.showDiaglog3s(name: label, false)
                             }
                         }
-                        //fb.uploadLogTimes(user: detectedUser) //upload to firebase db
                         localUserList.append(detectedUser)
                         localUserList = localUserList.sorted(by: { $0.time > $1.time })
                         showDiaglog3s(name: label, true)
