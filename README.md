@@ -14,3 +14,24 @@ Reference:
 Minimum requirement:
   - iOS 12.0 or later.
   - Xcode 11 or later, Swift 5.
+
+
+Demo:
+- Recognize Screen:
+
+<img src="https://github.com/hosituanit/clockon-clockoff-face-recognition/blob/master/images/recognize.jpg" width="300">
+
+
+- Unknown Person:
+
+<img src="https://github.com/hosituanit/clockon-clockoff-face-recognition/blob/master/images/unknownPerson.PNG" width="300">
+
+
+- Predict Image Screen (two people):
+
+<img src="https://github.com/hosituanit/clockon-clockoff-face-recognition/blob/master/images/testTwoPeople.PNG" width="300">
+
+-  Predict Image Screen, Time Taken (1 person):
+
+<img src="https://github.com/hosituanit/clockon-clockoff-face-recognition/blob/master/images/testTimeTaken.jpg" width="300">
+
