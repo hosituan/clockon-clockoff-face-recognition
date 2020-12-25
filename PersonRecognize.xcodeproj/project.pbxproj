@@ -49,7 +49,6 @@
 		FBC5AC0B251AEE6D0016995C /* UIViewController+ShowDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC5AC0A251AEE6D0016995C /* UIViewController+ShowDialog.swift */; };
 		FBD3BEE72591CA100098010E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FBD3BEE62591CA0F0098010E /* GoogleService-Info.plist */; };
 		FBDD06AC251DDFA0002AF9F9 /* KMean.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDD06AB251DDFA0002AF9F9 /* KMean.swift */; };
-		FBDF07AE2525952A00620F33 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDF07AD2525952A00620F33 /* API.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,7 +103,6 @@
 		FBD3BEE62591CA0F0098010E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FBD3BEEA2591CC630098010E /* modelFacenet.pb */ = {isa = PBXFileReference; lastKnownFileType = file; path = modelFacenet.pb; sourceTree = "<group>"; };
 		FBDD06AB251DDFA0002AF9F9 /* KMean.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMean.swift; sourceTree = "<group>"; };
-		FBDF07AD2525952A00620F33 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,7 +253,6 @@
 				FBF954E1252EA5720058FFD4 /* Object */,
 				FBE4AFB1252EA5FE00BEF636 /* ML Algorithm */,
 				FBA1B4D6251905A100A31DF7 /* Global.swift */,
-				FBDF07AD2525952A00620F33 /* API.swift */,
 				FBA1B4DC251905A100A31DF7 /* Helper.swift */,
 				FBA1B4DA251905A100A31DF7 /* ImageDataset.swift */,
 				FB57AA75251CCA4E00B2CCF9 /* FirebaseManager.swift */,
@@ -437,7 +434,6 @@
 				951EB35422B698F100A9533B /* tfWrap.mm in Sources */,
 				FBA1B4C92519058B00A31DF7 /* ViewLogViewController.swift in Sources */,
 				FBDD06AC251DDFA0002AF9F9 /* KMean.swift in Sources */,
-				FBDF07AE2525952A00620F33 /* API.swift in Sources */,
 				FBA1B48C2519052D00A31DF7 /* DismisKeyboard.swift in Sources */,
 				FBA1B4D02519058B00A31DF7 /* PredictImageViewController.swift in Sources */,
 				FBA1B4DD251905A100A31DF7 /* Global.swift in Sources */,
