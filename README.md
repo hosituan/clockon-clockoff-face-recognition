@@ -6,6 +6,7 @@ This is a Face Recognition Application - HR Check-in on iOS Device.
 <h1> References </h1>
 
   - Pre-train Model: Facenet https://github.com/davidsandberg/facenet 
+  - Model for TensorFlow Lite: https://drive.google.com/file/d/1WjZ-rX-Jq0U08U5VefQ7XSC5Dc6RPitI/view
   - Dataset: VGGFace2 https://drive.google.com/file/d/1EXPBSXwTaqrSC0OhUdXNmKSh9qJUQ55-/view?usp=drive_open
   - Architecture: InceptionResnetV1 https://github.com/davidsandberg/facenet/blob/master/src/models/inception_resnet_v1.py
   - Algorithms and Libraries: 
