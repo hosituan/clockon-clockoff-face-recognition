@@ -6,12 +6,10 @@
 //  Copyright © 2020 Hồ Sĩ Tuấn. All rights reserved.
 //
 
+import FaceKit
 import UIKit
-import Vision
 import MobileCoreServices
 import AVFoundation
-import FaceCropper
-import MBProgressHUD
 import ProgressHUD
 import SkyFloatingLabelTextField
 import RxCocoa
@@ -87,19 +85,11 @@ extension UserData: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let valueSelected = self.userList[indexPath.row].keys.first! as String
+        // Rows show the filtered search result, not the full list.
+        let valueSelected = self.searchResult.value[indexPath.row].keys.first! as String
         let alert = UIAlertController(title: "Select Action", message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Generate Vector", style: .default, handler: { action in
-            
-            let queue = OperationQueue()
-            queue.maxConcurrentOperationCount = 10
-            
-            ProgressHUD.show("Generating...")
-            queue.addBarrierBlock {
-                //add vector to All vectors list, and get Kmean Vectors
-                self.generate(valueSelected: valueSelected)
-            }
-            
+            self.generate(valueSelected: valueSelected)
         }))
         alert.addAction(UIAlertAction(title: "View Face", style: .default, handler: { action in
             self.value = valueSelected
@@ -114,35 +104,20 @@ extension UserData: UITableViewDelegate {
         
     }
     
+    /// Re-enrolls the user from the photos saved on this device and uploads the templates.
     func generate(valueSelected: String) {
-        vectorHelper.addVector(name: valueSelected) { result in
-            print("All vectors for \(valueSelected): \(result.count)")
-            if result.count > 0 {
-                fb.loadAllVector(name: valueSelected) { oldVectors in
-                    print("Old vector: \(oldVectors.count)")
-                    let allVector = oldVectors + result
-                    let a = allVector.uniq()
-                    print("New vector:\(a.count)")
-                    if a.count > 10 {
-                    getKMeanVectorSameName(vectors: a) { (vectors) in
-                        print("K-mean vector for \(valueSelected): \(vectors.count)")
-                        fb.uploadKMeanVectors(vectors: vectors, child: KMEAN_VECTOR) {
-                            ProgressHUD.dismiss()
-                            self.showDialog(message: "Upload data for \(valueSelected) by \(a.count) vectors.")
-                            fb.uploadAllVectors(vectors: a, child: ALL_VECTOR) {
-                            }
-                        }
-                    }
-                    }
-                    
-                }
-            }
-            else {
+        ProgressHUD.show("Generating...")
+        Task { @MainActor in
+            do {
+                let identity = try await FaceService.shared.enrollFromLocalImages(name: valueSelected)
                 ProgressHUD.dismiss()
-                DispatchQueue.main.async {
-                    self.showDialog(message: "This user is not in your local data.")
-                }
-                
+                self.showDialog(message: "Uploaded \(identity.templates.count) templates for \(valueSelected).")
+            } catch FaceKitError.noUsableFaces {
+                ProgressHUD.dismiss()
+                self.showDialog(message: "No face photos of this user in your local data.")
+            } catch {
+                ProgressHUD.dismiss()
+                self.showDialog(message: "Could not generate data for \(valueSelected): \(error.localizedDescription)")
             }
         }
     }
@@ -157,7 +132,8 @@ extension UserData {
             .subscribe(onNext: { query in
                 self.searchResult.accept(self.userList.filter { $0.keys.first!.lowercased().hasPrefix(query.lowercased()) })
             })
-        
+            .disposed(by: dispose)
+
         searchResult
             .asObservable()
             .bind(to: tableView.rx.items(cellIdentifier: "cellID",

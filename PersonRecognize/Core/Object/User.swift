@@ -6,15 +6,13 @@
 //  Copyright © 2020 Hồ Sĩ Tuấn. All rights reserved.
 //
 
-import Foundation
-import RealmSwift
+import UIKit
 
 //local user
 struct User {
     var name: String
     var image: UIImage
     var time: String
-    //var confidence: String
 }
 
 //upload user
@@ -22,10 +20,4 @@ struct Users: Codable {
     var name: String
     var imageURL: String
     var time: String
-}
-
-class SavedVector: Object {
-    @objc dynamic var name: String = ""
-    @objc dynamic var vector: String = ""
-    @objc dynamic var distance: Double = 0
 }

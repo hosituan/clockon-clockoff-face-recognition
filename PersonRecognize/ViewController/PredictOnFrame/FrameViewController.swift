@@ -6,19 +6,21 @@
 //  Copyright © 2020 Hồ Sĩ Tuấn. All rights reserved.
 //
 
-import UIKit
-import Vision
 import AVFoundation
-import FaceCropper
-import ProgressHUD
+import FaceKit
+import UIKit
 
 class FrameViewController: UIViewController {
     
     
-    //let api = API()
-    var currentFrame: UIImage?
     @IBOutlet weak var previewView: PreviewView!
-    //    private var faceDetectionRequest: VNRequest!
+    /// Latest upright camera frame (main thread only), used for "Take Photo" and log photos.
+    private var latestFrame: CIImage?
+    /// True while a frame is being recognised; newer frames are dropped meanwhile (main thread only).
+    private var isRecognizing = false
+    private var consensus = FrameConsensus(requiredFrames: 5, windowSize: 8)
+    private let frameContext = CIContext()
+    private let synthesizer = AVSpeechSynthesizer()
     private var devicePosition: AVCaptureDevice.Position = .front
     
     
@@ -40,21 +42,16 @@ class FrameViewController: UIViewController {
     private var videoDataOutput:    AVCaptureVideoDataOutput!
     private var videoDataOutputQueue = DispatchQueue(label: "VideoDataOutputQueue")
     
-    private var requests = [VNRequest]()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default) 
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = .clear
-        fnet.load()
-        print("Number of kMeans: \(kMeanVectors.count)")
+        // Load the model before the first frame arrives.
+        Task { _ = try? await FaceService.shared.recognizer() }
         session = AVCaptureSession()
         previewView.session = session
-        
-        // Set up Vision Request
-        setupVision()
         
         switch AVCaptureDevice.authorizationStatus(for: AVMediaType.video){
         case .authorized:
@@ -114,7 +111,6 @@ class FrameViewController: UIViewController {
     
     
     override func viewDidDisappear(_ animated: Bool) {
-        fnet.clean()
         super.viewDidDisappear(animated)
         sessionQueue.async {[weak self]()  -> Void in
             guard let self = self else { return }
@@ -128,10 +124,6 @@ class FrameViewController: UIViewController {
     
     fileprivate func stopCaptureSession() {
         session.stopRunning()
-        for req in requests {
-            req.cancel()
-        }
-        requests = []
         
         session = nil
         videoDeviceInput = nil
@@ -144,7 +136,7 @@ class FrameViewController: UIViewController {
     //MARK: - User interaction
     
     @IBAction func tapTakePhoto(_ sender: UIButton) {
-        guard let frame = currentFrame else {
+        guard let frame = latestFrame.flatMap(uiImage) else {
             print("nil frame")
             return
         }
@@ -161,7 +153,7 @@ class FrameViewController: UIViewController {
         //        }
         fb.uploadLogTimes(user: user) { error in
             if error != nil {
-                self.showDiaglog3s(name: TAKE_PHOTO_NAME, false)
+                DispatchQueue.main.async { self.showDiaglog3s(name: TAKE_PHOTO_NAME, false) }
             }
         }
         
@@ -309,123 +301,50 @@ extension FrameViewController {
     }
 }
 
-// MARK: -- Helpers
+// MARK: -- Recognition
 extension FrameViewController {
-    func setupVision() {
-        let faceDetectionRequest = VNDetectFaceRectanglesRequest(completionHandler: self.handleFaces) // Default
-        self.requests = [faceDetectionRequest]
+    /// Shows every face with its own label and logs attendance once a person is confirmed.
+    func handle(_ results: [Recognition], frame: CIImage) {
+        previewView.removeMask()
+        for result in results {
+            previewView.drawFaceboundingBox(boundingBox: result.face.boundingBox,
+                                            label: PredictImageViewController.describe(result.match))
+        }
+        // Confirm the largest face: the person standing in front of the device.
+        let main = results.max { $0.face.boundingBox.width < $1.face.boundingBox.width }
+        if let name = consensus.observe(main?.match.identityID) {
+            logAttendance(name: name, frame: frame)
+        }
     }
-    
-    func handleFaces(request: VNRequest, error: Error?) {
-        DispatchQueue.main.async {[weak self]() -> Void in
-            guard let self = self else { return }
-            //perform all the UI updates on the main queue
-            guard let results = request.results as? [VNFaceObservation] else { return }
-            self.previewView.removeMask()
-            let lb = self.getLabel(image: self.currentFrame)
-            for face in results {
-                self.previewView.drawFaceboundingBox(face: face, label: lb)
+
+    func logAttendance(name: String, frame: CIImage) {
+        let now = Date()
+        formatter.dateFormat = DATE_FORMAT
+        if let last = localUserList.first(where: { $0.name == name }),
+           let time = formatter.date(from: last.time),
+           now.timeIntervalSince(time) < Double(VALID_TIME) {
+            return
+        }
+        guard let image = uiImage(from: frame) else { return }
+        let user = User(name: name, image: image, time: formatter.string(from: now))
+        localUserList.insert(user, at: 0)
+        speak(name: name)
+        showDiaglog3s(name: name, true)
+        fb.uploadLogTimes(user: user) { error in
+            if error != nil {
+                DispatchQueue.main.async { self.showDiaglog3s(name: name, false) }
             }
         }
     }
-    
-    func getLabel(image: UIImage?) -> String {
-        var lb = UNKNOWN
-        guard let frame = image else { return UNKNOWN }
-        let res = vectorHelper.getResult(image: frame)
-        lb = "\(res.name): \(res.distance)%"
-        let result = res.name
-        if result != UNKNOWN {
-            let  label = result
-            let today = Date()
-            formatter.dateFormat = DATE_FORMAT
-            let timestamp = formatter.string(from: today)
-            if label != currentLabel {
-                currentLabel = label
-                numberOfFramesDeteced = 1
-            } else {
-                numberOfFramesDeteced += 1
-            }
-            let detectedUser = User(name: label, image: frame, time: timestamp)
-            if numberOfFramesDeteced > validFrames  {
-                print("Detected")
-                if localUserList.count == 0 {
-                    print("append 1")
-                    speak(name: label)
-                    trainingDataset.saveImage(detectedUser.image, for: detectedUser.name)
-                    localUserList.append(detectedUser)
-                    
-                    //upload to firebase db
-                    fb.uploadLogTimes(user: detectedUser)  {
-                        error in
-                        if error != nil {
-                            self.showDiaglog3s(name: label, false)
-                        }
-                        
-                    }
-                    showDiaglog3s(name: label, true)
-                }
-                else  {
-                    var count = 0
-                    for item in localUserList {
-                        if item.name == label {
-                            if let time = formatter.date(from: item.time) {
-                                let diff = abs(time.timeOfDayInterval(toDate: today))
-                                print("Diffrent: \(diff) seconds")
-                                if Int(diff) > VALID_TIME {
-                                    print("append 2")
-                                    localUserList.append(detectedUser)
-                                    localUserList = localUserList.sorted(by: { $0.time > $1.time })
-                                    speak(name: label)
-                                    trainingDataset.saveImage(detectedUser.image, for: detectedUser.name)
-                                    
-                                    
-                                    //upload to firebase db
-                                    fb.uploadLogTimes(user: detectedUser)  {
-                                        error in
-                                        if error != nil {
-                                            self.showDiaglog3s(name: label, false)
-                                        }
-                                    }
-                                    showDiaglog3s(name: label, true)
-                                }
-                            }
-                            break
-                        }
-                        else {
-                            count += 1
-                        }
-                    }
-                    
-                    if count == localUserList.count {
-                        print("append 3")
-                        speak(name: label)
-                        trainingDataset.saveImage(detectedUser.image, for: detectedUser.name)
-                        //upload to firebase db
-                        fb.uploadLogTimes(user: detectedUser) { error in
-                            if error != nil {
-                                self.showDiaglog3s(name: label, false)
-                            }
-                        }
-                        localUserList.append(detectedUser)
-                        localUserList = localUserList.sorted(by: { $0.time > $1.time })
-                        showDiaglog3s(name: label, true)
-                    }
-                }
-                
-            }
-            
-        }
-        //}
-        return lb
+
+    func uiImage(from frame: CIImage) -> UIImage? {
+        frameContext.createCGImage(frame, from: frame.extent).map { UIImage(cgImage: $0) }
     }
-    
+
     func speak(name: String) {
         let utterance = AVSpeechUtterance(string: "Hello \(name)")
         utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
         utterance.rate = 0.5
-        
-        let synthesizer = AVSpeechSynthesizer()
         synthesizer.speak(utterance)
     }
 }
@@ -498,27 +417,24 @@ extension FrameViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     }
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer),
-              let exifOrientation = CGImagePropertyOrientation(rawValue: exifOrientationFromDeviceOrientation()) else { return }
-        //var requestOptions: [VNImageOption : Any] = [:]
-        
-        let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
-        
-        let context = CIContext()
-        guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else { return  }
-        
-        let image = UIImage(cgImage: cgImage)
-        self.currentFrame = image.rotate(radians: .pi/2)//?.flipHorizontally(
-        
-        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: exifOrientation, options: [:])
-        
-        do {
-            try imageRequestHandler.perform(requests)
+              let orientation = CGImagePropertyOrientation(rawValue: exifOrientationFromDeviceOrientation()) else { return }
+        let frame = CIImage(cvPixelBuffer: pixelBuffer).oriented(orientation)
+
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            self.latestFrame = frame
+            guard !self.isRecognizing else { return }
+            self.isRecognizing = true
+            Task { @MainActor in
+                defer { self.isRecognizing = false }
+                do {
+                    let results = try await FaceService.shared.recognizer().identify(in: pixelBuffer, orientation: orientation)
+                    self.handle(results, frame: frame)
+                } catch {
+                    print("Recognition failed: \(error)")
+                }
+            }
         }
-        
-        catch {
-            print(error)
-        }
-        
     }
     
 }

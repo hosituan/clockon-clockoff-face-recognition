@@ -49,3 +49,5 @@ coverage/
 # trunk source
 spec/fixtures/spec-repos/trunk/**/*.etag
 spec/fixtures/spec-repos/trunk/*.yml
+# Firebase config is per developer/project; never commit it
+PersonRecognize/GoogleService-Info.plist

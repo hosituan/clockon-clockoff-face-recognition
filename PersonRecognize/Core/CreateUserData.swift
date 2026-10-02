@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 import ProgressHUD
 
-class FrameOperation: Operation {
+class FrameOperation: Operation, @unchecked Sendable {
     var time: Double!
     var label: String!
     private var generator:AVAssetImageGenerator!
@@ -34,16 +34,8 @@ class FrameOperation: Operation {
         } catch {
             return
         }
+        // FaceKit augments (mirror, small rotations) during enrollment.
         trainingDataset.saveImage(image, for: label)
-        if let img = image.rotate(radians: .pi / 20) {
-            trainingDataset.saveImage(img, for: label)
-        }
-        if let img = image.rotate(radians: -.pi / 20) {
-            trainingDataset.saveImage(img, for: label)
-        }
-        if let img = image.flipHorizontally() {
-            trainingDataset.saveImage(img, for: label)
-        }
     }
 }
 
@@ -70,28 +62,17 @@ class GetFrames {
         self.generator = nil
         queue.addBarrierBlock {
             print("Complete")
-            ProgressHUD.show("Generating...")
-            vectorHelper.addVector(name: label) { result in
-                print("All vectors for \(label): \(result.count)")
-                if result.count > 0 {
-                    getKMeanVectorSameName(vectors: result) { (vectors) in
-            
-                        print("K-mean vector for \(label): \(vectors.count)")
-                        fb.uploadKMeanVectors(vectors: vectors, child: KMEAN_VECTOR) {
-                            ProgressHUD.dismiss()
-                            fb.uploadAllVectors(vectors: result, child: ALL_VECTOR) {
-                            }
-                        }
-                    }
-                }
-                else {
+            Task { @MainActor in
+                ProgressHUD.show("Generating...")
+                do {
+                    let identity = try await FaceService.shared.enrollFromLocalImages(name: label)
+                    print("Templates for \(label): \(identity.templates.count)")
                     ProgressHUD.dismiss()
+                } catch {
+                    print("Enrollment failed for \(label): \(error)")
+                    ProgressHUD.showError("Could not enroll \(label).")
                 }
             }
-            
-            
         }
-        
-        
     }
 }

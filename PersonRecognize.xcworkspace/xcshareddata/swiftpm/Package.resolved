@@ -1,16 +1,15 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "KDTree",
-        "repositoryURL": "https://github.com/Bersaelor/KDTree.git",
-        "state": {
-          "branch": null,
-          "revision": "aee3ab2593f4cbbb03f90a64cea157edb1c99879",
-          "version": "1.4.0"
-        }
+  "originHash" : "9509f94bee8c9fbebb82b3bd41a986f8c84d4334d9ff8af7a86e52ab39404026",
+  "pins" : [
+    {
+      "identity" : "facekit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hosituan/FaceKit.git",
+      "state" : {
+        "revision" : "53902d864a693bdac96de1d1d0add8e3388c48aa",
+        "version" : "0.1.0"
       }
-    ]
-  },
-  "version": 1
+    }
+  ],
+  "version" : 3
 }

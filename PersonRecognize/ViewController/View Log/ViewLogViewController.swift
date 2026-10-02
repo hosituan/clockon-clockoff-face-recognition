@@ -8,13 +8,13 @@
 
 import UIKit
 import ProgressHUD
+import SDWebImage
 
 class ViewLogViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        fnet.clean()
         if NetworkChecker.isConnectedToInternet {
            ProgressHUD.show("Loading log times...")
             fb.loadLogTimes { (result) in

@@ -27,30 +27,18 @@ class ViewFaceViewController: UIViewController {
     
     @IBAction func generateVector(_ sender: UIBarButtonItem) {
         let valueSelected = self.name
-        vectorHelper.addVector(name: valueSelected) { result in
-            print("All vectors for \(valueSelected): \(result.count)")
-            if result.count > 0 {
-                getKMeanVectorSameName(vectors: result) { (vectors) in
-                    print("K-mean vector for \(valueSelected): \(vectors.count)")
-                    fb.uploadKMeanVectors(vectors: vectors, child: KMEAN_VECTOR) {
-                        ProgressHUD.dismiss()
-                        self.showDialog(message: "Upload data for \(valueSelected) by \(result.count) vectors.")
-                        fb.uploadAllVectors(vectors: result, child: ALL_VECTOR) {
-                        }
-                    }
-                }
-            }
-            else {
+        ProgressHUD.show("Generating...")
+        Task { @MainActor in
+            do {
+                let identity = try await FaceService.shared.enrollFromLocalImages(name: valueSelected)
                 ProgressHUD.dismiss()
-                DispatchQueue.main.async {
-                    self.showDialog(message: "This user is not in your local data.")
-                }
-                
+                self.showDialog(message: "Uploaded \(identity.templates.count) templates for \(valueSelected) from \(self.imgList.count) photos.")
+            } catch {
+                ProgressHUD.dismiss()
+                self.showDialog(message: "Could not generate data for \(valueSelected): \(error.localizedDescription)")
             }
         }
-
     }
-    
     
 }
 

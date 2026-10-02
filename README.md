@@ -3,28 +3,27 @@ This is a Face Recognition Application - HR Check-in on iOS Device.
 
 
 
-<h1> References </h1>
+<h1>How it works</h1>
 
-  - Pre-train Model: Facenet https://github.com/davidsandberg/facenet 
-  - Model for TensorFlow Lite: https://drive.google.com/file/d/1WjZ-rX-Jq0U08U5VefQ7XSC5Dc6RPitI/view
-  - Dataset: VGGFace2 https://drive.google.com/file/d/1EXPBSXwTaqrSC0OhUdXNmKSh9qJUQ55-/view?usp=drive_open
-  - Architecture: InceptionResnetV1 https://github.com/davidsandberg/facenet/blob/master/src/models/inception_resnet_v1.py
-  - Algorithms and Libraries: 
-    + Swift for TensorFlow: https://www.tensorflow.org/swift
-    + Swift K-means Clustering https://github.com/raywenderlich/swift-algorithm-club/tree/master/K-Means 
-    + Swift k-NN https://github.com/mmahler2/Swift-DTW-KNN 
-    + Apple Vision: https://developer.apple.com/documentation/vision
-    + Apple CoreML: https://developer.apple.com/documentation/coreml
-    + Apple TuriCreate: https://github.com/apple/turicreate
-  
-  
-  
+  Face detection, alignment, embedding and matching come from **FaceKit**
+  (https://github.com/hosituan/FaceKit, private Swift package):
+  - Vision face landmarks, crop levelled on the eyes.
+  - FaceNet (InceptionResNetV1, 128-d) converted to Core ML, fp16, on device.
+  - Nearest-neighbour matching with thresholds calibrated on LFW (99.17% verification accuracy).
+  - A person is logged after 5 of 8 consecutive frames agree (`FrameConsensus`).
+
+  Templates are stored encrypted on the device and synced through Firebase Realtime Database
+  (`FaceKit Identities`). Attendance photos go to Firebase Storage, entries to `LogTimes`.
+
+  References:
+  - FaceNet: https://github.com/davidsandberg/facenet
+  - Apple Vision: https://developer.apple.com/documentation/vision
+  - Apple Core ML: https://developer.apple.com/documentation/coreml
+
 <h1>Supported Platforms</h1>
 
-  - iOS 12.0 or later.
-  - Xcode 11 or later, Swift 5.
-  
-
+  - iOS 15.0 or later.
+  - Xcode 15 or later, Swift 5.
 
 <h1>Demo </h1>
 
@@ -64,12 +63,21 @@ This is a Face Recognition Application - HR Check-in on iOS Device.
 
 <h1>Usage</h1>
 
-```
-pod install
-```
-```
-pod update
-```
+1. Install pods (FaceKit is resolved by Xcode through Swift Package Manager; your GitHub
+   account needs access to the private FaceKit repository):
+   ```
+   pod install
+   ```
+2. Create a Firebase project with Realtime Database and Storage, download its
+   `GoogleService-Info.plist` and put it at `PersonRecognize/GoogleService-Info.plist`
+   (ignored by git).
+3. Open `PersonRecognize.xcworkspace` and run on a device (the camera is required).
+
+**Upgrading from the TensorFlow version:** templates in `K-mean Vectors` are not compatible
+with FaceKit. Re-enroll everyone: All Users → select a user → Generate Vector (uses the
+photos saved on the device), or add the user again.
+
+**Limitations:** no liveness detection — a photo of an enrolled person can be logged.
 
 <h1>Author</h1>
 

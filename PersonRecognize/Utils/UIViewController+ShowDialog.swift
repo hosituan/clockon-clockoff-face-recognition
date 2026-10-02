@@ -6,7 +6,7 @@
 //  Copyright © 2020 Sun*. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension UIViewController {
     func showDialog(message: String) {

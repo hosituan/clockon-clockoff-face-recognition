@@ -10,26 +10,20 @@ import Foundation
 
 //define in Firebase DB
 let LOG_TIME = "LogTimes"
-let ALL_VECTOR = "All vectors"
-let AVG_VECTOR = "Vectors"
-let KMEAN_VECTOR = "K-mean Vectors"
 let USER_CHILD = "Users"
-
-let STORAGE_URL = "gs://personalregcozine.appspot.com"
+// FaceKit templates. Kept apart from the old "K-mean Vectors": those came from a different
+// face crop and are not comparable with FaceKit embeddings, so users must be re-enrolled.
+let FACE_IDENTITIES = "FaceKit Identities"
 
 //Define unknown
 let UNKNOWN = "Unknown"
 let TAKE_PHOTO_NAME = "Unknown - Take Photo"
 
-
-let NUMBER_OF_K = 3
-
-//RealM
+//Local user list
 let SAVED_USERS = "SavedUserList"
 
 //Date time formatter
 let DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
 
-
-
+//Seconds before the same person can be logged again
 let VALID_TIME = 60

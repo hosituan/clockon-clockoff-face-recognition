@@ -9,7 +9,6 @@
 import UIKit
 import AVFoundation
 import SkyFloatingLabelTextField
-import MBProgressHUD
 import ProgressHUD
 
 class AddNameViewController: UIViewController {
@@ -23,7 +22,6 @@ class AddNameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        fnet.load()
         if let url = videoURL {
             self.getThumbnailImageFromVideoUrl(url: url) { (thumbImage) in
                 self.faceImageView.image = thumbImage

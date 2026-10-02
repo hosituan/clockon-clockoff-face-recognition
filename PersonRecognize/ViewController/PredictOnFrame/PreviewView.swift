@@ -6,15 +6,11 @@
 //  Copyright © 2020 Hồ Sĩ Tuấn. All rights reserved.
 //
 
-import UIKit
-
-import UIKit
-import Vision
 import AVFoundation
+import UIKit
 
 class PreviewView: UIView {
     
-//    let api = API()
     private var maskLayer = [CAShapeLayer]()
     private var textLayer = [CATextLayer]()
     
@@ -61,11 +57,12 @@ class PreviewView: UIView {
     }
     
     
-    func drawFaceboundingBox(face : VNFaceObservation, label: String) {
+    /// - Parameter boundingBox: normalised, origin bottom-left (Vision/FaceKit convention).
+    func drawFaceboundingBox(boundingBox: CGRect, label: String) {
         
         let transform = CGAffineTransform(scaleX: 1, y: -1).translatedBy(x: 0, y: -frame.height)
         let translate = CGAffineTransform.identity.scaledBy(x: frame.width, y: frame.height)
-        let facebounds = face.boundingBox.applying(translate).applying(transform)
+        let facebounds = boundingBox.applying(translate).applying(transform)
         _ = createLayer(in: facebounds, prediction: label)
     }
     func ImageInRect(_ rect: CGRect) -> UIImage? {
@@ -81,28 +78,6 @@ class PreviewView: UIView {
         textLayer.removeAll()
         maskLayer.removeAll()
     }
-    
-    func speak(name: String) {
-        let utterance = AVSpeechUtterance(string: "Hello \(name)")
-        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-        utterance.rate = 0.5
-        
-        let synthesizer = AVSpeechSynthesizer()
-        synthesizer.speak(utterance)
-    }
-    
-    
-    func showDiaglog3s(name: String,_ success: Bool) {
-        let title = success == false ?  "Can't join!" : "Joining..."
-        let alert = UIAlertController(title: title, message: "\(name)", preferredStyle: .alert)
-        self.window?.rootViewController?.present(alert, animated: true, completion: nil)
-        let when = DispatchTime.now() + 1
-        
-        DispatchQueue.main.asyncAfter(deadline: when) {
-            alert.dismiss(animated: true, completion: nil)
-        }
-    }
-    
 
 }
 

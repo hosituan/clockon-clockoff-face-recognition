@@ -8,7 +8,6 @@
 
 import UIKit
 import AVFoundation
-import MBProgressHUD
 
 class RecordVideoViewController: UIViewController, AVCaptureFileOutputRecordingDelegate {
     
