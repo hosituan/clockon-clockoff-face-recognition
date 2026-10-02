@@ -5,6 +5,8 @@ This is a Face Recognition Application - HR Check-in on iOS Device.
 
 <h1>How it works</h1>
 
+  Article: [Five years later: rebuilding my iOS FaceNet app as an open-source Swift package](https://hosituan.medium.com/five-years-later-rebuilding-my-ios-facenet-app-as-an-open-source-swift-package-447a99848d1e)
+
   Face detection, alignment, embedding and matching come from **FaceKit**
   (https://github.com/hosituan/FaceKit, Swift package):
   - Vision face landmarks, crop levelled on the eyes.
