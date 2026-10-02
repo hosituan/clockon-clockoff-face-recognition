@@ -6,7 +6,7 @@ This is a Face Recognition Application - HR Check-in on iOS Device.
 <h1>How it works</h1>
 
   Face detection, alignment, embedding and matching come from **FaceKit**
-  (https://github.com/hosituan/FaceKit, private Swift package):
+  (https://github.com/hosituan/FaceKit, Swift package):
   - Vision face landmarks, crop levelled on the eyes.
   - FaceNet (InceptionResNetV1, 128-d) converted to Core ML, fp16, on device.
   - Nearest-neighbour matching with thresholds calibrated on LFW (99.17% verification accuracy).
@@ -63,8 +63,7 @@ This is a Face Recognition Application - HR Check-in on iOS Device.
 
 <h1>Usage</h1>
 
-1. Install pods (FaceKit is resolved by Xcode through Swift Package Manager; your GitHub
-   account needs access to the private FaceKit repository):
+1. Install pods (FaceKit is resolved by Xcode through Swift Package Manager):
    ```
    pod install
    ```
